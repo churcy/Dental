@@ -119,7 +119,7 @@ public class Chapter02 {
         Thread.sleep(1000);
         System.out.println("Our cached data looks like:");
         String r = conn.get("inv:itemX");
-        System.out.println(r);
+        System.out.println(r); 
         assert r != null;
         System.out.println();
 
