@@ -11,6 +11,18 @@ import java.util.Date;
 @Controller
 public class CommonController{
 
+    @ResponseBody
+    @RequestMapping(value = "/",method = RequestMethod.GET)
+    public String hello(){
+        JSONObject jsonObject = new JSONObject();
+        try{
+            String hello = "HELLO,Welcome to My Page!";
+            jsonObject.put("Welcome",hello);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return jsonObject.toString();
+    }
 
     @ResponseBody
     @RequestMapping(value = "/common/systemTime",method = RequestMethod.GET)
@@ -25,6 +37,4 @@ public class CommonController{
         }
         return jsonObject.toString();
     }
-
-
 }
