@@ -7,7 +7,7 @@ public class Group {
     private String id;//id
     private String groupName;//分组名称
     private String userId;//分组所属人id
-    private String groupType;//分组类型 0:默认分组 1:一般分组
+    private int groupType;//分组类型 0:默认分组 1:一般分组
 
     public String getId() {
         return id;
@@ -33,11 +33,11 @@ public class Group {
         this.userId = userId;
     }
 
-    public String getGroupType() {
+    public int getGroupType() {
         return groupType;
     }
 
-    public void setGroupType(String groupType) {
+    public void setGroupType(int groupType) {
         this.groupType = groupType;
     }
 

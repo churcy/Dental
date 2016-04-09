@@ -17,4 +17,13 @@ public interface UserDao {
     public User get(String id);
 
     public List<Map<String,Object>> getByConditions(Map<String, Object> conditions);
+
+    public List<Map<String,Object>> testMethod(Map<String, Object> conditions);
+
+    /**
+     * 登录
+     * @param conditions:username password
+     * @return
+     */
+    public List<Map<String,Object>> login(Map<String, Object> conditions);
 }

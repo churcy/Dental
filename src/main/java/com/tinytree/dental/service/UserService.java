@@ -24,4 +24,11 @@ public interface UserService {
      */
     public List<Map<String, Object>> getByConditions(String id, String username, String password);
 
+    /**
+     * 根据用户名和密码登录
+     * @param username
+     * @param password
+     * @return 用户
+     */
+    public List<Map<String, Object>>login(String username, String password);
 }

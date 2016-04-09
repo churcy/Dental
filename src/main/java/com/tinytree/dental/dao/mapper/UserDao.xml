@@ -2,36 +2,52 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tinytree.dental.dao.UserDao" >
-        <select id="get">
+<mapper namespace="com.tinytree.dental.dao.UserDao">
+    <select id="get">
                 SELECT * FROM user
                 WHERE id = #{0}
-        </select>
-        <select id="getByConditions" resultType="java.util.HashMap" parameterType="java.util.HashMap">
-                SELECT id,username,password,real_name AS realName,birthday AS birthday FROM user
+    </select>
+    <select id="testMethod" resultType="java.util.HashMap" parameterType="java.util.HashMap" statementType="STATEMENT">
+                SELECT * FROM ${tableName}
                 WHERE 1=1
-                <!--<if test="id != null and id != ''">
-                        <![CDATA[
+
+
+     </select>
+
+    <select id="login" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+        SELECT u.id AS userId,u.real_name AS realName,a.id AS accountId
+        FROM `user` u
+        LEFT JOIN account a
+        ON  u.account_id = a.id
+        WHERE a.login_name = #{username}
+        AND a.password = #{password}
+
+    </select>
+    <select id="getByConditions" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+        SELECT id,username,password,real_name AS realName,birthday AS birthday FROM user
+        WHERE 1=1
+        <if test="id != null and id != ''">
+            <![CDATA[
                         AND id = #{id}
                         ]]>
-                </if>-->
-                <if test="username != null and username != ''">
-                        <![CDATA[
+        </if>
+        <if test="username != null and username != ''">
+            <![CDATA[
                         AND username = #{username}
                         ]]>
-                </if>
-                <if test="password != null and password != ''">
-                        <![CDATA[
+        </if>
+        <if test="password != null and password != ''">
+            <![CDATA[
                         AND password = #{password}
                         ]]>
-                </if>
-        </select>
+        </if>
+    </select>
 
-        <resultMap id="userMap" type="com.tinytree.dental.entity.User">
-                <id column="id" property="id"></id>
-                <result column="username" property="username"></result>
-                <result column="password" property="password"></result>
-                <result column="real_name" property="realName"></result>
-                <result column="birthday" property="birthday"></result>
-        </resultMap>
+    <resultMap id="userMap" type="com.tinytree.dental.entity.User">
+        <id column="id" property="id"></id>
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+        <result column="real_name" property="realName"></result>
+        <result column="birthday" property="birthday"></result>
+    </resultMap>
 </mapper>

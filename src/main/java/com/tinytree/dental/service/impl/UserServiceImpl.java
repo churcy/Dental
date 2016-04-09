@@ -35,4 +35,14 @@ public class UserServiceImpl implements UserService {
         List<Map<String, Object>> users = userDao.getByConditions(conditions);
         return users;
     }
+
+    @Override
+    public List<Map<String, Object>> login(String username, String password) {
+        Map<String,Object> conditions = new HashMap<>();
+        conditions.put("username",username);
+        conditions.put("password",password);
+        List<Map<String, Object>> users = userDao.login(conditions);
+        return users;
+    }
+
 }
