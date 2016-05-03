@@ -1,9 +1,11 @@
 package com.tinytree.dao;
+
+import com.tinytree.entity.GroupMembers;
+import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Map;
 
-import com.kungfu.dental.entity.GroupMembers;
-
+@Repository
 public interface GroupMembersDao extends BaseDao<GroupMembers> {
 
 	/**

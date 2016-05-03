@@ -1,26 +1,19 @@
 package com.tinytree.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.github.pagehelper.PageHelper;
-import com.tinytree.bean.Pager;
-import com.tinytree.bean.PagerEx;
-import com.tinytree.bean.PagerParam;
-import com.tinytree.bean.PagerParam.ConditionType;
+
 import com.tinytree.dao.DocSysSettingDao;
 import com.tinytree.dao.DoctorDao;
 import com.tinytree.entity.DocSysSetting;
 import com.tinytree.entity.Doctor;
-import com.kungfu.dental.service.DoctorService;
+import com.tinytree.service.DoctorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 /**
  * @Description:医生信息相关服务实现
  * @ClassName: DoctorServiceImpl
@@ -30,7 +23,7 @@ import com.kungfu.dental.service.DoctorService;
  * 如：eric	2015/01/08 修改了删除功
  */
 @Service
-public class DoctorServiceImpl extends BaseServiceImpl<Doctor, String> implements DoctorService{
+public class DoctorServiceImpl extends BaseServiceImpl<Doctor, String> implements DoctorService {
 	
 	@Autowired
 	private DoctorDao doctorDao;

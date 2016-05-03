@@ -1,10 +1,11 @@
 package com.tinytree.dao;
 
+import com.tinytree.entity.DocSysSetting;
+import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Map;
 
-import com.kungfu.dental.entity.DocSysSetting;
-
+@Repository
 public interface DocSysSettingDao extends BaseDao<DocSysSetting>{
 	
 	/**

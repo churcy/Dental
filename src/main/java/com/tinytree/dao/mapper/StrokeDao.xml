@@ -12,8 +12,8 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.StrokeDao"> 
-	<resultMap type="com.kungfu.dental.entity.Stroke" id="strokeMap">
+<mapper namespace="com.tinytree.dao.StrokeDao"> 
+	<resultMap type="com.tinytree.entity.Stroke" id="strokeMap">
 		<id column="id" property="id"/>
 		<result column="account_id" property="accountId"/>
 		<result column="subject" property="subject"/>
@@ -285,7 +285,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.Stroke">
+	<insert id="insert"  parameterType="com.tinytree.entity.Stroke">
 	    insert into stroke(<include refid="insertColumns"/>) values(<include refid="insertParams"/>);
 	</insert>
 	<!-- 添加,SQL添加   -->
@@ -293,11 +293,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.Stroke">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.Stroke">
 	    delete from stroke<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.Stroke">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.Stroke">
 	    delete from stroke<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -305,7 +305,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.Stroke" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.Stroke" >
 		update stroke <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -325,7 +325,7 @@
 		select count(1) from stroke
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="strokeMap" parameterType="com.kungfu.dental.entity.Stroke">
+	<select id="selectByEntiry"  resultMap="strokeMap" parameterType="com.tinytree.entity.Stroke">
 		select <include refid="tbaleColumns"/> from stroke <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

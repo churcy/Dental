@@ -1,20 +1,15 @@
 package com.tinytree.service.impl;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
+import com.github.pagehelper.PageHelper;
+import com.tinytree.dao.HospitalDao;
+import com.tinytree.entity.Hospital;
+import com.tinytree.service.HospitalSerivce;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dimeng.platform.model.Page;
-import com.github.pagehelper.PageHelper;
-import com.tinytree.bean.Pager;
-import com.tinytree.dao.AccountDao;
-import com.tinytree.dao.HospitalDao;
-import com.tinytree.entity.Hospital;
-import com.kungfu.dental.service.HospitalSerivce;
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 /**
  * @Description:医院信息相关服务实现
  * @ClassName: HospitalSerivceImpl
@@ -24,7 +19,7 @@ import com.kungfu.dental.service.HospitalSerivce;
  * 如：eric	2015/01/08 修改了删除功
  */
 @Service
-public class HospitalSerivceImpl extends BaseServiceImpl<Hospital, String> implements HospitalSerivce{
+public class HospitalSerivceImpl extends BaseServiceImpl<Hospital, String> implements HospitalSerivce {
 	@Autowired
 	private HospitalDao hospitalDao;
 	

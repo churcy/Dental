@@ -12,14 +12,14 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.AccountDao"> 
+<mapper namespace="com.tinytree.dao.AccountDao">
 	
 	<select id="getByUserName" resultMap="accountMap">
 		SELECT * FROM account 
 		WHERE login_name = #{userName}
 	</select>
 	
-	<resultMap type="com.kungfu.dental.entity.Account" id="accountMap">
+	<resultMap type="com.tinytree.entity.Account" id="accountMap">
 		<id column="id" property="id"/>
 		<result column="login_name" property="loginName"/>
 		<result column="password" property="password"/>
@@ -307,7 +307,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.Account" useGeneratedKeys="true">
+	<insert id="insert"  parameterType="com.tinytree.entity.Account" useGeneratedKeys="true">
 		<!-- <selectKey keyProperty="id" resultType="String" order="BEFORE">
         	replace(uuid(),'-','')
     	</selectKey> -->
@@ -318,11 +318,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.Account">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.Account">
 	    delete from account<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.Account">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.Account">
 	    delete from account<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -330,7 +330,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.Account" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.Account" >
 		update account <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -350,7 +350,7 @@
 		select count(1) from account
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="accountMap" parameterType="com.kungfu.dental.entity.Account">
+	<select id="selectByEntiry"  resultMap="accountMap" parameterType="com.tinytree.entity.Account">
 		select <include refid="tbaleColumns"/> from account <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

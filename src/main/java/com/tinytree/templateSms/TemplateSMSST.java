@@ -1,9 +1,9 @@
 package com.tinytree.templateSms;
 
-import java.util.Date;
-
-import com.google.gson.Gson;
 import com.tinytree.bean.SMSBody;
+import net.sf.json.JSONObject;
+
+import java.util.Date;
 
 public class TemplateSMSST extends SMS {
 
@@ -35,8 +35,7 @@ public class TemplateSMSST extends SMS {
 			templateSMS.setParam(params[0] + "," + params[1]);
 			break;
 		}
-		Gson gson = new Gson();
-		String body = gson.toJson(templateSMS);
+		String body = JSONObject.fromObject(templateSMS).toString();
 		return body;
 	}
 

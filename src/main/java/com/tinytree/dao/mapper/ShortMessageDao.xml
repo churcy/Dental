@@ -12,14 +12,14 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.ShortMessageDao" > 
+<mapper namespace="com.tinytree.dao.ShortMessageDao" > 
 	<select id="findShortMessageByUserPhoneAndCode" resultMap="shortMessageMap">
 		SELECT * 
 		FROM short_message
 		WHERE user_phone = #{0} 
 		AND verification_code = #{1}
 	</select>
-	<resultMap type="com.kungfu.dental.entity.ShortMessage" id="shortMessageMap">
+	<resultMap type="com.tinytree.entity.ShortMessage" id="shortMessageMap">
 		<id column="id" property="id"/>
 		<result column="user_phone" property="userPhone"/>
 		<result column="verification_code" property="verificationCode"/>
@@ -178,7 +178,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.ShortMessage" useGeneratedKeys="true">
+	<insert id="insert"  parameterType="com.tinytree.entity.ShortMessage" useGeneratedKeys="true">
 		<!-- <selectKey keyProperty="id" resultType="String" order="BEFORE">
         	replace(uuid(),'-','')
     	</selectKey> -->
@@ -189,11 +189,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.ShortMessage">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.ShortMessage">
 	    delete from short_message<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.ShortMessage">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.ShortMessage">
 	    delete from short_message<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -201,7 +201,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.ShortMessage" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.ShortMessage" >
 		update short_message <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -221,7 +221,7 @@
 		select count(1) from short_message
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="shortMessageMap" parameterType="com.kungfu.dental.entity.ShortMessage">
+	<select id="selectByEntiry"  resultMap="shortMessageMap" parameterType="com.tinytree.entity.ShortMessage">
 		select <include refid="tbaleColumns"/> from short_message <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

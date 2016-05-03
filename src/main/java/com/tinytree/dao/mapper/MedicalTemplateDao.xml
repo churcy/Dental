@@ -12,7 +12,7 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.MedicalTemplateDao"> 
+<mapper namespace="com.tinytree.dao.MedicalTemplateDao"> 
 	<select id = "getByConditions" resultType = "java.util.HashMap" parameterType = "java.util.Map">
 	SELECT *
 	FROM medical_template
@@ -24,7 +24,7 @@
 	and node_id=#{nodeId}
 	</if>
 	</select>
-	<resultMap type="com.kungfu.dental.entity.MedicalTemplate" id="medicalTemplateMap">
+	<resultMap type="com.tinytree.entity.MedicalTemplate" id="medicalTemplateMap">
 		<id column="id" property="id"/>
 		<result column="node_id" property="nodeId"/>
 		<result column="doctor_id" property="doctorId"/>
@@ -294,7 +294,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.MedicalRecordBook">
+	<insert id="insert"  parameterType="com.tinytree.entity.MedicalRecordBook">
 	    insert into medical_template(<include refid="insertColumns"/>) values(<include refid="insertParams"/>);
 	</insert>
 	<!-- 添加,SQL添加   -->
@@ -302,11 +302,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.MedicalRecordBook">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.MedicalRecordBook">
 	    delete from medical_template<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.MedicalRecordBook">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.MedicalRecordBook">
 	    delete from medical_template<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -314,7 +314,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.MedicalRecordBook" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.MedicalRecordBook" >
 		update medical_template <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -334,7 +334,7 @@
 		select count(1) from medical_template
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="medicalTemplateMap" parameterType="com.kungfu.dental.entity.MedicalRecordBook">
+	<select id="selectByEntiry"  resultMap="medicalTemplateMap" parameterType="com.tinytree.entity.MedicalRecordBook">
 		select <include refid="tbaleColumns"/> from medical_template <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

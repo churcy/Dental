@@ -1,14 +1,12 @@
 package com.tinytree.controller;
 
-import java.io.IOException;
+import net.sf.json.JSONObject;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import net.sf.json.JSONObject;
-
-import org.springframework.web.bind.annotation.ModelAttribute;
+import java.io.IOException;
 
 /**
  * @Description:Controller基类

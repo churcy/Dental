@@ -1,24 +1,19 @@
 package com.tinytree.service.impl;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.tinytree.dao.MedicalRecordDao;
+import com.tinytree.entity.MedicalRecord;
+import com.tinytree.entity.MedicalRecordBook;
+import com.tinytree.entity.User;
+import com.tinytree.service.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tinytree.dao.MedicalRecordDao;
-import com.tinytree.entity.MedicalRecord;
-import com.tinytree.entity.MedicalRecordBook;
-import com.tinytree.entity.User;
-import com.kungfu.dental.service.DoctorService;
-import com.kungfu.dental.service.FriendManageService;
-import com.kungfu.dental.service.MedicalRecordBookService;
-import com.kungfu.dental.service.MedicalRecordService;
-import com.kungfu.dental.service.UserService;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:病历服务实现
@@ -29,7 +24,7 @@ import com.kungfu.dental.service.UserService;
  * 如：eric	2015/01/08 修改了删除功
  */
 @Service("medicalRecordServiceImpl")
-public class MedicalRecordServiceImpl extends BaseServiceImpl<MedicalRecord, String> implements MedicalRecordService{
+public class MedicalRecordServiceImpl extends BaseServiceImpl<MedicalRecord, String> implements MedicalRecordService {
 	
 	@Autowired
 	private MedicalRecordDao medicalRecordDao;

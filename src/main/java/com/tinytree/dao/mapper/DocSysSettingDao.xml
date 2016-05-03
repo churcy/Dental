@@ -12,7 +12,7 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.DocSysSettingDao"> 
+<mapper namespace="com.tinytree.dao.DocSysSettingDao"> 
 
 	<select id="getSysSetting" resultType="java.util.HashMap" parameterType="java.util.Map">
 		SELECT id AS id,user_id AS userId,
@@ -27,7 +27,7 @@
 		</if> -->
 	</select>
 	
-	<resultMap type="com.kungfu.dental.entity.DocSysSetting" id="docSysSettingMap">
+	<resultMap type="com.tinytree.entity.DocSysSetting" id="docSysSettingMap">
 		<id column="id" property="id"/>
 		<result column="user_id" property="userId"/>
 		<result column="reserve_status" property="reserveStatus"/>
@@ -205,7 +205,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.DocSysSetting" useGeneratedKeys="true">
+	<insert id="insert"  parameterType="com.tinytree.entity.DocSysSetting" useGeneratedKeys="true">
 		<!-- <selectKey keyProperty="id" resultType="String" order="BEFORE">
         	replace(uuid(),'-','')
     	</selectKey> -->
@@ -216,11 +216,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.DocSysSetting">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.DocSysSetting">
 	    delete from doc_sys_setting<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.DocSysSetting">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.DocSysSetting">
 	    delete from doc_sys_setting<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -228,7 +228,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.DocSysSetting" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.DocSysSetting" >
 		update doc_sys_setting <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -248,7 +248,7 @@
 		select count(1) from doc_sys_setting
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="docSysSettingMap" parameterType="com.kungfu.dental.entity.DocSysSetting">
+	<select id="selectByEntiry"  resultMap="docSysSettingMap" parameterType="com.tinytree.entity.DocSysSetting">
 		select <include refid="tbaleColumns"/> from doc_sys_setting <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

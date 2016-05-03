@@ -1,6 +1,7 @@
 package com.tinytree.dao;
 
-import com.kungfu.dental.entity.Images;
+import com.tinytree.entity.Images;
+import org.springframework.stereotype.Repository;
 /**
  * @Description:图片数据库操作接口
  * @ClassName: ImagesDao
@@ -9,6 +10,7 @@ import com.kungfu.dental.entity.Images;
  * (变更历史)
  * 如：eric	2015/01/08 修改了删除功
  */
+@Repository
 public interface ImagesDao extends BaseDao<Images>{
 
 }

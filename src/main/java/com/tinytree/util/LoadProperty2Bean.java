@@ -18,7 +18,7 @@ public class LoadProperty2Bean {
 	
 	private static final String BEAN_SUFFIX = "Bean";
 	
-	private static final String BEAN_PREFIX = "com.kungfu.dental.bean.";
+	private static final String BEAN_PREFIX = "com.tinytree.bean.";
 	
 	private static final String CONFIG_SUFFIX = ".properties";
 	

@@ -1,14 +1,13 @@
 package com.tinytree.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.tinytree.dao.ReturnVisitRecordDao;
 import com.tinytree.entity.ReturnVisit;
 import com.tinytree.entity.ReturnVisitRecord;
-import com.kungfu.dental.service.ReturnVisitRecordService;
-import com.kungfu.dental.service.ReturnVisitService;
+import com.tinytree.service.ReturnVisitRecordService;
+import com.tinytree.service.ReturnVisitService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Description:回访记录详情服务实现类
@@ -19,7 +18,7 @@ import com.kungfu.dental.service.ReturnVisitService;
  * 如：eric	2015/01/08 修改了删除功
  */
 @Service("returnVisitRecordService")
-public class ReturnVisitRecordServiceImpl extends BaseServiceImpl<ReturnVisitRecord, String> implements ReturnVisitRecordService{
+public class ReturnVisitRecordServiceImpl extends BaseServiceImpl<ReturnVisitRecord, String> implements ReturnVisitRecordService {
 	@Autowired
 	private ReturnVisitRecordDao returnVisitRecordDao;
 	

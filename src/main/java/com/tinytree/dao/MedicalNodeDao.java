@@ -2,8 +2,8 @@ package com.tinytree.dao;
 
 import java.util.List;
 import java.util.Map;
-
-import com.kungfu.dental.entity.MedicalNode;
+import com.tinytree.entity.MedicalNode;
+import org.springframework.stereotype.Repository;
 
 /**
  * @Author zhengzhong
@@ -12,6 +12,7 @@ import com.kungfu.dental.entity.MedicalNode;
  * @Date 2016-03-21
  * 
  */
+@Repository
 public interface MedicalNodeDao extends BaseDao<MedicalNode>{
 	
 	/**

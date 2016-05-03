@@ -12,8 +12,8 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.ReturnVisitRecordDao"> 
-	<resultMap type="com.kungfu.dental.entity.ReturnVisitRecord" id="returnVisitRecordMap">
+<mapper namespace="com.tinytree.dao.ReturnVisitRecordDao"> 
+	<resultMap type="com.tinytree.entity.ReturnVisitRecord" id="returnVisitRecordMap">
 		<id column="id" property="id"/>
 		<result column="return_visit_id" property="returnVisitId"/>
 		<result column="content" property="content"/>
@@ -172,7 +172,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.ReturnVisitRecord">
+	<insert id="insert"  parameterType="com.tinytree.entity.ReturnVisitRecord">
 	    insert into return_visit_record(<include refid="insertColumns"/>) values(<include refid="insertParams"/>);
 	</insert>
 	<!-- 添加,SQL添加   -->
@@ -180,11 +180,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.ReturnVisitRecord">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.ReturnVisitRecord">
 	    delete from return_visit_record<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.ReturnVisitRecord">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.ReturnVisitRecord">
 	    delete from return_visit_record<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -192,7 +192,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.ReturnVisitRecord" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.ReturnVisitRecord" >
 		update return_visit_record <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -212,7 +212,7 @@
 		select count(1) from return_visit_record
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="returnVisitRecordMap" parameterType="com.kungfu.dental.entity.ReturnVisitRecord">
+	<select id="selectByEntiry"  resultMap="returnVisitRecordMap" parameterType="com.tinytree.entity.ReturnVisitRecord">
 		select <include refid="tbaleColumns"/> from return_visit_record <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

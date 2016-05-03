@@ -1,32 +1,26 @@
 package com.tinytree.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
+import com.tinytree.bean.PagerEx;
+import com.tinytree.bean.PagerParam;
+import com.tinytree.bean.PagerParam.ConditionType;
+import com.tinytree.bean.UriBean;
+import com.tinytree.dao.UserDao;
+import com.tinytree.dao.UserSysSettingDao;
+import com.tinytree.entity.GroupInfo;
+import com.tinytree.entity.User;
+import com.tinytree.entity.UserSysSetting;
+import com.tinytree.service.FriendManageService;
+import com.tinytree.service.UserService;
+import com.tinytree.util.LoadProperty2Bean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tinytree.bean.Pager;
-import com.tinytree.bean.PagerEx;
-import com.tinytree.bean.PagerParam;
-import com.tinytree.bean.UriBean;
-import com.tinytree.bean.WeatherBean;
-import com.tinytree.bean.PagerParam.ConditionType;
-import com.tinytree.dao.UserDao;
-import com.tinytree.dao.UserSysSettingDao;
-import com.tinytree.entity.Account;
-import com.tinytree.entity.DocSysSetting;
-import com.tinytree.entity.GroupInfo;
-import com.tinytree.entity.User;
-import com.tinytree.entity.UserSysSetting;
-import com.kungfu.dental.service.FriendManageService;
-import com.kungfu.dental.service.UserService;
-import com.kungfu.dental.util.LoadProperty2Bean;
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 /**
  * @Description:用户信息相关服务实现
  * @ClassName: UserServiceImpl
@@ -36,7 +30,7 @@ import com.kungfu.dental.util.LoadProperty2Bean;
  * 如：eric	2015/01/08 修改了删除功
  */
 @Service("userService")
-public class UserServiceImpl extends BaseServiceImpl<User, String> implements UserService{
+public class UserServiceImpl extends BaseServiceImpl<User, String> implements UserService {
 	
 	public static final UriBean filePathBean = (UriBean)LoadProperty2Bean.getInstance().getBean(LoadProperty2Bean.URI);
 	@Autowired

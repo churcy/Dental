@@ -1,15 +1,13 @@
 package com.tinytree.service.impl;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
+import com.tinytree.dao.ImageVersionDao;
+import com.tinytree.entity.ImageVersion;
+import com.tinytree.service.ImageVersionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tinytree.dao.ImageVersionDao;
-import com.tinytree.entity.ImageVersion;
-import com.kungfu.dental.service.ImageVersionService;
+import javax.annotation.Resource;
+import java.util.List;
 /**
  * @Description:图片发布版本服务实现接口
  * @ClassName: ImageVersionServiceImpl
@@ -19,7 +17,7 @@ import com.kungfu.dental.service.ImageVersionService;
  * 如：eric	2015/01/08 修改了删除功
  */
 @Service("imageVersionService")
-public class ImageVersionServiceImpl extends BaseServiceImpl<ImageVersion, String> implements ImageVersionService{
+public class ImageVersionServiceImpl extends BaseServiceImpl<ImageVersion, String> implements ImageVersionService {
 	@Autowired
 	private ImageVersionDao imageVersionDao;
 	

@@ -1,7 +1,7 @@
 package com.tinytree.templateSms;
 
+import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -69,7 +69,7 @@ public class SMSManager {
 	public  boolean sendSMS(String phone,Object[] params) throws Exception{
 		
 		String responseInfo = sms.sendSMS(phone, params);
-		JSONObject jsonObj = new JSONObject(responseInfo);
+		JSONObject jsonObj = JSONObject.fromObject(responseInfo);
 		// 得到指定json key对象的value对象
 		JSONObject respObj = (JSONObject) jsonObj.get("resp");
 		String respCode = respObj.get("respCode").toString();
@@ -83,7 +83,7 @@ public class SMSManager {
 
 	public boolean sendTempSMS(String mobile,int tempType, Object[] params) throws Exception {
 		String responseInfo = sms.sendTempSMS(mobile,tempType, params);
-		JSONObject jsonObj = new JSONObject(responseInfo);
+		JSONObject jsonObj = JSONObject.fromObject(responseInfo);
 		// 得到指定json key对象的value对象
 		JSONObject respObj = (JSONObject) jsonObj.get("resp");
 		String respCode = respObj.get("respCode").toString();

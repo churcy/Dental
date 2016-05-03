@@ -1,8 +1,6 @@
 package com.tinytree.TokenSecurity;
 
 import java.util.UUID;
-import java.util.concurrent.Delayed;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @Description：TOKEN

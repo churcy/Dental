@@ -1,18 +1,14 @@
 package com.tinytree.service.impl;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
+import com.tinytree.bean.Pager;
+import com.tinytree.dao.DepartmentDao;
+import com.tinytree.entity.Department;
+import com.tinytree.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tinytree.bean.Pager;
-import com.tinytree.dao.DepartmentDao;
-import com.tinytree.dao.HospitalDao;
-import com.tinytree.entity.Department;
-import com.tinytree.entity.Hospital;
-import com.kungfu.dental.service.DepartmentService;
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Description:部门信息相关服务实现
@@ -23,7 +19,7 @@ import com.kungfu.dental.service.DepartmentService;
  * 如：eric	2015/01/08 修改了删除功
  */
 @Service
-public class DepartmentServiceImpl extends BaseServiceImpl<Department, String> implements DepartmentService{
+public class DepartmentServiceImpl extends BaseServiceImpl<Department, String> implements DepartmentService {
 	@Autowired
 	private DepartmentDao departmentDao;
 	

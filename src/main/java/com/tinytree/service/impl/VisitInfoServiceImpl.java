@@ -1,18 +1,17 @@
 package com.tinytree.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.tinytree.bean.PagerEx;
 import com.tinytree.bean.PagerParam;
 import com.tinytree.bean.PagerParam.ConditionType;
 import com.tinytree.dao.VisitInfoDao;
 import com.tinytree.entity.VisitInfo;
-import com.kungfu.dental.service.VisitInfoService;
+import com.tinytree.service.VisitInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @Description:就诊记录服务实现类
@@ -23,7 +22,7 @@ import com.kungfu.dental.service.VisitInfoService;
  * 如：eric	2015/01/08 修改了删除功
  */
 @Service("visitInfoService")
-public class VisitInfoServiceImpl extends BaseServiceImpl<VisitInfo, String> implements VisitInfoService{
+public class VisitInfoServiceImpl extends BaseServiceImpl<VisitInfo, String> implements VisitInfoService {
 	@Autowired
 	private VisitInfoDao visitInfoDao;
 	

@@ -1,13 +1,13 @@
 package com.tinytree.dao;
 
-import java.util.Date;
+import com.tinytree.entity.ReserveInfo;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-
-import com.kungfu.dental.entity.ReserveInfo;
 /**
  * @Description:预约信息处理接口
  * @ClassName: ReserveInfoDao
@@ -16,6 +16,7 @@ import com.kungfu.dental.entity.ReserveInfo;
  * (变更历史)
  * 如：eric	2015/01/08 修改了删除功
  */
+@Repository
 public interface ReserveInfoDao extends BaseDao<ReserveInfo>{
 
 	/**

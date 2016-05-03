@@ -1,11 +1,11 @@
 package com.tinytree.encry;
 
-import com.kungfu.dental.exception.EncryptException;
+import com.tinytree.exception.EncryptException;
 
-public interface Encrypt 
+public interface Encrypt
 {
 	public byte[] encrypt(byte[] src,String... keys) throws EncryptException;
 	
-	public byte[] decrypt(byte[] src,String... keys) throws EncryptException;
+	public byte[] decrypt(byte[] src,String... keys) throws EncryptException, EncryptException;
 	
 }

@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
+import com.tinytree.util.RandomUtil;
+import com.tinytree.util.ReflectUtil;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
@@ -13,9 +15,6 @@ import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Plugin;
 import org.apache.ibatis.plugin.Signature;
-
-import com.kungfu.dental.util.RandomUtil;
-import com.kungfu.dental.util.ReflectUtil;
 
 @Intercepts({@Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class}) })
 public class EntityInterceptor implements Interceptor{
@@ -49,7 +48,7 @@ public class EntityInterceptor implements Interceptor{
                 
                 if(PK.equals(field.getName())){
                 	field.setAccessible(true);
-                    field.set(parameter,RandomUtil.uuid());
+                    field.set(parameter, RandomUtil.uuid());
                     field.setAccessible(false);
                 }
             }

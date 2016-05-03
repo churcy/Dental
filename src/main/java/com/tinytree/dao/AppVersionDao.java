@@ -2,10 +2,10 @@ package com.tinytree.dao;
 
 import java.util.Date;
 
+import com.tinytree.entity.AppVersion;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
-import com.kungfu.dental.entity.AppVersion;
 /**
  * @Description:app版本数据库操作接口
  * @ClassName: AppVersionDao

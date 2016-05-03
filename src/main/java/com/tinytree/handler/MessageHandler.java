@@ -1,9 +1,9 @@
 package com.tinytree.handler;
 
+import com.tinytree.util.Message;
+
 import java.util.LinkedList;
 import java.util.List;
-
-import com.kungfu.dental.util.Message;
 
 
 /**

@@ -1,13 +1,12 @@
 package com.tinytree.service.impl;
 
-import javax.annotation.Resource;
-
+import com.tinytree.dao.AccountDao;
+import com.tinytree.entity.Account;
+import com.tinytree.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tinytree.dao.AccountDao;
-import com.tinytree.entity.Account;
-import com.kungfu.dental.service.AccountService;
+import javax.annotation.Resource;
 /**
  * @Description:用户账户信息服务实现类
  * @ClassName: AccountServiceImpl
@@ -17,7 +16,7 @@ import com.kungfu.dental.service.AccountService;
  * 如：eric	2015/01/08 修改了删除功
  */
 @Service
-public class AccountServiceImpl extends BaseServiceImpl<Account, String> implements AccountService{
+public class AccountServiceImpl extends BaseServiceImpl<Account, String> implements AccountService {
 	
 	@Autowired
 	private AccountDao accountDao;

@@ -1,26 +1,12 @@
 package com.tinytree.handler;
 
-import java.util.List;
-
+import com.tinytree.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import cn.jpush.api.common.resp.APIConnectionException;
-import cn.jpush.api.common.resp.APIRequestException;
-
-import com.tinytree.bean.RemindBean;
-import com.tinytree.cache.CacheObject;
-import com.tinytree.entity.ReserveInfo;
-import com.tinytree.entity.Stroke;
-import com.tinytree.entity.User;
-import com.kungfu.dental.service.DoctorService;
-import com.kungfu.dental.service.JPushService;
-import com.kungfu.dental.service.SMSService;
-import com.kungfu.dental.service.UserService;
-import com.kungfu.dental.util.DateUtils;
-import com.kungfu.dental.util.GlobalUtil;
+import java.util.List;
 
 /**
  * @Description:消息提醒异步处理程序
@@ -36,10 +22,7 @@ public class RemindHandler extends MessageHandler{
 	
 	@Autowired
 	private SMSService smsService;
-	
-	@Autowired
-	private JPushService jPushService;
-	
+
 	@Autowired
 	private UserService userService;
 	

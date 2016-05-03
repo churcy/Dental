@@ -12,8 +12,8 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.MedicalRecordBookTmpDao"> 
-	<resultMap type="com.kungfu.dental.entity.MedicalRecordBookTmp" id="medicalRecordBookTmpMap">
+<mapper namespace="com.tinytree.dao.MedicalRecordBookTmpDao"> 
+	<resultMap type="com.tinytree.entity.MedicalRecordBookTmp" id="medicalRecordBookTmpMap">
 		<id column="id" property="id"/>
 		<result column="user_id" property="userId"/>
 		<result column="doctor_id" property="doctorId"/>
@@ -252,7 +252,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.MedicalRecordBookTmp">
+	<insert id="insert"  parameterType="com.tinytree.entity.MedicalRecordBookTmp">
 	    insert into medical_record_book_tmp(<include refid="insertColumns"/>) values(<include refid="insertParams"/>);
 	</insert>
 	<!-- 添加,SQL添加   -->
@@ -260,11 +260,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.MedicalRecordBookTmp">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.MedicalRecordBookTmp">
 	    delete from medical_record_book_tmp<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.MedicalRecordBookTmp">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.MedicalRecordBookTmp">
 	    delete from medical_record_book_tmp<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -272,7 +272,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.MedicalRecordBookTmp" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.MedicalRecordBookTmp" >
 		update medical_record_book_tmp <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -292,7 +292,7 @@
 		select count(1) from medical_record_book
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="medicalRecordBookTmpMap" parameterType="com.kungfu.dental.entity.MedicalRecordBookTmp">
+	<select id="selectByEntiry"  resultMap="medicalRecordBookTmpMap" parameterType="com.tinytree.entity.MedicalRecordBookTmp">
 		select <include refid="tbaleColumns"/> from medical_record_book_tmp <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

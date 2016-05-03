@@ -12,8 +12,8 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.PositionDao"> 
-	<resultMap type="com.kungfu.dental.entity.Position" id="positionMap">
+<mapper namespace="com.tinytree.dao.PositionDao"> 
+	<resultMap type="com.tinytree.entity.Position" id="positionMap">
 		<id column="id" property="id"/>
 		<result column="position_no" property="positionNo"/>
 		<result column="name" property="name"/>
@@ -204,7 +204,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.Position" useGeneratedKeys="true">
+	<insert id="insert"  parameterType="com.tinytree.entity.Position" useGeneratedKeys="true">
 		<!-- <selectKey keyProperty="id" resultType="String" order="BEFORE">
         	replace(uuid(),'-','')
     	</selectKey> -->
@@ -215,11 +215,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.Position">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.Position">
 	    delete from position<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.Position">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.Position">
 	    delete from position<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -227,7 +227,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.Position" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.Position" >
 		update position <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -247,7 +247,7 @@
 		select count(1) from position
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="positionMap" parameterType="com.kungfu.dental.entity.Position">
+	<select id="selectByEntiry"  resultMap="positionMap" parameterType="com.tinytree.entity.Position">
 		select <include refid="tbaleColumns"/> from position <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

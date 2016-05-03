@@ -1,11 +1,10 @@
 package com.tinytree.encry;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
+import com.tinytree.exception.EncryptException;
 import org.apache.commons.codec.binary.Hex;
 
-import com.kungfu.dental.exception.EncryptException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * @Description：MD5加密实现类

@@ -1,18 +1,17 @@
 package com.tinytree.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.tinytree.bean.PagerEx;
 import com.tinytree.bean.PagerParam;
 import com.tinytree.bean.PagerParam.ConditionType;
 import com.tinytree.dao.MedicalRecordBookTmpDao;
 import com.tinytree.entity.MedicalRecordBookTmp;
-import com.kungfu.dental.service.MedicalRecordBookTmpService;
+import com.tinytree.service.MedicalRecordBookTmpService;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Description:注册用户病历本服务实现类
@@ -23,7 +22,7 @@ import com.kungfu.dental.service.MedicalRecordBookTmpService;
  * 如：eric	2015/01/08 修改了删除功
  */
 @Service("medicalRecordBookTmpService")
-public class MedicalRecordBookTmpServiceImpl extends BaseServiceImpl<MedicalRecordBookTmp, String> implements MedicalRecordBookTmpService{
+public class MedicalRecordBookTmpServiceImpl extends BaseServiceImpl<MedicalRecordBookTmp, String> implements MedicalRecordBookTmpService {
 	
 	@Autowired
 	private MedicalRecordBookTmpDao medicalRecordBookTmpDao;

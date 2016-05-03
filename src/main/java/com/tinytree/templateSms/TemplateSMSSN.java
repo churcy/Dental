@@ -1,11 +1,11 @@
 package com.tinytree.templateSms;
 
+import com.tinytree.bean.SMSBody;
+import net.sf.json.JSONObject;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.google.gson.Gson;
-import com.tinytree.bean.SMSBody;
 /**
  * @Description:发送短信验证码实现
  * @ClassName: TemplateSMSSN
@@ -39,8 +39,7 @@ public class TemplateSMSSN extends SMS{
         templateSMS.setTo(map.get("tel"));
         templateSMS.setTemplateId(smsBean.getTemplateSNId());
         templateSMS.setParam(map.get("sn")+","+map.get("expTime"));
-        Gson gson = new Gson();
-        String body = gson.toJson(templateSMS);
+        String body = JSONObject.fromObject(templateSMS).toString();
         return body;
 	}
 	//拼装请求url

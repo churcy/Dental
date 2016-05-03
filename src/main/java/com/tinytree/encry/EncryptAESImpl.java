@@ -1,9 +1,9 @@
 package com.tinytree.encry;
 
+import com.tinytree.exception.EncryptException;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-
-import com.kungfu.dental.exception.EncryptException;
 
 /**
  * @Description：AES加密/解密实现类

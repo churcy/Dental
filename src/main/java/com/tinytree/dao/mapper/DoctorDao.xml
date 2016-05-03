@@ -12,7 +12,7 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.DoctorDao"> 
+<mapper namespace="com.tinytree.dao.DoctorDao"> 
 	
 	<select id="getByUserId" resultType="java.util.HashMap" parameterType ="java.lang.String">
 		SELECT d.id AS doctorId,
@@ -78,7 +78,7 @@
 		ORDER BY doc.create_date DESC
 	</select>
 
-	<resultMap type="com.kungfu.dental.entity.Doctor" id="doctorMap">
+	<resultMap type="com.tinytree.entity.Doctor" id="doctorMap">
 		<id column="id" property="id"/>
 		<result column="brief" property="brief"/>
 		<result column="type" property="type"/>
@@ -95,23 +95,23 @@
 		<result column="create_date" property="createDate"/>
 		<result column="modify_date" property="modifyDate"/>
 		<association property="account" column="account_id"
-			javaType="com.kungfu.dental.entity.Account" 
-			select="com.kungfu.dental.dao.AccountDao.selectByPrimaryKey">
+			javaType="com.tinytree.entity.Account" 
+			select="com.tinytree.dao.AccountDao.selectByPrimaryKey">
 		</association>
 		<association property="hospital" column="hospital_id" 
-			javaType="com.kungfu.dental.entity.Hospital"
-			select="com.kungfu.dental.dao.HospitalDao.selectByPrimaryKey">
+			javaType="com.tinytree.entity.Hospital"
+			select="com.tinytree.dao.HospitalDao.selectByPrimaryKey">
 		</association>
 		<association property="department" column="dept_id" 
-			javaType="com.kungfu.dental.entity.Department"
-			select="com.kungfu.dental.dao.DepartmentDao.selectByPrimaryKey">
+			javaType="com.tinytree.entity.Department"
+			select="com.tinytree.dao.DepartmentDao.selectByPrimaryKey">
 		</association>
 		<association property="position" column="position_id" 
-			javaType="com.kungfu.dental.entity.Position"
-			select="com.kungfu.dental.dao.PositionDao.selectByPrimaryKey">
+			javaType="com.tinytree.entity.Position"
+			select="com.tinytree.dao.PositionDao.selectByPrimaryKey">
 		</association>
 	</resultMap>
-	<resultMap type="com.kungfu.dental.entity.Account" id="accountMap">
+	<resultMap type="com.tinytree.entity.Account" id="accountMap">
 		<id column="id" property="id"/>
 		<result column="login_name" property="departmentName"/>
 		<result column="password" property="departmentName"/>
@@ -130,7 +130,7 @@
 		<result column="create_date" property="createDate"/>
 		<result column="modify_date" property="modifyDate"/>
 	</resultMap>
-	<resultMap type="com.kungfu.dental.entity.Hospital" id="hospitalMap">
+	<resultMap type="com.tinytree.entity.Hospital" id="hospitalMap">
 		<id column="id" property="id"/>
 		<result column="name" property="name"/>
 		<result column="address" property="address"/>
@@ -151,7 +151,7 @@
 		<result column="create_date" property="createDate"/>
 		<result column="modify_date" property="modifyDate"/>
 	</resultMap>
-	<resultMap type="com.kungfu.dental.entity.Department" id="departmentMap">
+	<resultMap type="com.tinytree.entity.Department" id="departmentMap">
 		<id column="id" property="id"/>
 		<result column="department_no" property="departmentNo"/>
 		<result column="order_id" property="orderId"/>
@@ -161,7 +161,7 @@
 		<result column="create_date" property="createDate"/>
 		<result column="modify_date" property="modifyDate"/>
 	</resultMap>
-	<resultMap type="com.kungfu.dental.entity.Position" id="positionMap">
+	<resultMap type="com.tinytree.entity.Position" id="positionMap">
 		<id column="id" property="id"/>
 		<result column="position_no" property="positionNo"/>
 		<result column="name" property="name"/>
@@ -505,7 +505,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.Doctor" useGeneratedKeys="true">
+	<insert id="insert"  parameterType="com.tinytree.entity.Doctor" useGeneratedKeys="true">
 		<!-- <selectKey keyProperty="id" resultType="String" order="BEFORE">
         	replace(uuid(),'-','')
     	</selectKey> -->
@@ -516,11 +516,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.Doctor">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.Doctor">
 	    delete from doctor<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.Doctor">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.Doctor">
 	    delete from doctor<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -528,7 +528,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.Doctor" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.Doctor" >
 		update doctor <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -548,7 +548,7 @@
 		select count(1) from doctor
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="doctorMap" parameterType="com.kungfu.dental.entity.Doctor">
+	<select id="selectByEntiry"  resultMap="doctorMap" parameterType="com.tinytree.entity.Doctor">
 		select <include refid="tbaleColumns"/> from doctor <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

@@ -12,7 +12,7 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.GroupInfoDao"> 
+<mapper namespace="com.tinytree.dao.GroupInfoDao"> 
 	<select id="getByConditions" resultType="java.util.HashMap" parameterType="java.util.Map">
 		SELECT id AS groupId,name AS groupName,type AS groupType
 		FROM group_info
@@ -53,7 +53,7 @@
 			]]>
 	</if>
 	</select>
-	<resultMap type="com.kungfu.dental.entity.GroupInfo" id="groupInfoMap">
+	<resultMap type="com.tinytree.entity.GroupInfo" id="groupInfoMap">
 		<id column="id" property="id"/>
 		<result column="name" property="name"/>
 		<result column="user_id" property="userId"/>
@@ -196,7 +196,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.GroupInfo" useGeneratedKeys="true">
+	<insert id="insert"  parameterType="com.tinytree.entity.GroupInfo" useGeneratedKeys="true">
 		<!-- <selectKey keyProperty="id" resultType="String" order="BEFORE">
         	replace(uuid(),'-','')
     	</selectKey> -->
@@ -207,11 +207,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.GroupInfo">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.GroupInfo">
 	    delete from group_info<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.GroupInfo">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.GroupInfo">
 	    delete from group_info<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -219,7 +219,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.GroupInfo" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.GroupInfo" >
 		update group_info <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -239,7 +239,7 @@
 		select count(1) from group_info
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="groupInfoMap" parameterType="com.kungfu.dental.entity.GroupInfo">
+	<select id="selectByEntiry"  resultMap="groupInfoMap" parameterType="com.tinytree.entity.GroupInfo">
 		select <include refid="tbaleColumns"/> from group_info <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

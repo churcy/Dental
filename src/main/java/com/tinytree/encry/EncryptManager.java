@@ -1,11 +1,11 @@
 package com.tinytree.encry;
 
-import java.io.UnsupportedEncodingException;
-
+import com.tinytree.exception.EncryptException;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
-import com.kungfu.dental.exception.EncryptException;
+import java.io.UnsupportedEncodingException;
+
 
 /**
  * @Description：加密/解密管理器，支持MD5、AES、RSA三种方式
@@ -72,7 +72,7 @@ public class EncryptManager {
 		}
 	}
 	
-	public String encrypt(String src,String...keys) throws EncryptException  {
+	public String encrypt(String src,String...keys) throws EncryptException {
 		if(enc == null || src == null){
 			return null;
 		}

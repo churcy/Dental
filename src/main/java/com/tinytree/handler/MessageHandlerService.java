@@ -5,11 +5,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.tinytree.util.Message;
+import com.tinytree.util.MessageQueue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.kungfu.dental.util.Message;
-import com.kungfu.dental.util.MessageQueue;
 
 
 /**

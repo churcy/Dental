@@ -1,11 +1,11 @@
 package com.tinytree.dao;
 
-import java.util.List;
-
+import com.tinytree.entity.ReserveSetting;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
-import com.kungfu.dental.entity.ReserveSetting;
+import java.util.List;
 
 /**
  * @Description:预约设置处理接口
@@ -15,6 +15,7 @@ import com.kungfu.dental.entity.ReserveSetting;
  * (变更历史)
  * 如：eric	2015/01/08 修改了删除功
  */
+@Repository
 public interface ReserveSettingDao extends BaseDao<ReserveSetting>{
 	/**
 	 * 查询预约设置

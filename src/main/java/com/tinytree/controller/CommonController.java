@@ -1,21 +1,17 @@
 package com.tinytree.controller;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.tinytree.entity.AppVersion;
+import com.tinytree.entity.Weather;
+import com.tinytree.service.AppVersionService;
+import com.tinytree.service.ImageVersionService;
+import com.tinytree.service.SMSService;
+import com.tinytree.service.WeatherService;
+import com.tinytree.util.DateUtils;
+import com.tinytree.util.GlobalUtil;
+import com.tinytree.util.RandomUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,20 +19,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.kungfu.dental.entity.AppVersion;
-import com.kungfu.dental.entity.GroupInfo;
-import com.kungfu.dental.entity.GroupMembers;
-import com.kungfu.dental.entity.Weather;
-import com.kungfu.dental.service.AppVersionService;
-import com.kungfu.dental.service.FriendManageService;
-import com.kungfu.dental.service.GroupInfoService;
-import com.kungfu.dental.service.GroupMembersService;
-import com.kungfu.dental.service.ImageVersionService;
-import com.kungfu.dental.service.SMSService;
-import com.kungfu.dental.service.WeatherService;
-import com.kungfu.dental.util.DateUtils;
-import com.kungfu.dental.util.GlobalUtil;
-import com.kungfu.dental.util.RandomUtil;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 /**
  * @Description:通用服务接口
  * @ClassName: CommonController
@@ -109,7 +98,7 @@ public class CommonController extends BaseController{
 					pattern = GlobalUtil.DATETIME_PATTERN;
 				}
 				Date date = new Date();
-				time = DateUtils.format2String(date,pattern);
+				time = DateUtils.format2String(date, pattern);
 				status = GlobalUtil.SUCCESS;
 				jsonObject.put("status", status);
 				jsonObject.put("time", time);

@@ -1,8 +1,7 @@
 package com.tinytree.dao;
-
+import com.tinytree.entity.FeedBack;
+import org.springframework.stereotype.Repository;
 import java.util.Map;
-
-import com.kungfu.dental.entity.FeedBack;
 /**
  * @Description:用户意见反馈dao
  * @ClassName: FeedBackDao
@@ -11,6 +10,7 @@ import com.kungfu.dental.entity.FeedBack;
  * (变更历史)
  * 如：eric	2015/01/08 修改了删除功
  */
+@Repository
 public interface FeedBackDao extends BaseDao<FeedBack>{
 	
 	public Map<String, Object> getByUserId(Map<String, Object> map);

@@ -1,11 +1,11 @@
 package com.tinytree.dao;
 
+import com.tinytree.entity.ReturnVisit;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Map;
-
-import org.apache.ibatis.annotations.Param;
-
-import com.kungfu.dental.entity.ReturnVisit;
 
 /**
  * @Description:回访列表数据访问接口
@@ -15,6 +15,7 @@ import com.kungfu.dental.entity.ReturnVisit;
  * (变更历史)
  * 如：eric	2015/01/08 修改了删除功
  */
+@Repository
 public interface ReturnVisitDao extends BaseDao<ReturnVisit>{
 
 	/**

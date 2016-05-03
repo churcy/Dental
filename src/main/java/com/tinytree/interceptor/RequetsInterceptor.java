@@ -1,15 +1,15 @@
 package com.tinytree.interceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.tinytree.entity.RequestLog;
+import com.tinytree.util.GlobalUtil;
+import com.tinytree.util.Message;
+import com.tinytree.util.MessageQueue;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.tinytree.entity.RequestLog;
-import com.kungfu.dental.util.GlobalUtil;
-import com.kungfu.dental.util.Message;
-import com.kungfu.dental.util.MessageQueue;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 
 
 /**
@@ -61,7 +61,7 @@ public class RequetsInterceptor extends HandlerInterceptorAdapter{
 		requestLog.setIp(request.getRemoteAddr());
 		requestLog.setToken((String) request.getHeader(GlobalUtil.TOKEN));
 		requestLog.setOption((String) request.getParameter(GlobalUtil.OPT));
-		Message  message = new Message("REQUEST", requestLog);
+		Message message = new Message("REQUEST", requestLog);
 		MessageQueue.getInstance().add(message);
 	}
 	/**

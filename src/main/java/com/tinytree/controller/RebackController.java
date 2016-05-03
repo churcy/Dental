@@ -1,17 +1,11 @@
 package com.tinytree.controller;
 
-import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.tinytree.entity.*;
+import com.tinytree.service.*;
+import com.tinytree.util.DateUtils;
+import com.tinytree.util.GlobalUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,15 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.JsonObject;
-import com.kungfu.dental.entity.ReturnVisit;
-import com.kungfu.dental.entity.ReturnVisitRecord;
-import com.kungfu.dental.service.ReturnVisitRecordService;
-import com.kungfu.dental.service.ReturnVisitService;
-import com.kungfu.dental.util.DateUtils;
-import com.kungfu.dental.util.GlobalUtil;
+import javax.servlet.http.HttpServletRequest;
+import java.net.URLDecoder;
+import java.util.*;
 
 /**
  * @Description:回访管理接口

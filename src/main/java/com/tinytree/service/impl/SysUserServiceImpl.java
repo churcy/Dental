@@ -1,13 +1,12 @@
 package com.tinytree.service.impl;
 
-import javax.annotation.Resource;
-
+import com.tinytree.dao.SysUserDao;
+import com.tinytree.entity.SysUser;
+import com.tinytree.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tinytree.dao.SysUserDao;
-import com.tinytree.entity.SysUser;
-import com.kungfu.dental.service.SysUserService;
+import javax.annotation.Resource;
 /**
  * @Description:系统用户相关服务实现
  * @ClassName: SysUserServiceImpl
@@ -17,7 +16,7 @@ import com.kungfu.dental.service.SysUserService;
  * 如：eric	2015/01/08 修改了删除功
  */
 @Service
-public class SysUserServiceImpl extends BaseServiceImpl<SysUser, String> implements SysUserService{
+public class SysUserServiceImpl extends BaseServiceImpl<SysUser, String> implements SysUserService {
 
 	@Autowired
 	private SysUserDao sysUserDao;

@@ -1,10 +1,11 @@
 package com.tinytree.dao;
 
+import com.tinytree.entity.GroupInfo;
+import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Map;
 
-import com.kungfu.dental.entity.GroupInfo;
-
+@Repository
 public interface GroupInfoDao extends BaseDao<GroupInfo> {
 	
 	/**

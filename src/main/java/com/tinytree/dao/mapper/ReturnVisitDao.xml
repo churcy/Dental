@@ -12,8 +12,8 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.ReturnVisitDao"> 
-	<resultMap type="com.kungfu.dental.entity.ReturnVisit" id="returnVisitMap">
+<mapper namespace="com.tinytree.dao.ReturnVisitDao"> 
+	<resultMap type="com.tinytree.entity.ReturnVisit" id="returnVisitMap">
 		<id column="id" property="id"/>
 		<result column="user_id" property="userId"/>
 		<result column="medical_record_id" property="medicalRecordId"/>
@@ -188,7 +188,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.ReturnVisit">
+	<insert id="insert"  parameterType="com.tinytree.entity.ReturnVisit">
 	    insert into return_visit(<include refid="insertColumns"/>) values(<include refid="insertParams"/>);
 	</insert>
 	<!-- 添加,SQL添加   -->
@@ -196,11 +196,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.ReturnVisit">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.ReturnVisit">
 	    delete from return_visit<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.ReturnVisit">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.ReturnVisit">
 	    delete from return_visit<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -208,7 +208,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.ReturnVisit" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.ReturnVisit" >
 		update return_visit <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -228,7 +228,7 @@
 		select count(1) from return_visit
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="returnVisitMap" parameterType="com.kungfu.dental.entity.ReturnVisit">
+	<select id="selectByEntiry"  resultMap="returnVisitMap" parameterType="com.tinytree.entity.ReturnVisit">
 		select <include refid="tbaleColumns"/> from return_visit <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

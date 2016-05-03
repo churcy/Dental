@@ -2,9 +2,9 @@ package com.tinytree.dao;
 
 import java.util.List;
 
+import com.tinytree.entity.ImageVersion;
 import org.apache.ibatis.annotations.Select;
-
-import com.kungfu.dental.entity.ImageVersion;
+import org.springframework.stereotype.Repository;
 
 /**
  * @Description:图片发布版本数据库操作接口
@@ -14,6 +14,7 @@ import com.kungfu.dental.entity.ImageVersion;
  * (变更历史)
  * 如：eric	2015/01/08 修改了删除功
  */
+
 public interface ImageVersionDao extends BaseDao<ImageVersion>{
 	
 	/**

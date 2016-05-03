@@ -12,8 +12,8 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.VisitInfoDao"> 
-	<resultMap type="com.kungfu.dental.entity.VisitInfo" id="visitMap">
+<mapper namespace="com.tinytree.dao.VisitInfoDao"> 
+	<resultMap type="com.tinytree.entity.VisitInfo" id="visitMap">
 		<id column="id" property="id"/>
 		<result column="user_id" property="userId"/>
 		<result column="visit_date" property="visitDate"/>
@@ -204,7 +204,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.VisitInfo" useGeneratedKeys="true">
+	<insert id="insert"  parameterType="com.tinytree.entity.VisitInfo" useGeneratedKeys="true">
 		<!-- <selectKey keyProperty="id" resultType="String" order="BEFORE">
         	replace(uuid(),'-','')
     	</selectKey> -->
@@ -215,11 +215,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.VisitInfo">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.VisitInfo">
 	    delete from visit_info<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.VisitInfo">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.VisitInfo">
 	    delete from visit_info<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -227,7 +227,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.VisitInfo" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.VisitInfo" >
 		update visit_info <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -247,7 +247,7 @@
 		select count(1) from visit_info
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="visitMap" parameterType="com.kungfu.dental.entity.VisitInfo">
+	<select id="selectByEntiry"  resultMap="visitMap" parameterType="com.tinytree.entity.VisitInfo">
 		select <include refid="tbaleColumns"/> from visit_info <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

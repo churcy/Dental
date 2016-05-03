@@ -1,13 +1,12 @@
 package com.tinytree.entity;
 
-import java.util.Date;
-
-import javax.persistence.Entity;
-
+import com.tinytree.util.DateUtils;
+import com.tinytree.util.GlobalUtil;
 import org.apache.ibatis.type.Alias;
 
-import com.kungfu.dental.util.DateUtils;
-import com.kungfu.dental.util.GlobalUtil;
+import javax.persistence.Entity;
+import java.util.Date;
+
 /**
  * @Description:request请求基本信息
  * @ClassName: RequestLog
@@ -82,7 +81,7 @@ public class RequestLog extends BaseEntity{
 //				+ consumeTime + ", ip=" + ip + ", token=" + token + ", option="
 //				+ opt +",requestTime="+DateUtils.format2String(requestTime, GlobalUtil.DATETIME_PATTERN)
 //				+", status="+status+"]";
-		return "[requestlog]:|"+DateUtils.format2String(requestTime, GlobalUtil.DATETIME_PATTERN)+"|"+opertatSystem+"|"+ip+"|"+
+		return "[requestlog]:|"+ DateUtils.format2String(requestTime, GlobalUtil.DATETIME_PATTERN)+"|"+opertatSystem+"|"+ip+"|"+
 				opt+"|"+consumeTime+"|"+status+"|"+token;
 	}
 }

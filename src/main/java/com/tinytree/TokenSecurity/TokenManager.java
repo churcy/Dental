@@ -1,16 +1,16 @@
 package com.tinytree.TokenSecurity;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 import com.tinytree.cache.CacheManager;
 import com.tinytree.cache.CacheObject;
 import com.tinytree.cache.CachePool;
 import com.tinytree.encry.EncryptManager;
 import com.tinytree.exception.EncryptException;
 import com.tinytree.exception.ErrorTokenException;
-import com.kungfu.dental.util.DateUtils;
+import com.tinytree.util.DateUtils;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 
@@ -94,7 +94,7 @@ public class TokenManager {
 			key = EncryptManager.getInstance(EncryptManager.MD5_TYPE).encrypt(time+INIT_TOKEN).substring(1,17);
 			tokenValue = EncryptManager.getInstance(EncryptManager.AES_TYPE).decrypt(token, key);
 		} 
-		catch (EncryptException e) {
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 		

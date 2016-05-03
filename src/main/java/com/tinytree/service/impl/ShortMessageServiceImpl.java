@@ -1,15 +1,13 @@
 package com.tinytree.service.impl;
 
-import java.util.Date;
-
-import javax.annotation.Resource;
-
+import com.tinytree.dao.ShortMessageDao;
+import com.tinytree.entity.ShortMessage;
+import com.tinytree.service.ShortMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tinytree.dao.ShortMessageDao;
-import com.tinytree.entity.ShortMessage;
-import com.kungfu.dental.service.ShortMessageService;
+import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * @Description:发送短信服务实现

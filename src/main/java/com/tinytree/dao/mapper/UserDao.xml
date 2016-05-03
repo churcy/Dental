@@ -12,7 +12,7 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.UserDao" > 
+<mapper namespace="com.tinytree.dao.UserDao" > 
 	<select id="getByUserId" resultType="java.util.Map">
 		SELECT
 			u.id AS userId,
@@ -59,7 +59,7 @@
 		ON u.account_id = a.id
 		WHERE mobile = #{userId} 
 	</select>
-	<resultMap type="com.kungfu.dental.entity.User" id="userMap">
+	<resultMap type="com.tinytree.entity.User" id="userMap">
 		<id column="id" property="id"/>
 		<result column="real_name" property="realName"/>
 		<result column="gender" property="gender"/>
@@ -76,11 +76,11 @@
 		<result column="create_date" property="createDate"/>
 		<result column="modify_date" property="modifyDate"/>
 		<association property="account" column="account_id"
-			javaType="com.kungfu.dental.entity.Account" 
-			select="com.kungfu.dental.dao.AccountDao.selectByPrimaryKey">
+			javaType="com.tinytree.entity.Account" 
+			select="com.tinytree.dao.AccountDao.selectByPrimaryKey">
 		</association>
 	</resultMap>
-	<resultMap type="com.kungfu.dental.entity.Account" id="accountMap">
+	<resultMap type="com.tinytree.entity.Account" id="accountMap">
 		<id column="id" property="id"/>
 		<result column="login_name" property="loginName"/>
 		<result column="password" property="password"/>
@@ -353,7 +353,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.User" >
+	<insert id="insert"  parameterType="com.tinytree.entity.User" >
 	    insert into user(<include refid="insertColumns"/>) values(<include refid="insertParams"/>);
 	</insert>
 	<!-- 添加,SQL添加   -->
@@ -361,11 +361,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.User">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.User">
 	    delete from user<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.User">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.User">
 	    delete from user<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -373,7 +373,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.User" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.User" >
 		update user <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -393,7 +393,7 @@
 		select count(1) from user
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="userMap" parameterType="com.kungfu.dental.entity.User">
+	<select id="selectByEntiry"  resultMap="userMap" parameterType="com.tinytree.entity.User">
 		select <include refid="tbaleColumns"/> from user <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

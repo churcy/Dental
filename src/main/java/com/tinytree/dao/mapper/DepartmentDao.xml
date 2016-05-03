@@ -12,7 +12,7 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.DepartmentDao"> 
+<mapper namespace="com.tinytree.dao.DepartmentDao"> 
 
 	<resultMap type="department" id="departmentMap">
 		<id column="id" property="id"/>
@@ -205,7 +205,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.Department" useGeneratedKeys="true">
+	<insert id="insert"  parameterType="com.tinytree.entity.Department" useGeneratedKeys="true">
 		<!-- <selectKey keyProperty="id" resultType="String" order="BEFORE">
         	replace(uuid(),'-','')
     	</selectKey> -->
@@ -216,11 +216,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.Department">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.Department">
 	    delete from department<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.Department">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.Department">
 	    delete from department<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -228,7 +228,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.Department" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.Department" >
 		update department <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -248,7 +248,7 @@
 		select count(1) from department
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="departmentMap" parameterType="com.kungfu.dental.entity.Department">
+	<select id="selectByEntiry"  resultMap="departmentMap" parameterType="com.tinytree.entity.Department">
 		select <include refid="tbaleColumns"/> from department <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

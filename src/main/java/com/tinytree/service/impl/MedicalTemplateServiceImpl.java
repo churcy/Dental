@@ -1,16 +1,14 @@
 package com.tinytree.service.impl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.tinytree.dao.MedicalTemplateDao;
+import com.tinytree.entity.MedicalTemplate;
+import com.tinytree.service.MedicalTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tinytree.dao.GroupMembersDao;
-import com.tinytree.dao.MedicalTemplateDao;
-import com.tinytree.entity.MedicalTemplate;
-import com.kungfu.dental.service.MedicalTemplateService;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 /**
  * @Author zhengzhong
  * @Date 2016-03-22
@@ -19,7 +17,7 @@ import com.kungfu.dental.service.MedicalTemplateService;
  *
  */
 @Service
-public class MedicalTemplateServiceImpl extends BaseServiceImpl<MedicalTemplate, String> implements MedicalTemplateService{
+public class MedicalTemplateServiceImpl extends BaseServiceImpl<MedicalTemplate, String> implements MedicalTemplateService {
 	
 	@Autowired
 	private MedicalTemplateDao medicalTemplateDao;

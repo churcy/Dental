@@ -1,12 +1,9 @@
 package com.tinytree.controller;
 
-import java.net.URLDecoder;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.tinytree.entity.*;
+import com.tinytree.service.*;
+import com.tinytree.util.GlobalUtil;
 import net.sf.json.JSONObject;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,13 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kungfu.dental.entity.FeedBack;
-import com.kungfu.dental.entity.User;
-import com.kungfu.dental.service.FeedBackService;
-import com.kungfu.dental.service.UserService;
-import com.kungfu.dental.util.GlobalUtil;
+import javax.servlet.http.HttpServletRequest;
+import java.net.URLDecoder;
+import java.util.Map;
 /**
  * @Description:用户意见反馈接口
  * @ClassName: FeedBackController

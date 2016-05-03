@@ -1,25 +1,18 @@
 package com.tinytree.service.impl;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
 import com.tinytree.dao.FriendManageDao;
 import com.tinytree.entity.GroupInfo;
 import com.tinytree.entity.GroupMembers;
 import com.tinytree.entity.User;
-import com.kungfu.dental.service.DoctorService;
-import com.kungfu.dental.service.FriendManageService;
-import com.kungfu.dental.service.GroupInfoService;
-import com.kungfu.dental.service.GroupMembersService;
-import com.kungfu.dental.service.UserService;
-import com.kungfu.dental.util.DateUtils;
-import com.kungfu.dental.util.GlobalUtil;
+import com.tinytree.service.*;
+import com.tinytree.util.GlobalUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 @Controller
 public class FreindManageServiceImpl extends BaseServiceImpl<User, String> implements FriendManageService {
 	

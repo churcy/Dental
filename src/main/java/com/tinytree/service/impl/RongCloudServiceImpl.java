@@ -1,10 +1,10 @@
 package com.tinytree.service.impl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.tinytree.RongCloud.RongCloudSupport;
-import com.kungfu.dental.service.RongCloudService;
-import com.kungfu.dental.service.UserService;
+import com.tinytree.service.RongCloudService;
+import com.tinytree.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 /**
  * @Description:融云信息服务实现类
  * @ClassName: RongCloudServiceImpl

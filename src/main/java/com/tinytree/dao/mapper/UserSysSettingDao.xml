@@ -12,7 +12,7 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.UserSysSettingDao"> 
+<mapper namespace="com.tinytree.dao.UserSysSettingDao"> 
 	<select id="getSysSetting" resultType="java.util.HashMap" parameterType="java.util.Map">
 		SELECT id AS id,user_id AS userId,
 		reserve_remind AS reserveRemind,
@@ -25,7 +25,7 @@
 		</if> -->
 	</select>
 	
-	<resultMap type="com.kungfu.dental.entity.UserSysSetting" id="userSysSettingMap">
+	<resultMap type="com.tinytree.entity.UserSysSetting" id="userSysSettingMap">
 		<id column="id" property="id"/>
 		<result column="user_id" property="userId"/>
 		<result column="reserve_remind" property="reserveRemind"/>
@@ -184,7 +184,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.UserSysSetting" useGeneratedKeys="true">
+	<insert id="insert"  parameterType="com.tinytree.entity.UserSysSetting" useGeneratedKeys="true">
 		<!-- <selectKey keyProperty="id" resultType="String" order="BEFORE">
         	replace(uuid(),'-','')
     	</selectKey> -->
@@ -195,11 +195,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.UserSysSetting">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.UserSysSetting">
 	    delete from user_sys_setting<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.UserSysSetting">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.UserSysSetting">
 	    delete from user_sys_setting<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -207,7 +207,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.UserSysSetting" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.UserSysSetting" >
 		update user_sys_setting <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -227,7 +227,7 @@
 		select count(1) from user_sys_setting
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="userSysSettingMap" parameterType="com.kungfu.dental.entity.UserSysSetting">
+	<select id="selectByEntiry"  resultMap="userSysSettingMap" parameterType="com.tinytree.entity.UserSysSetting">
 		select <include refid="tbaleColumns"/> from user_sys_setting <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

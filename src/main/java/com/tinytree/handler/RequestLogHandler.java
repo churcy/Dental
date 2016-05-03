@@ -1,15 +1,13 @@
 package com.tinytree.handler;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.annotation.Resource;
-
+import com.tinytree.entity.RequestLog;
+import com.tinytree.service.RequestLogService;
+import com.tinytree.util.Message;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.tinytree.entity.RequestLog;
-import com.kungfu.dental.service.RequestLogService;
-import com.kungfu.dental.util.Message;
+import javax.annotation.Resource;
+import java.util.List;
 
 
 

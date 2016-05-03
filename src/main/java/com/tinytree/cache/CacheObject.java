@@ -3,12 +3,11 @@
  */
 package com.tinytree.cache;
 
-import java.util.concurrent.Delayed;
-import java.util.concurrent.TimeUnit;
-
+import com.tinytree.util.RandomUtil;
 import org.apache.commons.lang3.StringUtils;
 
-import com.kungfu.dental.util.RandomUtil;
+import java.util.concurrent.Delayed;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Description：缓存对象包装类
@@ -43,13 +42,13 @@ public class CacheObject implements Delayed{
 	
 	/**
 	 * 
-	 * @param key缓存的key
+	 * @param key 缓存的key
 	 * @param source 缓存的具体对象
 	 * @param timeout 超时时间，单位秒
 	 */
 	public CacheObject(String key,Object source,long timeout){
 		this.value = source;
-		this.key = StringUtils.isBlank(key)?RandomUtil.uuid():key;
+		this.key = StringUtils.isBlank(key)? RandomUtil.uuid():key;
 		this.timeout = timeout;
 		this.startTime = System.currentTimeMillis();
 	}

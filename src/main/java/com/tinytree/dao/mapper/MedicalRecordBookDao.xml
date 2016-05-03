@@ -12,8 +12,8 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.MedicalRecordBookDao"> 
-	<resultMap type="com.kungfu.dental.entity.MedicalRecordBook" id="medicalRecordBookMap">
+<mapper namespace="com.tinytree.dao.MedicalRecordBookDao"> 
+	<resultMap type="com.tinytree.entity.MedicalRecordBook" id="medicalRecordBookMap">
 		<id column="id" property="id"/>
 		<result column="doctor_id" property="doctorId"/>
 		<result column="last_visit_date" property="lastVisitDate"/>
@@ -21,11 +21,11 @@
 		<result column="create_date" property="createDate"/>
 		<result column="modify_date" property="modifyDate"/>
 		<association property="user" column="user_id"
-			javaType="com.kungfu.dental.entity.User" 
-			select="com.kungfu.dental.dao.UserDao.selectByPrimaryKey">
+			javaType="com.tinytree.entity.User" 
+			select="com.tinytree.dao.UserDao.selectByPrimaryKey">
 		</association>
 	</resultMap>
-	<resultMap type="com.kungfu.dental.entity.User" id="userMap">
+	<resultMap type="com.tinytree.entity.User" id="userMap">
 		<id column="id" property="id"/>
 		<result column="real_name" property="realName"/>
 		<result column="gender" property="gender"/>
@@ -42,11 +42,11 @@
 		<result column="create_date" property="createDate"/>
 		<result column="modify_date" property="modifyDate"/>
 		<association property="account" column="account_id"
-			javaType="com.kungfu.dental.entity.Account" 
-			select="com.kungfu.dental.dao.AccountDao.selectByPrimaryKey">
+			javaType="com.tinytree.entity.Account" 
+			select="com.tinytree.dao.AccountDao.selectByPrimaryKey">
 		</association>
 	</resultMap>
-	<resultMap type="com.kungfu.dental.entity.Account" id="accountMap">
+	<resultMap type="com.tinytree.entity.Account" id="accountMap">
 		<id column="id" property="id"/>
 		<result column="login_name" property="loginName"/>
 		<result column="password" property="password"/>
@@ -213,7 +213,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.MedicalRecordBook">
+	<insert id="insert"  parameterType="com.tinytree.entity.MedicalRecordBook">
 	    insert into medical_record_book(<include refid="insertColumns"/>) values(<include refid="insertParams"/>);
 	</insert>
 	<!-- 添加,SQL添加   -->
@@ -221,11 +221,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.MedicalRecordBook">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.MedicalRecordBook">
 	    delete from medical_record_book<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.MedicalRecordBook">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.MedicalRecordBook">
 	    delete from medical_record_book<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -233,7 +233,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.MedicalRecordBook" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.MedicalRecordBook" >
 		update medical_record_book <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -253,7 +253,7 @@
 		select count(1) from medical_record_book
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="medicalRecordBookMap" parameterType="com.kungfu.dental.entity.MedicalRecordBook">
+	<select id="selectByEntiry"  resultMap="medicalRecordBookMap" parameterType="com.tinytree.entity.MedicalRecordBook">
 		select <include refid="tbaleColumns"/> from medical_record_book <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

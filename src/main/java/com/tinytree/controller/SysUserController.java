@@ -1,28 +1,21 @@
 package com.tinytree.controller;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.tinytree.entity.SysUser;
+import com.tinytree.service.SysUserService;
+import com.tinytree.util.GlobalUtil;
+import com.tinytree.bean.LoginCommand;
 import net.sf.json.JSONObject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import com.tinytree.bean.LoginCommand;
-import com.kungfu.dental.entity.SysUser;
-import com.kungfu.dental.service.SysUserService;
-import com.kungfu.dental.util.GlobalUtil;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class SysUserController extends BaseController{

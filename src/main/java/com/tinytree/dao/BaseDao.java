@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  * @Description:	DAO基类
@@ -13,6 +14,7 @@ import org.apache.ibatis.annotations.Param;
  * (变更历史)
  * 如：eric	2015/01/08 修改了删除功
  */
+@Repository
 public interface BaseDao<T>{
 	/*****************CRUD操作********************/
 	public T selectByPrimaryKey(Object key);

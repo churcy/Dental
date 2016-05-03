@@ -1,16 +1,14 @@
 package com.tinytree.service.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
+import com.tinytree.dao.FeedBackDao;
+import com.tinytree.entity.FeedBack;
+import com.tinytree.service.FeedBackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tinytree.dao.FeedBackDao;
-import com.tinytree.entity.FeedBack;
-import com.kungfu.dental.service.FeedBackService;
+import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 /**
  * @Description:用户意见反馈接口实现
  * @ClassName: FeedBackImpl
@@ -20,7 +18,7 @@ import com.kungfu.dental.service.FeedBackService;
  * 如：eric	2015/01/08 修改了删除功
  */
 @Service
-public class FeedBackImpl extends BaseServiceImpl<FeedBack, String> implements FeedBackService{
+public class FeedBackImpl extends BaseServiceImpl<FeedBack, String> implements FeedBackService {
 
 	@Autowired
 	private FeedBackDao feedBackDao;

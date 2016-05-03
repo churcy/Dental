@@ -1,10 +1,9 @@
 package com.tinytree.service;
 
 import java.io.IOException;
-
-import org.json.JSONException;
-
 import com.tinytree.entity.Weather;
+import net.sf.json.JSONException;
+
 /**
  * @Description:天气信息服务
  * @ClassName: WeatherService

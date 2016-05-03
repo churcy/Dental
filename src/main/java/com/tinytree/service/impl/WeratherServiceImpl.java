@@ -1,19 +1,17 @@
 package com.tinytree.service.impl;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.tinytree.bean.WeatherBean;
+import com.tinytree.entity.Weather;
+import com.tinytree.service.WeatherService;
+import com.tinytree.util.HttpUtil;
+import com.tinytree.util.LoadProperty2Bean;
 import net.sf.json.JSONObject;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
-import com.tinytree.bean.WeatherBean;
-import com.tinytree.entity.Weather;
-import com.kungfu.dental.service.WeatherService;
-import com.kungfu.dental.util.HttpUtil;
-import com.kungfu.dental.util.LoadProperty2Bean;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 /**
  * @Description:天气服务实现
  * @ClassName: WeratherServiceImpl
@@ -23,7 +21,7 @@ import com.kungfu.dental.util.LoadProperty2Bean;
  * 如：eric	2015/01/08 修改了删除功
  */
 @Service("weatherService")
-public class WeratherServiceImpl implements WeatherService{
+public class WeratherServiceImpl implements WeatherService {
 	
 	private static final WeatherBean weatherBean = (WeatherBean) LoadProperty2Bean.getInstance().getBean(LoadProperty2Bean.WEATHER);
 	
@@ -32,7 +30,7 @@ public class WeratherServiceImpl implements WeatherService{
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("apikey", weatherBean.getApikey());
 		String url = weatherBean.getUrl();
-		String weatherInfo = HttpUtil.httpGet(url,map,"citypinyin="+cityName);
+		String weatherInfo = HttpUtil.httpGet(url, map, "citypinyin=" + cityName);
 		JSONObject jsonObject  = JSONObject.fromObject(weatherInfo);
 		Object object = jsonObject.get("retData");
 		String errMsg = jsonObject.get("errMsg").toString();

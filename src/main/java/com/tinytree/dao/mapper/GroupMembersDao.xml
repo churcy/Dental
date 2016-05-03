@@ -12,7 +12,7 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.GroupMembersDao"> 
+<mapper namespace="com.tinytree.dao.GroupMembersDao"> 
 	<select id="getByConditions" resultType="java.util.HashMap" parameterType="java.util.Map">
 		SELECT gm.id AS groupMebId,gm.status AS status,gm.group_id AS groupId,gm.user_id AS userId,gm.username AS userName,gf.user_id AS requestorUserId,u.real_name AS requestorUserName
 		FROM group_members gm
@@ -50,7 +50,7 @@
 	WHERE gm.user_id = #{friendUserId}
 	AND gf.user_id =#{userId}
 	</select>		
-	<resultMap type="com.kungfu.dental.entity.GroupMembers" id="groupMembersMap">
+	<resultMap type="com.tinytree.entity.GroupMembers" id="groupMembersMap">
 		<id column="id" property="id"/>
 		<result column="group_id" property="groupId"/>
 		<result column="user_id" property="userId"/>
@@ -254,7 +254,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.GroupMembers" useGeneratedKeys="true">
+	<insert id="insert"  parameterType="com.tinytree.entity.GroupMembers" useGeneratedKeys="true">
 		<!-- <selectKey keyProperty="id" resultType="String" order="BEFORE">
         	replace(uuid(),'-','')
     	</selectKey> -->
@@ -265,11 +265,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.GroupMembers">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.GroupMembers">
 	    delete from group_members<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.GroupMembers">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.GroupMembers">
 	    delete from group_members<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -277,7 +277,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.GroupMembers" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.GroupMembers" >
 		update group_members <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -297,7 +297,7 @@
 		select count(1) from group_members
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="groupMembersMap" parameterType="com.kungfu.dental.entity.GroupMembers">
+	<select id="selectByEntiry"  resultMap="groupMembersMap" parameterType="com.tinytree.entity.GroupMembers">
 		select <include refid="tbaleColumns"/> from group_members <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

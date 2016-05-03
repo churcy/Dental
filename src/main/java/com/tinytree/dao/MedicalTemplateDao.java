@@ -1,9 +1,10 @@
 package com.tinytree.dao;
 
+import com.tinytree.entity.MedicalTemplate;
+import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Map;
 
-import com.kungfu.dental.entity.MedicalTemplate;
 
 /**
  * @Description:病历模板数据库操作
@@ -13,6 +14,7 @@ import com.kungfu.dental.entity.MedicalTemplate;
  * (变更历史)
  * 如：eric	2015/01/08 修改了删除功
  */
+@Repository
 public interface MedicalTemplateDao extends BaseDao<MedicalTemplate>{
 
 	/**

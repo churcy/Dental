@@ -1,13 +1,12 @@
 package com.tinytree.service.impl;
 
-import java.util.Date;
-
+import com.tinytree.dao.AppVersionDao;
+import com.tinytree.entity.AppVersion;
+import com.tinytree.service.AppVersionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tinytree.dao.AppVersionDao;
-import com.tinytree.entity.AppVersion;
-import com.kungfu.dental.service.AppVersionService;
+import java.util.Date;
 /**
  * @Description:app版本相关服务操作接口实现
  * @ClassName: AppVersionServiceImpl
@@ -17,7 +16,7 @@ import com.kungfu.dental.service.AppVersionService;
  * 如：eric	2015/01/08 修改了删除功
  */
 @Service("appVersionService")
-public class AppVersionServiceImpl extends BaseServiceImpl<AppVersion, String> implements AppVersionService{
+public class AppVersionServiceImpl extends BaseServiceImpl<AppVersion, String> implements AppVersionService {
 
 	@Autowired
 	private AppVersionDao appVersionDao;

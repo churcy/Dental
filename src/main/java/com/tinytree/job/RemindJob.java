@@ -1,14 +1,5 @@
 package com.tinytree.job;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.tinytree.bean.RemindBean;
 import com.tinytree.cache.CacheManager;
 import com.tinytree.cache.CacheObject;
@@ -16,11 +7,19 @@ import com.tinytree.cache.CachePool;
 import com.tinytree.cache.CacheTimeoutListener;
 import com.tinytree.entity.ReserveInfo;
 import com.tinytree.entity.Stroke;
-import com.kungfu.dental.service.ReserveInfoService;
-import com.kungfu.dental.service.StrokeService;
-import com.kungfu.dental.util.DateUtils;
-import com.kungfu.dental.util.Message;
-import com.kungfu.dental.util.MessageQueue;
+import com.tinytree.service.ReserveInfoService;
+import com.tinytree.service.StrokeService;
+import com.tinytree.util.DateUtils;
+import com.tinytree.util.Message;
+import com.tinytree.util.MessageQueue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:提醒功能定时任务

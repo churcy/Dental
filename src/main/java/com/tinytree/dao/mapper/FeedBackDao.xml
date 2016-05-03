@@ -12,7 +12,7 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.FeedBackDao"> 
+<mapper namespace="com.tinytree.dao.FeedBackDao"> 
 	<resultMap type="feedBack" id="feedBackMap">
 		<id column="id" property="id"/>
 		<result column="fb_content" property="fbContent"/>
@@ -156,7 +156,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.FeedBack" useGeneratedKeys="true">
+	<insert id="insert"  parameterType="com.tinytree.entity.FeedBack" useGeneratedKeys="true">
 		<!-- <selectKey keyProperty="id" resultType="String" order="BEFORE">
         	replace(uuid(),'-','')
     	</selectKey> -->
@@ -167,11 +167,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.FeedBack">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.FeedBack">
 	    delete from feedback<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.FeedBack">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.FeedBack">
 	    delete from feedback<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -179,7 +179,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.FeedBack" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.FeedBack" >
 		update feedback <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -199,7 +199,7 @@
 		select count(1) from feedback
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="feedBackMap" parameterType="com.kungfu.dental.entity.FeedBack">
+	<select id="selectByEntiry"  resultMap="feedBackMap" parameterType="com.tinytree.entity.FeedBack">
 		select <include refid="tbaleColumns"/> from feedback <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

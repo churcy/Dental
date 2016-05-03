@@ -1,6 +1,5 @@
 package com.tinytree.entity;
 
-import javax.persistence.Entity;
 /**
  * @Description:账号信息
  * @ClassName: Account
@@ -9,7 +8,7 @@ import javax.persistence.Entity;
  * (变更历史)
  * 如：eric	2015/01/08 修改了删除功
  */
-@Entity
+
 public class Account extends BaseEntity{
 
 	private static final long serialVersionUID = -4631511217640934133L;

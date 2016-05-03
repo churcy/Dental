@@ -1,18 +1,17 @@
 package com.tinytree.service.impl;
 
+import com.tinytree.dao.GroupMembersDao;
+import com.tinytree.entity.GroupMembers;
+import com.tinytree.service.GroupMembersService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.tinytree.dao.GroupMembersDao;
-import com.tinytree.entity.GroupMembers;
-import com.kungfu.dental.service.GroupMembersService;
-
 @Service
-public class GroupMembersServiceImpl extends BaseServiceImpl<GroupMembers, String> implements GroupMembersService{
+public class GroupMembersServiceImpl extends BaseServiceImpl<GroupMembers, String> implements GroupMembersService {
 	
 	@Autowired
 	private GroupMembersDao groupMembersDao;

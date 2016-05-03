@@ -1,21 +1,21 @@
 package com.tinytree.RongCloud;
 
+import com.tinytree.bean.RongCloudBean;
+import com.tinytree.encry.EncryptMD5Impl;
+import com.tinytree.util.GlobalUtil;
+import com.tinytree.util.HttpUtil;
+import com.tinytree.util.LoadProperty2Bean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.tinytree.bean.RongCloudBean;
-import com.tinytree.encry.EncryptMD5Impl;
-import com.kungfu.dental.util.GlobalUtil;
-import com.kungfu.dental.util.HttpUtil;
-import com.kungfu.dental.util.LoadProperty2Bean;
 
 public class RongCloudSupport {
 	private static final Logger logger = LoggerFactory.getLogger(RongCloudSupport.class);
-	private static final RongCloudBean RONGCLOUDBEAN = (RongCloudBean) LoadProperty2Bean.getInstance().getBean(LoadProperty2Bean.RONGCLOUD);; 
+	private static final RongCloudBean RONGCLOUDBEAN = (RongCloudBean) LoadProperty2Bean.getInstance().getBean(LoadProperty2Bean.RONGCLOUD);;
 	
 	private RongCloudSupport(){
 		

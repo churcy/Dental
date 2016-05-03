@@ -1,15 +1,14 @@
 package com.tinytree.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.tinytree.dao.ReserveSettingDao;
+import com.tinytree.entity.ReserveSetting;
+import com.tinytree.service.ReserveSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tinytree.dao.ReserveSettingDao;
-import com.tinytree.entity.ReserveSetting;
-import com.kungfu.dental.service.ReserveSettingService;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Description:预约设置服务实现类
@@ -20,7 +19,7 @@ import com.kungfu.dental.service.ReserveSettingService;
  * 如：eric	2015/01/08 修改了删除功
  */
 @Service("reserveSettingService")
-public class ReserveSettingServiceImpl extends BaseServiceImpl<ReserveSetting, String> implements ReserveSettingService{
+public class ReserveSettingServiceImpl extends BaseServiceImpl<ReserveSetting, String> implements ReserveSettingService {
 
 	@Autowired
 	private ReserveSettingDao reserveSettingDao;

@@ -1,6 +1,8 @@
 package com.tinytree.dao;
 
-import com.kungfu.dental.entity.Account;
+import com.tinytree.entity.Account;
+import org.springframework.stereotype.Repository;
+
 /**
  * @Description:用户账户信息相关数据库操作
  * @ClassName: AccountDao
@@ -9,6 +11,7 @@ import com.kungfu.dental.entity.Account;
  * (变更历史)
  * 如：eric	2015/01/08 修改了删除功
  */
+@Repository
 public interface AccountDao extends BaseDao<Account>{
 	
 	/**

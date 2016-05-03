@@ -12,7 +12,7 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.AppVersionDao"> 
+<mapper namespace="com.tinytree.dao.AppVersionDao"> 
 	
 	<select id = "getLatestAppVersion" resultMap = "appVersionMap">
 	SELECT
@@ -30,7 +30,7 @@
 			AND app_name= #{1}  
 		AND status = 1 )
 	</select>
-	<resultMap type="com.kungfu.dental.entity.AppVersion" id="appVersionMap">
+	<resultMap type="com.tinytree.entity.AppVersion" id="appVersionMap">
 		<id column="id" property="id"/>
 		<result column="app_name" property="appName"/>
 		<result column="version_no" property="versionNo"/>
@@ -317,7 +317,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.AppVersion" useGeneratedKeys="true">
+	<insert id="insert"  parameterType="com.tinytree.entity.AppVersion" useGeneratedKeys="true">
 		<!-- <selectKey keyProperty="id" resultType="String" order="BEFORE">
         	replace(uuid(),'-','')
     	</selectKey> -->
@@ -328,11 +328,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.AppVersion">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.AppVersion">
 	    delete from app_version<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.AppVersion">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.AppVersion">
 	    delete from app_version<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -340,7 +340,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.AppVersion" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.AppVersion" >
 		update app_version <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -360,7 +360,7 @@
 		select count(1) from app_version
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="appVersionMap" parameterType="com.kungfu.dental.entity.AppVersion">
+	<select id="selectByEntiry"  resultMap="appVersionMap" parameterType="com.tinytree.entity.AppVersion">
 		select <include refid="tbaleColumns"/> from app_version <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

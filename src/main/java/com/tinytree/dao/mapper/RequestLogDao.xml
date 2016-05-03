@@ -12,8 +12,8 @@
     &quot;       "
   <![CDATA[ 这里写你的SQL或者符号 ]]> 
  -->
-<mapper namespace="com.kungfu.dental.dao.RequestLogDao" > 
-	<resultMap type="com.kungfu.dental.entity.RequestLog" id="requestLogDaoMap">
+<mapper namespace="com.tinytree.dao.RequestLogDao" > 
+	<resultMap type="com.tinytree.entity.RequestLog" id="requestLogDaoMap">
 		<id column="id" property="id"/>
 		<result column="consume_time" property="consumeTime"/>
 		<result column="opertat_system" property="opertatSystem"/>
@@ -188,7 +188,7 @@
 	   </if>
 	</sql>
 	<!-- 添加,插入记录   -->
-	<insert id="insert"  parameterType="com.kungfu.dental.entity.RequestLog" useGeneratedKeys="true">
+	<insert id="insert"  parameterType="com.tinytree.entity.RequestLog" useGeneratedKeys="true">
 		<!-- <selectKey keyProperty="id" resultType="String" order="BEFORE">
         	replace(uuid(),'-','')
     	</selectKey> -->
@@ -199,11 +199,11 @@
 	    <include refid="sql"/>
 	</insert>
 	<!-- 删除,主键删除   -->
-	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.RequestLog">
+	<delete id="deleteByPrimaryKey" parameterType="com.tinytree.entity.RequestLog">
 	    delete from request_log<include refid="where"/><include refid="columnKey"/>
 	</delete>
 	<!-- 删除,实体删除   -->
-	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.RequestLog">
+	<delete id="deleteByEntity" parameterType="com.tinytree.entity.RequestLog">
 	    delete from request_log<include refid="where"/><include refid="andOtherAll"/>
 	</delete>
 	<!-- 删除,SQL删除   -->
@@ -211,7 +211,7 @@
 	      <include refid="sql"/>
 	</delete>
 	<!-- 修改,主键更新  -->
-	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.RequestLog" >
+	<update id="updateByPrimaryKey" parameterType="com.tinytree.entity.RequestLog" >
 		update request_log <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
 	</update>
 	<!-- 修改,SQL更新 -->
@@ -231,7 +231,7 @@
 		select count(1) from request_log
 	</select>
 	<!-- 查询,实体查询   -->
-	<select id="selectByEntiry"  resultMap="requestLogDaoMap" parameterType="com.kungfu.dental.entity.RequestLog">
+	<select id="selectByEntiry"  resultMap="requestLogDaoMap" parameterType="com.tinytree.entity.RequestLog">
 		select <include refid="tbaleColumns"/> from request_log <include refid="where"/> <include refid="andOtherAll"/>
 	</select>
 	<!-- 查询,SQL -->

@@ -23,30 +23,41 @@
 			<list>
 				<!-- 生产环境配置 -->
 				<value>classpath:jdbc.properties</value>
-			    <value>classpath:config.properties</value>
 			</list>
 		</property>
 	</bean>
 	
 	<!-- 数据源定义,使用proxool连接池 -->
-	<bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">
-		<property name="driver" value="${jdbc.driverClass}" />
-		<property name="driverUrl" value="${jdbc.url}" />
-		<property name="user" value="${jdbc.username}" />
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<!--<property name="driver" value="${jdbc.driverClass}" />-->
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
-		<!-- 最少保持的空闲连接数 -->
-		<property name="prototypeCount" value="${proxool.prototypeCount}" />
-		<!-- 允许最大连接数,超过了这个连接，再有请求时，就排在队列中等候，最大的等待请求数由simultaneousBuildThrottle决定 -->
-		<property name="maximumConnectionCount" value="${proxool.maximumConnectionCount}" />
-		<!-- 最小连接数 -->
-		<property name="minimumConnectionCount" value="${proxool.minimumConnectionCount}" />
-		<!-- 一个线程持有一个连接的最长时间，而不管这个连接是否处于 active 状态, 并且如果线程的持有时间超过这个时间的之后会自动清除掉这个连接. 
-			但是很多时候5分钟并不够用, 所以需要在配置文件中进行设置, 其单位为毫秒(ms). -->
-		<property name="maximumActiveTime" value="${proxool.maximumActiveTime}" />
-		<!-- 指因未有空闲连接可以分配而在队列中等候的最大请求数,超过这个请求数的用户连接就不会被接受 -->
-		<property name="simultaneousBuildThrottle" value="${proxool.simultaneousBuildThrottle}" />
-		<property name="trace" value="true" />
-		<property name="houseKeepingTestSql" value="select CURRENT_DATE" />
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="1" />
+		<property name="minIdle" value="1" />
+		<property name="maxActive" value="20" />
+
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="60000" />
+
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+
+		<property name="validationQuery" value="SELECT 'x'" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+
+		<!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->
+		<property name="filters" value="stat" />
 	</bean>
 		
 	<bean id="transactionManager"
@@ -69,7 +80,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	  <property name="dataSource" ref="dataSource"/>
 	  <property name="mapperLocations"  value="classpath*:com/tinytree/dao/mapper/*.xml"/>
-	  <property name="typeAliasesPackage" value="com.kungfu.dental.entity"/>
+	  <property name="typeAliasesPackage" value="com.tinytree.entity"/>
 	  <property name="configurationProperties">
 			<props>
 				<prop key="mapUnderscoreToCamelCase">true</prop>
@@ -92,12 +103,12 @@
   
     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->  
     <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
-	    <property name="basePackage" value="com.kungfu.dental.dao"/>
+	    <property name="basePackage" value="com.tinytree.dao"/>
 	    <property name="markerInterface" value="com.tinytree.dao.BaseDao"></property>
   		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property> 
   		<property name="properties">
   			<value>
-  				mappers=com.kungfu.dental.dao.BaseDao
+  				mappers=com.tinytree.dao.BaseDao
   				INDENTITY=MYSQL
   			</value>
   		</property>
@@ -122,14 +133,14 @@
  	</bean>
  	
  	<!-- 实施时打开quartz -->
-	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false"  autowire="no">
-		<!-- <property name="triggers">
-			<list>
-				<ref bean="remindDepositTrigger"/>	
-	      	</list>
-		</property> -->
-		<property name="autoStartup">
-			<value>true</value>
-		</property>  
-	</bean>
+	<!--<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false"  autowire="no">-->
+		<!--&lt;!&ndash; <property name="triggers">-->
+			<!--<list>-->
+				<!--<ref bean="remindDepositTrigger"/>	-->
+	      	<!--</list>-->
+		<!--</property> &ndash;&gt;-->
+		<!--<property name="autoStartup">-->
+			<!--<value>true</value>-->
+		<!--</property>  -->
+	<!--</bean>-->
  </beans>

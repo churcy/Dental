@@ -1,11 +1,9 @@
 package com.tinytree.service.impl;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.tinytree.service.RequestLogService;
 import com.tinytree.dao.RequestLogDao;
 import com.tinytree.entity.RequestLog;
-import com.kungfu.dental.service.RequestLogService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @Description:请求数据服务实现类

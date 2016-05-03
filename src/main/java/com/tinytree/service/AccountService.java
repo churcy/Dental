@@ -11,6 +11,7 @@ import com.tinytree.entity.User;
  * (变更历史)
  * 如：eric	2015/01/08 修改了删除功
  */
+
 public interface AccountService extends BaseService<Account, String>{
 
 	/**

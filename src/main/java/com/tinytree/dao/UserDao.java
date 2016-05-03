@@ -1,9 +1,11 @@
 package com.tinytree.dao;
 
+import com.tinytree.entity.User;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Map;
 
-import com.kungfu.dental.entity.User;
 /**
  * @Description:用户信息相关数据库操作
  * @ClassName: UserDao
@@ -12,6 +14,7 @@ import com.kungfu.dental.entity.User;
  * (变更历史)
  * 如：eric	2015/01/08 修改了删除功
  */
+@Repository
 public interface UserDao extends BaseDao<User>{
 
 	/**

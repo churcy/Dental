@@ -1,6 +1,9 @@
 package com.tinytree.dao;
 
-import com.kungfu.dental.entity.ShortMessage;
+
+import com.tinytree.entity.ShortMessage;
+import org.springframework.stereotype.Repository;
+
 /**
  * @Description:短信相关数据库操作接口
  * @ClassName: ShortMessageDao
@@ -9,6 +12,7 @@ import com.kungfu.dental.entity.ShortMessage;
  * (变更历史)
  * 如：eric	2015/01/08 修改了删除功
  */
+@Repository
 public interface ShortMessageDao extends  BaseDao<ShortMessage>{
 	
 	/**
