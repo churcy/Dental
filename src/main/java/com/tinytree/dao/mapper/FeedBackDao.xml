@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+         符号转义说明
+    &lt;          < 
+    &gt;          >  
+    &lt;&gt;     <>
+    &amp;        & 
+    &apos;       '
+    &quot;       "
+  <![CDATA[ 这里写你的SQL或者符号 ]]> 
+ -->
+<mapper namespace="com.kungfu.dental.dao.FeedBackDao"> 
+	<resultMap type="feedBack" id="feedBackMap">
+		<id column="id" property="id"/>
+		<result column="fb_content" property="fbContent"/>
+		<result column="fb_time" property="fbTime"/>
+		<result column="user_id" property="userId"/>
+		<result column="create_date" property="createDate"/>
+		<result column="modify_date" property="modifyDate"/>
+	</resultMap>
+	<!-- tbaleColumns  所有列 -->
+  	<sql id="tbaleColumns">
+		<trim suffix="" suffixOverrides=",">
+			id,fb_content,fb_time,user_id,create_date,modify_date		
+		</trim>
+	</sql>
+	
+	<!-- insertColumns 入库列 -->
+	<sql id="insertColumns">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				id,
+			</if>
+			<if test="fbContent != null and fbContent != '' " >
+				fb_content,
+			</if>
+			<if test="fbTime != null " >
+				fb_time,
+			</if>
+			<if test="userId != null and userId != ''" >
+				user_id,
+			</if>
+			<if test="createDate != null" >
+				create_date,
+			</if>
+			<if test="modifyDate != null" >
+				modify_date,
+			</if>
+	    </trim>
+	</sql>
+	<!-- insertParams 入库值 -->
+	<sql id="insertParams">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != ''" >
+				#{id},
+			</if>
+			<if test="fbContent != null and fbContent != '' " >
+				#{fbContent},
+			</if>
+			<if test="fbTime != null " >
+				#{fbTime},
+			</if>
+			<if test="userId != null and userId != ''" >
+				#{userId},
+			</if>
+			<if test="createDate != null" >
+				#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- updateParams  更新列 -->
+	<sql id="updateParams">
+		<trim suffix="" suffixOverrides=",">
+			<if test="fbContent != null and fbContent != '' " >
+				fb_content=#{fbContent},  
+			</if>
+			<if test="fbTime != null " >
+				fb_time=#{fbTime},
+			</if>
+			<if test="userId != null and userId != ''" >
+				user_id=#{userId},
+			</if>
+			<if test="createDate != null" >
+				create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- 条件 查询  , 去掉主键列-->
+	<sql id="andOther">
+		<trim suffix="" suffixOverrides=",">
+			<if test="fbContent != null and fbContent != '' " >
+				and fb_content=#{fbContent},  
+			</if>
+			<if test="fbTime != null " >
+				and fb_time=#{fbTime},
+			</if>
+			<if test="userId != null and userId != ''" >
+				and user_id=#{userId},
+			</if>
+			<if test="createDate != null" >
+				and create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				and modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- 条件 查询  , 包含所有 -->
+	<sql id="andOtherAll">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				and id=#{id},
+			</if>
+			<if test="fbContent != null and fbContent != '' " >
+				and fb_content=#{fbContent},  
+			</if>
+			<if test="fbTime != null " >
+				and fb_time=#{fbTime},
+			</if>
+			<if test="userId != null and userId != ''" >
+				and user_id=#{userId},
+			</if>
+			<if test="createDate != null" >
+				and create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				and modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	
+	<!-- where 条件  -->
+	<sql id="where">
+	     where 1=1
+	</sql>
+	<!-- columnKey  主键 列名称 ,视图获取不到主键 需要设置 -->
+	<sql id="columnKey">
+	     and id=#{id}
+	</sql>
+	<!-- 自定义查询 -->
+	<sql id="sql">
+	   <if test="sql != null and sql !=''">
+	       ${sql}
+	   </if>
+	   <if test="sql == null || sql==''">
+	      select <include refid="tbaleColumns"/> from feedback <include refid="where"/>
+	   </if>
+	</sql>
+	<!-- 添加,插入记录   -->
+	<insert id="insert"  parameterType="com.kungfu.dental.entity.FeedBack" useGeneratedKeys="true">
+		<!-- <selectKey keyProperty="id" resultType="String" order="BEFORE">
+        	replace(uuid(),'-','')
+    	</selectKey> -->
+	    insert into feedback(<include refid="insertColumns"/>) values(<include refid="insertParams"/>);
+	</insert>
+	<!-- 添加,SQL添加   -->
+	<insert id="insertBySql" parameterType="java.lang.String">
+	    <include refid="sql"/>
+	</insert>
+	<!-- 删除,主键删除   -->
+	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.FeedBack">
+	    delete from feedback<include refid="where"/><include refid="columnKey"/>
+	</delete>
+	<!-- 删除,实体删除   -->
+	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.FeedBack">
+	    delete from feedback<include refid="where"/><include refid="andOtherAll"/>
+	</delete>
+	<!-- 删除,SQL删除   -->
+	<delete id="deleteBySql" parameterType="java.lang.String">
+	      <include refid="sql"/>
+	</delete>
+	<!-- 修改,主键更新  -->
+	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.FeedBack" >
+		update feedback <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
+	</update>
+	<!-- 修改,SQL更新 -->
+	<update id="updateBySql" parameterType="java.lang.String">
+		  <include refid="sql"/>
+	</update>
+	<!-- 查询,主键查询   -->
+	<select id="selectByPrimaryKey"  resultMap="feedBackMap" parameterType="java.lang.Object">
+		select <include refid="tbaleColumns"/> from feedback <include refid="where"/> <include refid="columnKey"/>
+	</select>
+	<!-- 查询,所有   -->
+	<select id="selectAll"  resultMap="feedBackMap">
+		select <include refid="tbaleColumns"/> from feedback
+	</select>
+	<!-- 查询,总数量   -->
+	<select id="count" resultType="java.lang.Integer">
+		select count(1) from feedback
+	</select>
+	<!-- 查询,实体查询   -->
+	<select id="selectByEntiry"  resultMap="feedBackMap" parameterType="com.kungfu.dental.entity.FeedBack">
+		select <include refid="tbaleColumns"/> from feedback <include refid="where"/> <include refid="andOtherAll"/>
+	</select>
+	<!-- 查询,SQL -->
+	<select id="selectBySql"  resultMap="feedBackMap" parameterType="java.lang.String">
+	     <include refid="sql"/>
+	</select>
+	<!-- 查询,总行数,Map -->
+	<select id="selectByMapCount" resultType="java.lang.Integer"  parameterType="java.util.Map">
+		select count(1) from feedback <include refid="where"/>
+	    ${queryCondition}
+		<if test="andCondition !=null and andCondition !=''">
+		   and ${andCondition}
+		</if>
+		<if test="orderCondition != null and queryCondition != ''" >
+	    	order by ${orderCondition}
+	    </if>
+	</select>
+	<!-- 查询,参数查询,Map -->
+	<select id="selectByMap" resultMap="feedBackMap"  parameterType="java.util.Map">
+		select <include refid="tbaleColumns"/>from feedback <include refid="where"/>
+	    ${queryCondition}
+		<if test="andCondition !=null and andCondition !=''">
+		   and ${andCondition}
+		</if>
+		<if test="orderCondition != null and orderCondition != ''" >
+	    	order by ${orderCondition}
+	    </if>
+	</select>
+</mapper>   

@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+         符号转义说明
+    &lt;          < 
+    &gt;          >  
+    &lt;&gt;     <>
+    &amp;        & 
+    &apos;       '
+    &quot;       "
+  <![CDATA[ 这里写你的SQL或者符号 ]]> 
+ -->
+<mapper namespace="com.kungfu.dental.dao.ReserveInfoDao">
+	<select id="countByDoctorId" resultType ="java.lang.Integer">
+	SELECT
+	count(*)
+	FROM
+	reserve_info
+	WHERE	
+	doctor_id = #{0}
+	AND DATE_FORMAT(start_time,'%Y%m%d') =#{1}
+	</select>
+	<select id="findReserveList" resultType="java.util.HashMap" parameterType="java.util.Map">
+		SELECT
+		r.id ,DATE_FORMAT(r.start_time,'%Y%m%d %H:%i:%s') AS startTime,
+		t.realname AS patientName,
+  		DATE_FORMAT(r.end_time,'%Y%m%d %H:%i:%s') AS endTime,
+  		t.accountId AS accountId
+		FROM
+		reserve_info r
+		LEFT JOIN (
+		SELECT
+		a.id AS accountId,
+		u.real_name AS realName
+		FROM
+		account a
+		LEFT JOIN USER u ON a.id = u.account_id
+		) t ON r.user_id = t.accountId
+		WHERE 1=1
+		<if test="doctorId != null and doctorId != ''">
+			AND r.doctor_id = #{doctorId}
+		</if>
+		<if test="startDate != null and startDate != ''">
+			<![CDATA[  
+			and DATE_FORMAT(r.start_time,'%Y%m%d') >= #{startDate}
+			 ]]> 
+			
+		</if>
+		  
+	</select> 
+	
+	<select id="findReserveListUser" resultType="java.util.HashMap" parameterType="java.util.Map">
+	SELECT
+	r.id,
+	DATE_FORMAT(
+	r.start_time,
+	'%Y%m%d %H:%i:%s'
+	) AS startTime,
+	t2.realName AS realName,
+	DATE_FORMAT(
+	r.end_time,
+	'%Y%m%d %H:%i:%s'
+	) AS endTime,
+	t2.doctorId AS doctorId
+	FROM
+	reserve_info r
+	LEFT JOIN (
+	SELECT
+	d.id AS doctorId,
+	t1.realName AS realName
+	FROM
+	doctor d
+	LEFT JOIN (
+	SELECT
+	a.id AS accountId,
+	u.mobile AS mobile,
+	u.real_name AS realName
+	FROM
+	account a
+	LEFT JOIN user u ON u.account_id = a.id
+	) t1 ON d.account_id = t1.accountId
+	) t2 ON r.doctor_id = t2.doctorId
+	WHERE
+	r.user_id = #{accountId}
+		<if test="startDate !=null ">
+			and DATE_FORMAT(r.start_time,'%Y%m%d')>=#{startDate}
+		</if>
+	</select>
+	<select id="findReserveDetail" resultType="java.util.Map" parameterType="java.lang.String">
+		SELECT
+		r.id ,DATE_FORMAT(r.start_time,'%Y%m%d %H:%i:%s') AS startTime,
+		t.realname AS patientName,
+		r.short_describe AS shortDescribe,
+		t.mobile AS mobile,
+		t.gender AS gender,
+		t.birthday AS birthday,
+  		DATE_FORMAT(r.end_time,'%Y%m%d %H:%i:%s') AS endTime
+		FROM
+		reserve_info r
+		LEFT JOIN (
+		SELECT
+		a.id AS accountId,
+		u.real_name AS realName,
+		u.mobile AS mobile,
+		u.gender AS gender,
+		u.birthday AS birthday
+		FROM
+		account a
+		LEFT JOIN USER u ON a.id = u.account_id
+		) t ON r.user_id = t.accountId
+		WHERE
+		r.id = #{0}
+	</select> 
+	<select id="findReserveListByDate" resultType="java.util.HashMap" parameterType="java.util.Map">
+		SELECT
+		r.id ,DATE_FORMAT(r.start_time,'%Y%m%d %H:%i:%s') AS startTime,
+		t.realname AS patientName,
+  		DATE_FORMAT(r.end_time,'%Y%m%d %H:%i:%s') AS endTime,
+  		t.accountId as accountId
+		FROM
+		reserve_info r
+		LEFT JOIN (
+		SELECT
+		a.id AS accountId,
+		u.real_name AS realName
+		FROM
+		account a
+		LEFT JOIN USER u ON a.id = u.account_id
+		) t ON r.user_id = t.accountId
+		WHERE
+		r.doctor_id = #{doctorId}
+		and DATE_FORMAT(r.start_time,'%Y%m%d')=#{startDate}
+	</select>
+	<resultMap type="com.kungfu.dental.entity.ReserveInfo" id="reserveInfoMap">
+		<id column="id" property="id"/>
+		<result column="user_id" property="userId"/>
+		<result column="doctor_id" property="doctorId"/>
+		<result column="start_time" property="startTime"/>
+		<result column="end_time" property="endTime"/>
+		<result column="short_describe" property="shortDescribe"/>
+		<result column="create_date" property="createDate"/>
+		<result column="modify_date" property="modifyDate"/>
+	</resultMap>
+	<!-- tbaleColumns  所有列 -->
+  	<sql id="tbaleColumns">
+		<trim suffix="" suffixOverrides=",">
+			id,user_id,doctor_id,start_time,end_time,short_describe,create_date,modify_date	
+		</trim>
+	</sql>
+	
+	<!-- insertColumns 入库列 -->
+	<sql id="insertColumns">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				id,
+			</if>
+			<if test="userId != null and userId != '' " >
+				user_id,
+			</if>
+			<if test="doctorId != null and doctorId != '' " >
+				doctor_id,
+			</if>
+			<if test="startTime != null and startTime != '' " >
+				start_time,
+			</if>
+			<if test="endTime != null and endTime != '' " >
+				end_time,
+			</if>
+			<if test="shortDescribe != null and shortDescribe != '' " >
+				short_describe,
+			</if>
+			<if test="createDate != null" >
+				create_date,
+			</if>
+			<if test="modifyDate != null" >
+				modify_date,
+			</if>
+	    </trim>
+	</sql>
+	<!-- insertParams 入库值 -->
+	<sql id="insertParams">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				#{id},
+			</if>
+			<if test="userId != null and userId != '' " >
+				#{userId},
+			</if>
+			<if test="doctorId != null and doctorId != '' " >
+				#{doctorId},
+			</if>
+			<if test="startTime != null and startTime != '' " >
+				#{startTime},
+			</if>
+			<if test="endTime != null and endTime != '' " >
+				#{endTime},
+			</if>
+			<if test="shortDescribe != null and shortDescribe != '' " >
+				#{shortDescribe},
+			</if>
+			<if test="createDate != null" >
+				#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- updateParams  更新列 -->
+	<sql id="updateParams">
+		<trim suffix="" suffixOverrides=",">
+			<if test="userId != null and userId != '' " >
+				user_id=#{userId},
+			</if>
+			<if test="doctorId != null and doctorId != '' " >
+				doctor_id=#{doctorId},
+			</if>
+			<if test="startTime != null and startTime != '' " >
+				start_time=#{startTime},
+			</if>
+			<if test="endTime != null and endTime != '' " >
+				end_time=#{endTime},
+			</if>
+			<if test="shortDescribe != null and shortDescribe != '' " >
+				short_describe=#{shortDescribe},
+			</if>
+			<if test="createDate != null" >
+				create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- 条件 查询  , 去掉主键列-->
+	<sql id="andOther">
+		<trim suffix="" suffixOverrides=",">
+			<if test="userId != null and userId != '' " >
+				and user_id=#{userId},
+			</if>
+			<if test="doctorId != null and doctorId != '' " >
+				and doctor_id=#{doctorId},
+			</if>
+			<if test="startTime != null and startTime != '' " >
+				and start_time=#{startTime},
+			</if>
+			<if test="endTime != null and endTime != '' " >
+				and end_time=#{endTime},
+			</if>
+			<if test="shortDescribe != null and shortDescribe != '' " >
+				and short_describe=#{shortDescribe},
+			</if>
+			<if test="createDate != null" >
+				and create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				and modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- 条件 查询  , 包含所有 -->
+	<sql id="andOtherAll">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				and id=#{id},
+			</if>
+			<if test="userId != null and userId != '' " >
+				and user_id=#{userId},
+			</if>
+			<if test="doctorId != null and doctorId != '' " >
+				and doctor_id=#{doctorId},
+			</if>
+			<if test="startTime != null and startTime != '' " >
+				and start_time=#{startTime},
+			</if>
+			<if test="endTime != null and endTime != '' " >
+				and end_time=#{endTime},
+			</if>
+			<if test="shortDescribe != null and shortDescribe != '' " >
+				and short_describe=#{shortDescribe},
+			</if>
+			<if test="createDate != null" >
+				and and create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				and modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	
+	<!-- where 条件  -->
+	<sql id="where">
+	     where 1=1
+	</sql>
+	<!-- columnKey  主键 列名称 ,视图获取不到主键 需要设置 -->
+	<sql id="columnKey">
+	     and id=#{id}
+	</sql>
+	<!-- 自定义查询 -->
+	<sql id="sql">
+	   <if test="sql != null and sql !=''">
+	       ${sql}
+	   </if>
+	   <if test="sql == null || sql==''">
+	      select <include refid="tbaleColumns"/> from reserve_info <include refid="where"/>
+	   </if>
+	</sql>
+	<!-- 添加,插入记录   -->
+	<insert id="insert"  parameterType="com.kungfu.dental.entity.ReserveInfo" useGeneratedKeys="true">
+		<!-- <selectKey keyProperty="id" resultType="String" order="BEFORE">
+        	replace(uuid(),'-','')
+    	</selectKey> -->
+	    insert into reserve_info(<include refid="insertColumns"/>) values(<include refid="insertParams"/>);
+	</insert>
+	<!-- 添加,SQL添加   -->
+	<insert id="insertBySql" parameterType="java.lang.String">
+	    <include refid="sql"/>
+	</insert>
+	<!-- 删除,主键删除   -->
+	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.ReserveInfo">
+	    delete from reserve_info<include refid="where"/><include refid="columnKey"/>
+	</delete>
+	<!-- 删除,实体删除   -->
+	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.ReserveInfo">
+	    delete from reserve_info<include refid="where"/><include refid="andOtherAll"/>
+	</delete>
+	<!-- 删除,SQL删除   -->
+	<delete id="deleteBySql" parameterType="java.lang.String">
+	      <include refid="sql"/>
+	</delete>
+	<!-- 修改,主键更新  -->
+	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.ReserveInfo" >
+		update reserve_info <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
+	</update>
+	<!-- 修改,SQL更新 -->
+	<update id="updateBySql" parameterType="java.lang.String">
+		  <include refid="sql"/>
+	</update>
+	<!-- 查询,主键查询   -->
+	<select id="selectByPrimaryKey"  resultMap="reserveInfoMap" parameterType="java.lang.Object">
+		select <include refid="tbaleColumns"/> from reserve_info <include refid="where"/> <include refid="columnKey"/>
+	</select>
+	<!-- 查询,所有   -->
+	<select id="selectAll"  resultMap="reserveInfoMap">
+		select <include refid="tbaleColumns"/> from reserve_info
+	</select>
+	<!-- 查询,总数量   -->
+	<select id="count" resultType="java.lang.Integer">
+		select count(1) from reserve_info
+	</select>
+	<!-- 查询,实体查询   -->
+	<select id="selectByEntiry"  resultMap="reserveInfoMap" parameterType="com.kungfu.dental.entity.ReserveInfo">
+		select <include refid="tbaleColumns"/> from reserve_info <include refid="where"/> <include refid="andOtherAll"/>
+	</select>
+	<!-- 查询,SQL -->
+	<select id="selectBySql"  resultMap="reserveInfoMap" parameterType="java.lang.String">
+	     <include refid="sql"/>
+	</select>
+	<!-- 查询,总行数,Map -->
+	<select id="selectByMapCount" resultType="java.lang.Integer"  parameterType="java.util.Map">
+		select count(1) from reserve_info <include refid="where"/>
+	    ${queryCondition}
+		<if test="andCondition !=null and andCondition !=''">
+		   and ${andCondition}
+		</if>
+		<if test="orderCondition != null and queryCondition != ''" >
+	    	order by ${orderCondition}
+	    </if>
+	</select>
+	<!-- 查询,参数查询,Map -->
+	<select id="selectByMap" resultMap="reserveInfoMap"  parameterType="java.util.Map">
+		select <include refid="tbaleColumns"/>from reserve_info <include refid="where"/>
+	    ${queryCondition}
+		<if test="andCondition !=null and andCondition !=''">
+		   and ${andCondition}
+		</if>
+		<if test="orderCondition != null and orderCondition != ''" >
+	    	order by ${orderCondition}
+	    </if>
+	</select>
+	<!-- <select id="findReserveListByDoctor" resultMap="reserveInfoMap" >
+		select <include refid="tbaleColumns"/> from reserve_info 
+		where doctor_id = #{0} and start_time > #{1} and start_time < #{2}
+	</select> -->
+</mapper>

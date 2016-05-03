@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+         符号转义说明
+    &lt;          < 
+    &gt;          >  
+    &lt;&gt;     <>
+    &amp;        & 
+    &apos;       '
+    &quot;       "
+  <![CDATA[ 这里写你的SQL或者符号 ]]> 
+ -->
+<mapper namespace="com.kungfu.dental.dao.AccountDao"> 
+	
+	<select id="getByUserName" resultMap="accountMap">
+		SELECT * FROM account 
+		WHERE login_name = #{userName}
+	</select>
+	
+	<resultMap type="com.kungfu.dental.entity.Account" id="accountMap">
+		<id column="id" property="id"/>
+		<result column="login_name" property="loginName"/>
+		<result column="password" property="password"/>
+		<result column="email" property="email"/>
+		<result column="account_type" property="accountType"/>
+		<result column="account_from" property="accountFrom"/>
+		<result column="referee" property="referee"/>
+		<result column="invite_code" property="inviteCode"/>
+		<result column="status" property="status"/>
+		<result column="email_verified" property="emailVerified"/>
+		<result column="last_login" property="lastLogin"/>
+		<result column="failure_times" property="failureTimes"/>
+		<result column="creator" property="creator"/>
+		<result column="modifier" property="modifier"/>
+		<result column="create_date" property="createDate"/>
+		<result column="modify_date" property="modifyDate"/>
+	</resultMap>
+	<!-- tbaleColumns  所有列 -->
+  	<sql id="tbaleColumns">
+		<trim suffix="" suffixOverrides=",">
+			id,login_name,password,account_type,account_from,referee,invite_code,status,email_verified,last_login,failure_times,creator,modifier,create_date,modify_date		
+		</trim>
+	</sql>
+	
+	<!-- insertColumns 入库列 -->
+	<sql id="insertColumns">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				id,
+			</if>
+			<if test="loginName != null and loginName != '' " >
+				login_name,
+			</if>
+			<if test="password != null and password != '' " >
+				password,
+			</if>
+			<if test="accountType != null " >
+				account_type,
+			</if>
+			<if test="accountFrom != null " >
+				account_from,
+			</if>
+			<if test="referee != null and referee != ''" >
+				referee,
+			</if>
+			<if test="inviteCode != null and inviteCode != ''" >
+				invite_code,
+			</if>
+			<if test="status != null" >
+				status,
+			</if>
+			<if test="emailVerified != null" >
+				email_verified,
+			</if>
+			<if test="lastLogin != null" >
+				last_login,
+			</if>
+			<if test="failureTimes != null" >
+				failure_times,
+			</if>
+			<if test="creator != null and creator != ''" >
+				creator,
+			</if>
+			<if test="modifier != null and modifier != ''" >
+				modifier,
+			</if>
+			<if test="createDate != null" >
+				create_date,
+			</if>
+			<if test="modifyDate != null" >
+				modify_date,
+			</if>
+	    </trim>
+	</sql>
+	<!-- insertParams 入库值 -->
+	<sql id="insertParams">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				#{id},
+			</if>
+			<if test="loginName != null and loginName != '' " >
+				#{loginName},
+			</if>
+			<if test="password != null and password != '' " >
+				#{password},
+			</if>
+			<if test="accountType != null " >
+				#{accountType},
+			</if>
+			<if test="accountFrom != null " >
+				#{accountFrom},
+			</if>
+			<if test="referee != null and referee != ''" >
+				#{referee},
+			</if>
+			<if test="inviteCode != null and inviteCode != ''" >
+				#{inviteCode},
+			</if>
+			<if test="status != null" >
+				#{status},
+			</if>
+			<if test="emailVerified != null" >
+				#{emailVerified},
+			</if>
+			<if test="lastLogin != null" >
+				#{lastLogin},
+			</if>
+			<if test="failureTimes != null" >
+				#{failureTimes},
+			</if>
+			<if test="creator != null and creator != ''" >
+				#{creator},
+			</if>
+			<if test="modifier != null and modifier != ''" >
+				#{modifier},
+			</if>
+			<if test="createDate != null" >
+				#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- updateParams  更新列 -->
+	<sql id="updateParams">
+		<trim suffix="" suffixOverrides=",">
+			<if test="loginName != null and loginName != '' " >
+				login_name=#{loginName},
+			</if>
+			<if test="password != null and password != '' " >
+				password=#{password},
+			</if>
+			<if test="accountType != null " >
+				account_type=#{accountType},
+			</if>
+			<if test="accountFrom != null " >
+				account_from=#{accountFrom},
+			</if>
+			<if test="referee != null and referee != ''" >
+				referee=#{referee},
+			</if>
+			<if test="inviteCode != null and inviteCode != ''" >
+				invite_code=#{inviteCode},
+			</if>
+			<if test="status != null" >
+				status=#{status},
+			</if>
+			<if test="emailVerified != null" >
+				email_verified=#{emailVerified},
+			</if>
+			<if test="lastLogin != null" >
+				last_login=#{lastLogin},
+			</if>
+			<if test="failureTimes != null" >
+				failure_times=#{failureTimes},
+			</if>
+			<if test="creator != null and creator != ''" >
+				creator=#{creator},
+			</if>
+			<if test="modifier != null and modifier != ''" >
+				modifier=#{modifier},
+			</if>
+			<if test="createDate != null" >
+				create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- 条件 查询  , 去掉主键列-->
+	<sql id="andOther">
+		<trim suffix="" suffixOverrides=",">
+			<if test="loginName != null and loginName != '' " >
+				and login_name=#{loginName},
+			</if>
+			<if test="password != null and password != '' " >
+				and password=#{password},
+			</if>
+			<if test="accountType != null " >
+				and account_type=#{accountType},
+			</if>
+			<if test="accountFrom != null " >
+				and account_from=#{accountFrom},
+			</if>
+			<if test="referee != null and referee != ''" >
+				and referee=#{referee},
+			</if>
+			<if test="inviteCode != null and inviteCode != ''" >
+				and invite_code=#{inviteCode},
+			</if>
+			<if test="status != null" >
+				and status=#{status},
+			</if>
+			<if test="emailVerified != null" >
+				and email_verified=#{emailVerified},
+			</if>
+			<if test="lastLogin != null" >
+				and last_login=#{lastLogin},
+			</if>
+			<if test="failureTimes != null" >
+				and failure_times=#{failureTimes},
+			</if>
+			<if test="creator != null and creator != ''" >
+				and creator=#{creator},
+			</if>
+			<if test="modifier != null and modifier != ''" >
+				and modifier=#{modifier},
+			</if>
+			<if test="createDate != null" >
+				and create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				and modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- 条件 查询  , 包含所有 -->
+	<sql id="andOtherAll">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				and id=#{id},
+			</if>
+			<if test="loginName != null and loginName != '' " >
+				and login_name=#{loginName},
+			</if>
+			<if test="password != null and password != '' " >
+				and password=#{password},
+			</if>
+			<if test="accountType != null " >
+				and account_type=#{accountType},
+			</if>
+			<if test="accountFrom != null " >
+				and account_from=#{accountFrom},
+			</if>
+			<if test="referee != null and referee != ''" >
+				and referee=#{referee},
+			</if>
+			<if test="inviteCode != null and inviteCode != ''" >
+				and invite_code=#{inviteCode},
+			</if>
+			<if test="status != null" >
+				and status=#{status},
+			</if>
+			<if test="emailVerified != null" >
+				and email_verified=#{emailVerified},
+			</if>
+			<if test="lastLogin != null" >
+				and last_login=#{lastLogin},
+			</if>
+			<if test="failureTimes != null" >
+				and failure_times=#{failureTimes},
+			</if>
+			<if test="creator != null and creator != ''" >
+				and creator=#{creator},
+			</if>
+			<if test="modifier != null and modifier != ''" >
+				and modifier=#{modifier},
+			</if>
+			<if test="createDate != null" >
+				and create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				and modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	
+	<!-- where 条件  -->
+	<sql id="where">
+	     where 1=1
+	</sql>
+	<!-- columnKey  主键 列名称 ,视图获取不到主键 需要设置 -->
+	<sql id="columnKey">
+	     and id=#{id}
+	</sql>
+	<!-- 自定义查询 -->
+	<sql id="sql">
+	   <if test="sql != null and sql !=''">
+	       ${sql}
+	   </if>
+	   <if test="sql == null || sql==''">
+	      select <include refid="tbaleColumns"/> from account <include refid="where"/>
+	   </if>
+	</sql>
+	<!-- 添加,插入记录   -->
+	<insert id="insert"  parameterType="com.kungfu.dental.entity.Account" useGeneratedKeys="true">
+		<!-- <selectKey keyProperty="id" resultType="String" order="BEFORE">
+        	replace(uuid(),'-','')
+    	</selectKey> -->
+	    insert into account(<include refid="insertColumns"/>) values(<include refid="insertParams"/>);
+	</insert>
+	<!-- 添加,SQL添加   -->
+	<insert id="insertBySql" parameterType="java.lang.String">
+	    <include refid="sql"/>
+	</insert>
+	<!-- 删除,主键删除   -->
+	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.Account">
+	    delete from account<include refid="where"/><include refid="columnKey"/>
+	</delete>
+	<!-- 删除,实体删除   -->
+	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.Account">
+	    delete from account<include refid="where"/><include refid="andOtherAll"/>
+	</delete>
+	<!-- 删除,SQL删除   -->
+	<delete id="deleteBySql" parameterType="java.lang.String">
+	      <include refid="sql"/>
+	</delete>
+	<!-- 修改,主键更新  -->
+	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.Account" >
+		update account <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
+	</update>
+	<!-- 修改,SQL更新 -->
+	<update id="updateBySql" parameterType="java.lang.String">
+		  <include refid="sql"/>
+	</update>
+	<!-- 查询,主键查询   -->
+	<select id="selectByPrimaryKey"  resultMap="accountMap" parameterType="java.lang.Object">
+		select <include refid="tbaleColumns"/> from account <include refid="where"/> <include refid="columnKey"/>
+	</select>
+	<!-- 查询,所有   -->
+	<select id="selectAll"  resultMap="accountMap">
+		select <include refid="tbaleColumns"/> from account
+	</select>
+	<!-- 查询,总数量   -->
+	<select id="count" resultType="java.lang.Integer">
+		select count(1) from account
+	</select>
+	<!-- 查询,实体查询   -->
+	<select id="selectByEntiry"  resultMap="accountMap" parameterType="com.kungfu.dental.entity.Account">
+		select <include refid="tbaleColumns"/> from account <include refid="where"/> <include refid="andOtherAll"/>
+	</select>
+	<!-- 查询,SQL -->
+	<select id="selectBySql"  resultMap="accountMap" parameterType="java.lang.String">
+	     <include refid="sql"/>
+	</select>
+	<!-- 查询,总行数,Map -->
+	<select id="selectByMapCount" resultType="java.lang.Integer"  parameterType="java.util.Map">
+		select count(1) from account <include refid="where"/>
+	    ${queryCondition}
+		<if test="andCondition !=null and andCondition !=''">
+		   and ${andCondition}
+		</if>
+		<if test="orderCondition != null and queryCondition != ''" >
+	    	order by ${orderCondition}
+	    </if>
+	</select>
+	<!-- 查询,参数查询,Map -->
+	<select id="selectByMap" resultMap="accountMap"  parameterType="java.util.Map">
+		select <include refid="tbaleColumns"/>from account <include refid="where"/>
+	    ${queryCondition}
+		<if test="andCondition !=null and andCondition !=''">
+		   and ${andCondition}
+		</if>
+		<if test="orderCondition != null and orderCondition != ''" >
+	    	order by ${orderCondition}
+	    </if>
+	</select>
+</mapper>   

@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+         符号转义说明
+    &lt;          < 
+    &gt;          >  
+    &lt;&gt;     <>
+    &amp;        & 
+    &apos;       '
+    &quot;       "
+  <![CDATA[ 这里写你的SQL或者符号 ]]> 
+ -->
+<mapper namespace="com.kungfu.dental.dao.ReturnVisitDao"> 
+	<resultMap type="com.kungfu.dental.entity.ReturnVisit" id="returnVisitMap">
+		<id column="id" property="id"/>
+		<result column="user_id" property="userId"/>
+		<result column="medical_record_id" property="medicalRecordId"/>
+		<result column="visitor_id" property="visitorId"/>
+		<result column="status" property="status"/>
+		<result column="visit_time" property="visitTime"/>
+		<result column="create_date" property="createDate"/>
+		<result column="modify_date" property="modifyDate"/>
+	</resultMap>
+	<!-- tbaleColumns  所有列 -->
+  	<sql id="tbaleColumns">
+		<trim suffix="" suffixOverrides=",">
+			id,user_id,medical_record_id,visitor_id,status,visit_time,create_date,modify_date		
+		</trim>
+	</sql>
+	
+	<!-- insertColumns 入库列 -->
+	<sql id="insertColumns">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				id,
+			</if>
+			<if test="userId != null and userId != '' " >
+				user_id,
+			</if>
+			<if test="medicalRecordId != null and medicalRecordId != ''" >
+				medical_record_id,
+			</if>
+			<if test="visitorId != null and visitorId != '' " >
+				visitor_id,
+			</if>
+			<if test="status != null " >
+				status,
+			</if>
+			<if test="visitTime != null" >
+				visit_time,
+			</if>
+			<if test="createDate != null" >
+				create_date,
+			</if>
+			<if test="modifyDate != null" >
+				modify_date,
+			</if>
+	    </trim>
+	</sql>
+	<!-- insertParams 入库值 -->
+	<sql id="insertParams">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				#{id},
+			</if>
+			<if test="userId != null and userId != '' " >
+				#{userId},
+			</if>
+			<if test="medicalRecordId != null and medicalRecordId != ''" >
+				#{medicalRecordId},
+			</if>
+			<if test="visitorId != null and visitorId != '' " >
+				#{visitorId},
+			</if>
+			<if test="status != null " >
+				#{status},
+			</if>
+			<if test="visitTime != null" >
+				#{visitTime},
+			</if>
+			<if test="createDate != null" >
+				#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- updateParams  更新列 -->
+	<sql id="updateParams">
+		<trim suffix="" suffixOverrides=",">
+			<if test="userId != null and userId != '' " >
+				user_id=#{userId},
+			</if>
+			<if test="medicalRecordId != null and medicalRecordId != ''" >
+				medical_record_id=#{medicalRecordId},
+			</if>
+			<if test="visitorId != null and visitorId != '' " >
+				visitor_id=#{visitorId},
+			</if>
+			<if test="status != null " >
+				status=#{status},
+			</if>
+			<if test="visitTime != null" >
+				visit_time=#{visitTime},
+			</if>
+			<if test="createDate != null" >
+				create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- 条件 查询  , 去掉主键列-->
+	<sql id="andOther">
+		<trim suffix="" suffixOverrides=",">
+			<if test="userId != null and userId != '' " >
+				and user_id=#{userId},
+			</if>
+			<if test="medicalRecordId != null and medicalRecordId != ''" >
+				and medical_record_id=#{medicalRecordId},
+			</if>
+			<if test="visitorId != null and visitorId != '' " >
+				and visitor_id=#{visitorId},
+			</if>
+			<if test="status != null " >
+				and status=#{status},
+			</if>
+			<if test="visitTime != null" >
+				and visit_time=#{visitTime},
+			</if>
+			<if test="createDate != null" >
+				and create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				and modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- 条件 查询  , 包含所有 -->
+	<sql id="andOtherAll">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				and id=#{id},
+			</if>
+			<if test="userId != null and userId != '' " >
+				and user_id=#{userId},
+			</if>
+			<if test="medicalRecordId != null and medicalRecordId != ''" >
+				and medical_record_id=#{medicalRecordId},
+			</if>
+			<if test="visitorId != null and visitorId != '' " >
+				and visitor_id=#{visitorId},
+			</if>
+			<if test="status != null " >
+				and status=#{status},
+			</if>
+			<if test="visitTime != null" >
+				and visit_time=#{visitTime},
+			</if>
+			<if test="createDate != null" >
+				and create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				and modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	
+	<!-- where 条件  -->
+	<sql id="where">
+	     where 1=1
+	</sql>
+	<!-- columnKey  主键 列名称 ,视图获取不到主键 需要设置 -->
+	<sql id="columnKey">
+	     and id=#{id}
+	</sql>
+	<!-- 自定义查询 -->
+	<sql id="sql">
+	   <if test="sql != null and sql !=''">
+	       ${sql}
+	   </if>
+	   <if test="sql == null || sql==''">
+	      select <include refid="tbaleColumns"/> from return_visit <include refid="where"/>
+	   </if>
+	</sql>
+	<!-- 添加,插入记录   -->
+	<insert id="insert"  parameterType="com.kungfu.dental.entity.ReturnVisit">
+	    insert into return_visit(<include refid="insertColumns"/>) values(<include refid="insertParams"/>);
+	</insert>
+	<!-- 添加,SQL添加   -->
+	<insert id="insertBySql" parameterType="java.lang.String">
+	    <include refid="sql"/>
+	</insert>
+	<!-- 删除,主键删除   -->
+	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.ReturnVisit">
+	    delete from return_visit<include refid="where"/><include refid="columnKey"/>
+	</delete>
+	<!-- 删除,实体删除   -->
+	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.ReturnVisit">
+	    delete from return_visit<include refid="where"/><include refid="andOtherAll"/>
+	</delete>
+	<!-- 删除,SQL删除   -->
+	<delete id="deleteBySql" parameterType="java.lang.String">
+	      <include refid="sql"/>
+	</delete>
+	<!-- 修改,主键更新  -->
+	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.ReturnVisit" >
+		update return_visit <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
+	</update>
+	<!-- 修改,SQL更新 -->
+	<update id="updateBySql" parameterType="java.lang.String">
+		  <include refid="sql"/>
+	</update>
+	<!-- 查询,主键查询   -->
+	<select id="selectByPrimaryKey"  resultMap="returnVisitMap" parameterType="java.lang.Object">
+		select <include refid="tbaleColumns"/> from return_visit <include refid="where"/> <include refid="columnKey"/>
+	</select>
+	<!-- 查询,所有   -->
+	<select id="selectAll"  resultMap="returnVisitMap">
+		select <include refid="tbaleColumns"/> from return_visit
+	</select>
+	<!-- 查询,总数量   -->
+	<select id="count" resultType="java.lang.Integer">
+		select count(1) from return_visit
+	</select>
+	<!-- 查询,实体查询   -->
+	<select id="selectByEntiry"  resultMap="returnVisitMap" parameterType="com.kungfu.dental.entity.ReturnVisit">
+		select <include refid="tbaleColumns"/> from return_visit <include refid="where"/> <include refid="andOtherAll"/>
+	</select>
+	<!-- 查询,SQL -->
+	<select id="selectBySql"  resultMap="returnVisitMap" parameterType="java.lang.String">
+	     <include refid="sql"/>
+	</select>
+	<!-- 查询,总行数,Map -->
+	<select id="selectByMapCount" resultType="java.lang.Integer"  parameterType="java.util.Map">
+		select count(1) from return_visit <include refid="where"/>
+	    ${queryCondition}
+		<if test="andCondition !=null and andCondition !=''">
+		   and ${andCondition}
+		</if>
+		<if test="orderCondition != null and queryCondition != ''" >
+	    	order by ${orderCondition}
+	    </if>
+	</select>
+	<!-- 查询,参数查询,Map -->
+	<select id="selectByMap" resultMap="returnVisitMap"  parameterType="java.util.Map">
+		select <include refid="tbaleColumns"/>from return_visit <include refid="where"/>
+	    ${queryCondition}
+		<if test="andCondition !=null and andCondition !=''">
+		   and ${andCondition}
+		</if>
+		<if test="orderCondition != null and orderCondition != ''" >
+	    	order by ${orderCondition}
+	    </if>
+	</select>
+	<resultMap type="java.util.Map" id="backDetailList">
+		<result column="id" property="id"/>
+		<result column="content" property="content"/>
+		<result column="result" property="result"/>
+		<result column="visitTime" property="visitTime"/>
+	</resultMap>
+	<select id="getRebackDetails"  resultMap="backDetailList" parameterType="java.lang.Object">
+		select rvr.id as id,rvr.content as content,rvr.result as result,rvr.visit_time as visitTime 
+		from return_visit_record rvr,return_visit rv 
+		where rvr.return_visit_id = rv.id and rv.user_id = #{userId}
+		<if test="startDate != null and startDate != ''">
+		<![CDATA[
+			and visitTime >= #{startDate} 
+			]]>
+		</if>
+		<if test="endDate != null and endDate !='' ">
+		<![CDATA[
+			and visitTime <= #{startDate}
+			]]>
+		</if>
+		
+		order by visitTime desc
+	</select>
+	<select id="getRebackDetail"  resultType="java.util.Map" >
+		SELECT
+			rvr.id AS id,
+			rvr.content AS content,
+			rvr.result AS result,
+			rvr.visit_time AS visitTime
+		FROM
+			return_visit_record rvr,
+			return_visit rv
+		WHERE
+			rvr.return_visit_id = rv.id
+		AND 
+			rv.id = #{rebackId}
+	</select>
+	<resultMap type="java.util.Map" id="backList">
+		<result column="id" property="id"/>
+		<result column="userId" property="userId"/>
+		<result column="realName" property="realName"/>
+		<result column="visitTime" property="visitTime"/>
+		<result column="time" property="time"/>
+	</resultMap>
+	<select id="getRebackList" resultMap="backList" parameterType="java.lang.Object">
+SELECT * from (SELECT
+	t2.id AS id,
+	t2. STATUS AS visitStatus,
+	t3.book_id AS bookId,
+	u.id AS userId,
+	u.account_id AS accountId,
+	u.real_name AS realName,
+	t3.create_date AS medicalCreateTime,
+	t2.visitTime AS visitTime,
+	t1.visitorName AS visitorName
+FROM
+ (
+	SELECT
+	
+		mr.id AS id,
+		mr.create_date,
+		mr.book_id
+	FROM
+		medical_record mr
+
+) t3 
+LEFT JOIN
+(
+		SELECT
+			rv.id AS id,
+			rv. STATUS AS STATUS,
+			rv.visit_time AS visitTime,
+			rv.visitor_id AS visitorId,
+			rv.medical_record_id,
+			rv.user_id
+		FROM
+			return_visit rv
+		ORDER BY
+			visitTime DESC
+	) t2 ON t2.medical_record_id = t3.id
+LEFT JOIN USER u ON t2.user_id = u.id
+LEFT JOIN (
+	SELECT
+		u1.real_name AS visitorName,
+		rv1.id AS visitId
+	FROM
+		USER u1
+	LEFT JOIN return_visit rv1 
+ON rv1.visitor_id = u1.account_id
+) t1 ON t1.visitId = t2.id
+WHERE
+	t2.visitorId = #{visitorId}
+AND t2. STATUS = 0
+ORDER BY t3.create_date DESC
+) t4 WHERE 1=1 
+<if test="startDate != null and startDate != ''">
+		<![CDATA[
+			and DATE_FORMAT(t4.visitTime,'%Y-%m-%d') >= #{startDate} 
+			]]>
+		</if>
+		<if test="endDate != null and endDate !='' ">
+		<![CDATA[
+			and DATE_FORMAT(t4.visitTime,'%Y-%m-%d') <= #{endDate}
+			]]>
+		</if>
+GROUP BY t4.userId
+ORDER BY t4.visitTime ASC
+	</select>
+	
+<select id="getRebackListByDate" resultMap="backList" parameterType="java.lang.Object">
+SELECT * from (SELECT
+	t2.id AS id,
+	t2. STATUS AS visitStatus,
+	t3.book_id AS bookId,
+	u.id AS userId,
+	u.account_id AS accountId,
+	u.real_name AS realName,
+	t3.create_date AS medicalCreateTime,
+	t2.visitTime AS visitTime,
+	t1.visitorName AS visitorName
+FROM
+ (
+	SELECT
+	
+		mr.id AS id,
+		mr.create_date,
+		mr.book_id
+	FROM
+		medical_record mr
+
+) t3 
+LEFT JOIN
+(
+		SELECT
+			rv.id AS id,
+			rv. STATUS AS STATUS,
+			rv.visit_time AS visitTime,
+			rv.visitor_id AS visitorId,
+			rv.medical_record_id,
+			rv.user_id
+		FROM
+			return_visit rv
+		ORDER BY
+			visitTime DESC
+	) t2 ON t2.medical_record_id = t3.id
+LEFT JOIN USER u ON t2.user_id = u.id
+LEFT JOIN (
+	SELECT
+		u1.real_name AS visitorName,
+		rv1.id AS visitId
+	FROM
+		USER u1
+	LEFT JOIN return_visit rv1 
+ON rv1.visitor_id = u1.account_id
+) t1 ON t1.visitId = t2.id
+WHERE
+	t2.visitorId = #{visitorId}
+AND t2. STATUS = 0
+ORDER BY t3.create_date DESC
+) t4 WHERE 1=1 
+	<if test="startDate != null and startDate != ''">
+		<![CDATA[
+			and DATE_FORMAT(t4.visitTime,'%Y-%m-%d') = #{startDate} 
+			]]>
+		</if>
+		<if test="endDate != null and endDate !='' ">
+		<![CDATA[
+			and DATE_FORMAT(t4.visitTime,'%Y-%m-%d') <= #{endDate}
+			]]>
+		</if>
+GROUP BY t4.userId
+ORDER BY t4.visitTime ASC
+	</select>
+</mapper>   

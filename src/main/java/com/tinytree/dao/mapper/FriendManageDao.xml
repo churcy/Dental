@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+         符号转义说明
+    &lt;          < 
+    &gt;          >  
+    &lt;&gt;     <>
+    &amp;        & 
+    &apos;       '
+    &quot;       "
+  <![CDATA[ 这里写你的SQL或者符号 ]]> 
+ -->
+<mapper namespace="com.kungfu.dental.dao.FriendManageDao"> 
+	<select id="getFriendList" resultType="java.util.HashMap" parameterType = "java.util.Map">
+	SELECT
+	t1.groupId AS groupId,
+	t1.groupName AS groupName,
+	t2.friendUserId AS friendUserId,
+	t2.friendName AS friendName,
+	t2.friendAccountId AS friendAccountId,
+	t2.type AS friendType,
+	t2.bookId AS bookId,
+	t2. status AS status,
+	t2.mobile AS mobile,
+	t2.registerType AS registerType
+	FROM
+	(
+		SELECT
+			u.id AS userId,
+			gf.id AS groupId,
+			gf.`name` AS groupName
+		FROM
+			group_info gf
+		LEFT JOIN `user` u ON u.id = gf.user_id
+	) t1
+	LEFT JOIN (
+	SELECT
+		u.real_name AS friendName,
+		u.id AS friendUserId,
+		u.account_id AS friendAccountId,
+		u.mobile AS mobile,
+		gm.group_id AS groupId,
+		gm.type AS type,
+		t3.bookId AS bookId,
+		gm. status AS status,
+		gm.register_type AS registerType
+	FROM
+		group_members gm
+	LEFT JOIN `user` u ON gm.user_id = u.id
+	LEFT JOIN (
+		SELECT
+			mrb.id AS bookId,
+			mrb.user_id AS userId
+		FROM
+			medical_record_book mrb
+	) t3 ON t3.userId = u.id
+	) t2 ON t1.groupId = t2.groupId
+	WHERE 1 = 1
+	<if test="userId != null and userId != ''">
+	and t1.userId = #{userId}
+	</if>
+	<if test="registerType != null and registerType != ''">
+	and t2.registerType = #{registerType}
+	</if>
+	and t2.status = 1
+	</select>
+		
+</mapper>   

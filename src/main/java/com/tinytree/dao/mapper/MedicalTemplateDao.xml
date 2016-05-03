@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+         符号转义说明
+    &lt;          < 
+    &gt;          >  
+    &lt;&gt;     <>
+    &amp;        & 
+    &apos;       '
+    &quot;       "
+  <![CDATA[ 这里写你的SQL或者符号 ]]> 
+ -->
+<mapper namespace="com.kungfu.dental.dao.MedicalTemplateDao"> 
+	<select id = "getByConditions" resultType = "java.util.HashMap" parameterType = "java.util.Map">
+	SELECT *
+	FROM medical_template
+	WHERE 1=1
+	<if test="templateId !=null and templateId != ''">
+	and id=#{medicalTemplateId},
+	</if>
+	<if test="nodeId !=null and nodeId != ''">
+	and node_id=#{nodeId}
+	</if>
+	</select>
+	<resultMap type="com.kungfu.dental.entity.MedicalTemplate" id="medicalTemplateMap">
+		<id column="id" property="id"/>
+		<result column="node_id" property="nodeId"/>
+		<result column="doctor_id" property="doctorId"/>
+		<result column="complaint" property="complaint"/>
+		<result column="history_present_illness" property="historyPresentIllness"/>
+		<result column="history_past_illness" property="historyPastIllness"/>
+		<result column="inspect" property="inspect"/>
+		<result column="assistant_inspect" property="assistantInspect"/>
+		<result column="diagnosis" property="diagnosis"/>
+		<result column="treatment_plan" property="treatmentPlan"/>
+		<result column="treatment" property="treatment"/>
+		<result column="orders" property="orders"/>
+		<result column="create_date" property="createDate"/>
+		<result column="modify_date" property="modifyDate"/>
+	</resultMap>
+	<!-- tbaleColumns  所有列 -->
+  	<sql id="tbaleColumns">
+		<trim suffix="" suffixOverrides=",">
+			id,node_id,doctor_id,complaint,history_present_illness,history_past_illness,inspect,
+			assistant_inspect,diagnosis,treatment_plan,
+			treatment,orders,create_date,modify_date		
+		</trim>
+	</sql>
+	
+	<!-- insertColumns 入库列 -->
+	<sql id="insertColumns">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				id,
+			</if>
+			<if test="doctorId != null and doctorId != '' " >
+				doctor_id,
+			</if>
+			<if test="nodeId != null and nodeId != '' " >
+				node_id,
+			</if>
+			<if test="complaint != null and complaint != ''" >
+				complaint,
+			</if>
+			<if test="historyPresentIllness != null and historyPresentIllness != ''" >
+				history_present_illness,
+			</if>
+			<if test="historyPastIllness != null and historyPastIllness != '' " >
+				history_past_illness,
+			</if>
+			<if test="inspect != null and inspect != '' " >
+				inspect,
+			</if>
+			<if test="assistantInspect != null and assistantInspect != ''" >
+				assistant_inspect,
+			</if>
+			<if test="diagnosis != null and diagnosis != '' " >
+				diagnosis,
+			</if>
+			<if test="treatmentPlan != null and treatmentPlan != ''" >
+				treatment_plan,
+			</if>
+			<if test="treatment != null and treatment != '' " >
+				treatment,
+			</if>
+			<if test="orders != null and orders != '' " >
+				orders,
+			</if>
+			<if test="createDate != null" >
+				create_date,
+			</if>
+			<if test="modifyDate != null" >
+				modify_date,
+			</if>
+	    </trim>
+	</sql>
+	<!-- insertParams 入库值 -->
+	<sql id="insertParams">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				#{id},
+			</if>
+			<if test="nodeId != null and nodeId != '' " >
+				#{nodeId},
+			</if>
+			<if test="doctorId != null and doctorId != '' " >
+				#{doctorId},
+			</if>
+			<if test="complaint != null and complaint != ''" >
+				#{complaint},
+			</if>
+			<if test="historyPresentIllness != null and historyPresentIllness != ''" >
+				#{historyPresentIllness},
+			</if>
+			<if test="historyPastIllness != null and historyPastIllness != '' " >
+				#{historyPastIllness},
+			</if>
+			<if test="inspect != null and inspect != '' " >
+				#{inspect},
+			</if>
+			<if test="assistantInspect != null and assistantInspect != ''" >
+				#{assistantInspect},
+			</if>
+			<if test="diagnosis != null and diagnosis != '' " >
+				#{diagnosis},
+			</if>
+			<if test="treatmentPlan != null and treatmentPlan != ''" >
+				#{treatmentPlan},
+			</if>
+			<if test="treatment != null and treatment != '' " >
+				#{treatment},
+			</if>
+			<if test="orders != null and orders != '' " >
+				#{orders},
+			</if>
+			<if test="createDate != null" >
+				#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- updateParams  更新列 -->
+	<sql id="updateParams">
+		<trim suffix="" suffixOverrides=",">
+			<if test="nodeId != null and nodeId != '' " >
+				node_id=#{nodeId},
+			</if>
+			<if test="doctorId != null and doctorId != '' " >
+				doctor_id=#{doctorId},
+			</if>
+			<if test="complaint != null and complaint != ''" >
+				complaint=#{complaint},
+			</if>
+			<if test="historyPresentIllness != null and historyPresentIllness != ''" >
+				history_present_illness=#{historyPresentIllness},
+			</if>
+			<if test="historyPastIllness != null and historyPastIllness != '' " >
+				history_past_illness=#{historyPastIllness},
+			</if>
+			<if test="inspect != null and inspect != '' " >
+				inspect=#{inspect},
+			</if>
+			<if test="assistantInspect != null and assistantInspect != ''" >
+				assistant_inspect=#{assistantInspect},
+			</if>
+			<if test="diagnosis != null and diagnosis != '' " >
+				diagnosis=#{diagnosis},
+			</if>
+			<if test="treatmentPlan != null and treatmentPlan != ''" >
+				treatment_plan=#{treatmentPlan},
+			</if>
+			<if test="treatment != null and treatment != '' " >
+				treatment=#{treatment},
+			</if>
+			<if test="orders != null and orders != '' " >
+				orders=#{orders},
+			</if>
+			<if test="createDate != null" >
+				create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- 条件 查询  , 去掉主键列-->
+	<sql id="andOther">
+		<trim suffix="" suffixOverrides=",">
+			<if test="nodeId != null and nodeId != '' " >
+				and node_id=#{nodeId},
+			</if>
+			<if test="doctorId != null and doctorId != '' " >
+				and doctor_id=#{doctorId},
+			</if>
+			<if test="complaint != null and complaint != ''" >
+				and complaint=#{complaint},
+			</if>
+			<if test="historyPresentIllness != null and historyPresentIllness != ''" >
+				and history_present_illness=#{historyPresentIllness},
+			</if>
+			<if test="historyPastIllness != null and historyPastIllness != '' " >
+				and history_past_illness=#{historyPastIllness},
+			</if>
+			<if test="inspect != null and inspect != '' " >
+				and inspect=#{inspect},
+			</if>
+			<if test="assistantInspect != null and assistantInspect != ''" >
+				and assistant_inspect=#{assistantInspect},
+			</if>
+			<if test="diagnosis != null and diagnosis != '' " >
+				and diagnosis=#{diagnosis},
+			</if>
+			<if test="treatmentPlan != null and treatmentPlan != ''" >
+				and treatment_plan=#{treatmentPlan},
+			</if>
+			<if test="treatment != null and treatment != '' " >
+				and treatment=#{treatment},
+			</if>
+			<if test="orders != null and orders != '' " >
+				and orders=#{orders},
+			</if>
+			<if test="createDate != null" >
+				and create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				and modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- 条件 查询  , 包含所有 -->
+	<sql id="andOtherAll">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				and id=#{id},
+			</if>
+			<if test="nodeId != null and nodeId != '' " >
+				and node_id=#{nodeId},
+			</if>
+			<if test="doctorId != null and doctorId != '' " >
+				and doctor_id=#{doctorId},
+			</if>
+			<if test="complaint != null and complaint != ''" >
+				and complaint=#{complaint},
+			</if>
+			<if test="historyPresentIllness != null and historyPresentIllness != ''" >
+				and history_present_illness=#{historyPresentIllness},
+			</if>
+			<if test="historyPastIllness != null and historyPastIllness != '' " >
+				and history_past_illness=#{historyPastIllness},
+			</if>
+			<if test="inspect != null and inspect != '' " >
+				and inspect=#{inspect},
+			</if>
+			<if test="assistantInspect != null and assistantInspect != ''" >
+				and assistant_inspect=#{assistantInspect},
+			</if>
+			<if test="diagnosis != null and diagnosis != '' " >
+				and diagnosis=#{diagnosis},
+			</if>
+			<if test="treatmentPlan != null and treatmentPlan != ''" >
+				and treatment_plan=#{treatmentPlan},
+			</if>
+			<if test="treatment != null and treatment != '' " >
+				and treatment=#{treatment},
+			</if>
+			<if test="createDate != null" >
+				and create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				and modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	
+	<!-- where 条件  -->
+	<sql id="where">
+	     where 1=1
+	</sql>
+	<!-- columnKey  主键 列名称 ,视图获取不到主键 需要设置 -->
+	<sql id="columnKey">
+	     and id=#{id}
+	</sql>
+	<!-- 自定义查询 -->
+	<sql id="sql">
+	   <if test="sql != null and sql !=''">
+	       ${sql}
+	   </if>
+	   <if test="sql == null || sql==''">
+	      select <include refid="tbaleColumns"/> from medical_template <include refid="where"/>
+	   </if>
+	</sql>
+	<!-- 添加,插入记录   -->
+	<insert id="insert"  parameterType="com.kungfu.dental.entity.MedicalRecordBook">
+	    insert into medical_template(<include refid="insertColumns"/>) values(<include refid="insertParams"/>);
+	</insert>
+	<!-- 添加,SQL添加   -->
+	<insert id="insertBySql" parameterType="java.lang.String">
+	    <include refid="sql"/>
+	</insert>
+	<!-- 删除,主键删除   -->
+	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.MedicalRecordBook">
+	    delete from medical_template<include refid="where"/><include refid="columnKey"/>
+	</delete>
+	<!-- 删除,实体删除   -->
+	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.MedicalRecordBook">
+	    delete from medical_template<include refid="where"/><include refid="andOtherAll"/>
+	</delete>
+	<!-- 删除,SQL删除   -->
+	<delete id="deleteBySql" parameterType="java.lang.String">
+	      <include refid="sql"/>
+	</delete>
+	<!-- 修改,主键更新  -->
+	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.MedicalRecordBook" >
+		update medical_template <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
+	</update>
+	<!-- 修改,SQL更新 -->
+	<update id="updateBySql" parameterType="java.lang.String">
+		  <include refid="sql"/>
+	</update>
+	<!-- 查询,主键查询   -->
+	<select id="selectByPrimaryKey"  resultMap="medicalTemplateMap" parameterType="java.lang.Object">
+		select <include refid="tbaleColumns"/> from medical_template <include refid="where"/> <include refid="columnKey"/>
+	</select>
+	<!-- 查询,所有   -->
+	<select id="selectAll"  resultMap="medicalTemplateMap">
+		select <include refid="tbaleColumns"/> from medical_template
+	</select>
+	<!-- 查询,总数量   -->
+	<select id="count" resultType="java.lang.Integer">
+		select count(1) from medical_template
+	</select>
+	<!-- 查询,实体查询   -->
+	<select id="selectByEntiry"  resultMap="medicalTemplateMap" parameterType="com.kungfu.dental.entity.MedicalRecordBook">
+		select <include refid="tbaleColumns"/> from medical_template <include refid="where"/> <include refid="andOtherAll"/>
+	</select>
+	<!-- 查询,SQL -->
+	<select id="selectBySql"  resultMap="medicalTemplateMap" parameterType="java.lang.String">
+	     <include refid="sql"/>
+	</select>
+	<!-- 查询,总行数,Map -->
+	<select id="selectByMapCount" resultType="java.lang.Integer"  parameterType="java.util.Map">
+		select count(1) from medical_template <include refid="where"/>
+	    ${queryCondition}
+		<if test="andCondition !=null and andCondition !=''">
+		   and ${andCondition}
+		</if>
+		<if test="orderCondition != null and queryCondition != ''" >
+	    	order by ${orderCondition}
+	    </if>
+	</select>
+	<!-- 查询,参数查询,Map -->
+	<select id="selectByMap" resultMap="medicalTemplateMap"  parameterType="java.util.Map">
+		select <include refid="tbaleColumns"/>from medical_template <include refid="where"/>
+	    ${queryCondition}
+		<if test="andCondition !=null and andCondition !=''">
+		   and ${andCondition}
+		</if>
+		<if test="orderCondition != null and orderCondition != ''" >
+	    	order by ${orderCondition}
+	    </if>
+	</select>
+</mapper>   

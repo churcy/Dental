@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+         符号转义说明
+    &lt;          < 
+    &gt;          >  
+    &lt;&gt;     <>
+    &amp;        & 
+    &apos;       '
+    &quot;       "
+  <![CDATA[ 这里写你的SQL或者符号 ]]> 
+ -->
+<mapper namespace="com.kungfu.dental.dao.ReturnVisitRecordDao"> 
+	<resultMap type="com.kungfu.dental.entity.ReturnVisitRecord" id="returnVisitRecordMap">
+		<id column="id" property="id"/>
+		<result column="return_visit_id" property="returnVisitId"/>
+		<result column="content" property="content"/>
+		<result column="result" property="result"/>
+		<result column="visit_time" property="visitTime"/>
+		<result column="create_date" property="createDate"/>
+		<result column="modify_date" property="modifyDate"/>
+	</resultMap>
+	<!-- tbaleColumns  所有列 -->
+  	<sql id="tbaleColumns">
+		<trim suffix="" suffixOverrides=",">
+			id,return_visit_id,content,result,visit_time,create_date,modify_date		
+		</trim>
+	</sql>
+	
+	<!-- insertColumns 入库列 -->
+	<sql id="insertColumns">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				id,
+			</if>
+			<if test="returnVisitId != null and returnVisitId != '' " >
+				return_visit_id,
+			</if>
+			<if test="content != null and content != ''" >
+				content,
+			</if>
+			<if test="result != null and result != '' " >
+				result,
+			</if>
+			<if test="visitTime != null" >
+				visit_time,
+			</if>
+			<if test="createDate != null" >
+				create_date,
+			</if>
+			<if test="modifyDate != null" >
+				modify_date,
+			</if>
+	    </trim>
+	</sql>
+	<!-- insertParams 入库值 -->
+	<sql id="insertParams">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				#{id},
+			</if>
+			<if test="returnVisitId != null and returnVisitId != '' " >
+				#{returnVisitId},
+			</if>
+			<if test="content != null and content != ''" >
+				#{content},
+			</if>
+			<if test="result != null and result != '' " >
+				#{result},
+			</if>
+			<if test="visitTime != null" >
+				#{visitTime},
+			</if>
+			<if test="createDate != null" >
+				#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- updateParams  更新列 -->
+	<sql id="updateParams">
+		<trim suffix="" suffixOverrides=",">
+			<if test="returnVisitId != null and returnVisitId != ''" >
+				return_visit_id=#{returnVisitId},
+			</if>
+			<if test="content != null and content != '' " >
+				content=#{content},
+			</if>
+			<if test="result != null and result != ''" >
+				result=#{result},
+			</if>
+			<if test="visitTime != null" >
+				visit_time=#{visitTime},
+			</if>
+			<if test="createDate != null" >
+				create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- 条件 查询  , 去掉主键列-->
+	<sql id="andOther">
+		<trim suffix="" suffixOverrides=",">
+			<if test="returnVisitId != null and returnVisitId != ''" >
+				and return_visit_id=#{returnVisitId},
+			</if>
+			<if test="content != null and content != '' " >
+				and content=#{content},
+			</if>
+			<if test="result != null and result != ''" >
+				and result=#{result},
+			</if>
+			<if test="visitTime != null" >
+				and visit_time=#{visitTime},
+			</if>
+			<if test="createDate != null" >
+				and create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				and modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- 条件 查询  , 包含所有 -->
+	<sql id="andOtherAll">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				and id=#{id},
+			</if>
+			<if test="returnVisitId != null and returnVisitId != ''" >
+				and return_visit_id=#{returnVisitId},
+			</if>
+			<if test="content != null and content != '' " >
+				and content=#{content},
+			</if>
+			<if test="result != null and result != ''" >
+				and result=#{result},
+			</if>
+			<if test="visitTime != null" >
+				and visit_time=#{visitTime},
+			</if>
+			<if test="createDate != null" >
+				and create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				and modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	
+	<!-- where 条件  -->
+	<sql id="where">
+	     where 1=1
+	</sql>
+	<!-- columnKey  主键 列名称 ,视图获取不到主键 需要设置 -->
+	<sql id="columnKey">
+	     and id=#{id}
+	</sql>
+	<!-- 自定义查询 -->
+	<sql id="sql">
+	   <if test="sql != null and sql !=''">
+	       ${sql}
+	   </if>
+	   <if test="sql == null || sql==''">
+	      select <include refid="tbaleColumns"/> from return_visit_record <include refid="where"/>
+	   </if>
+	</sql>
+	<!-- 添加,插入记录   -->
+	<insert id="insert"  parameterType="com.kungfu.dental.entity.ReturnVisitRecord">
+	    insert into return_visit_record(<include refid="insertColumns"/>) values(<include refid="insertParams"/>);
+	</insert>
+	<!-- 添加,SQL添加   -->
+	<insert id="insertBySql" parameterType="java.lang.String">
+	    <include refid="sql"/>
+	</insert>
+	<!-- 删除,主键删除   -->
+	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.ReturnVisitRecord">
+	    delete from return_visit_record<include refid="where"/><include refid="columnKey"/>
+	</delete>
+	<!-- 删除,实体删除   -->
+	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.ReturnVisitRecord">
+	    delete from return_visit_record<include refid="where"/><include refid="andOtherAll"/>
+	</delete>
+	<!-- 删除,SQL删除   -->
+	<delete id="deleteBySql" parameterType="java.lang.String">
+	      <include refid="sql"/>
+	</delete>
+	<!-- 修改,主键更新  -->
+	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.ReturnVisitRecord" >
+		update return_visit_record <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
+	</update>
+	<!-- 修改,SQL更新 -->
+	<update id="updateBySql" parameterType="java.lang.String">
+		  <include refid="sql"/>
+	</update>
+	<!-- 查询,主键查询   -->
+	<select id="selectByPrimaryKey"  resultMap="returnVisitRecordMap" parameterType="java.lang.Object">
+		select <include refid="tbaleColumns"/> from return_visit_record <include refid="where"/> <include refid="columnKey"/>
+	</select>
+	<!-- 查询,所有   -->
+	<select id="selectAll"  resultMap="returnVisitRecordMap">
+		select <include refid="tbaleColumns"/> from return_visit_record
+	</select>
+	<!-- 查询,总数量   -->
+	<select id="count" resultType="java.lang.Integer">
+		select count(1) from return_visit_record
+	</select>
+	<!-- 查询,实体查询   -->
+	<select id="selectByEntiry"  resultMap="returnVisitRecordMap" parameterType="com.kungfu.dental.entity.ReturnVisitRecord">
+		select <include refid="tbaleColumns"/> from return_visit_record <include refid="where"/> <include refid="andOtherAll"/>
+	</select>
+	<!-- 查询,SQL -->
+	<select id="selectBySql"  resultMap="returnVisitRecordMap" parameterType="java.lang.String">
+	     <include refid="sql"/>
+	</select>
+	<!-- 查询,总行数,Map -->
+	<select id="selectByMapCount" resultType="java.lang.Integer"  parameterType="java.util.Map">
+		select count(1) from return_visit_record <include refid="where"/>
+	    ${queryCondition}
+		<if test="andCondition !=null and andCondition !=''">
+		   and ${andCondition}
+		</if>
+		<if test="orderCondition != null and queryCondition != ''" >
+	    	order by ${orderCondition}
+	    </if>
+	</select>
+	<!-- 查询,参数查询,Map -->
+	<select id="selectByMap" resultMap="returnVisitRecordMap"  parameterType="java.util.Map">
+		select <include refid="tbaleColumns"/>from return_visit_record <include refid="where"/>
+	    ${queryCondition}
+		<if test="andCondition !=null and andCondition !=''">
+		   and ${andCondition}
+		</if>
+		<if test="orderCondition != null and orderCondition != ''" >
+	    	order by ${orderCondition}
+	    </if>
+	</select>
+</mapper>   

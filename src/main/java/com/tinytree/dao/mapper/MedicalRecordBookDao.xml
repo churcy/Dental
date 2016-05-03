@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+         符号转义说明
+    &lt;          < 
+    &gt;          >  
+    &lt;&gt;     <>
+    &amp;        & 
+    &apos;       '
+    &quot;       "
+  <![CDATA[ 这里写你的SQL或者符号 ]]> 
+ -->
+<mapper namespace="com.kungfu.dental.dao.MedicalRecordBookDao"> 
+	<resultMap type="com.kungfu.dental.entity.MedicalRecordBook" id="medicalRecordBookMap">
+		<id column="id" property="id"/>
+		<result column="doctor_id" property="doctorId"/>
+		<result column="last_visit_date" property="lastVisitDate"/>
+		<result column="allergy" property="allergy"/>
+		<result column="create_date" property="createDate"/>
+		<result column="modify_date" property="modifyDate"/>
+		<association property="user" column="user_id"
+			javaType="com.kungfu.dental.entity.User" 
+			select="com.kungfu.dental.dao.UserDao.selectByPrimaryKey">
+		</association>
+	</resultMap>
+	<resultMap type="com.kungfu.dental.entity.User" id="userMap">
+		<id column="id" property="id"/>
+		<result column="real_name" property="realName"/>
+		<result column="gender" property="gender"/>
+		<result column="mobile" property="mobile"/>
+		<result column="email" property="email"/>
+		<result column="marital" property="marital"/>
+		<result column="email" property="departmentName"/>
+		<result column="user_img" property="userImg"/>
+		<result column="birthday" property="birthday" jdbcType="DATE" javaType="java.util.Date"/>
+		<result column="qq" property="qq"/>
+		<result column="wechat" property="wechat"/>
+		<result column="address" property="address"/>
+		<result column="avatar" property="avatar"/>
+		<result column="create_date" property="createDate"/>
+		<result column="modify_date" property="modifyDate"/>
+		<association property="account" column="account_id"
+			javaType="com.kungfu.dental.entity.Account" 
+			select="com.kungfu.dental.dao.AccountDao.selectByPrimaryKey">
+		</association>
+	</resultMap>
+	<resultMap type="com.kungfu.dental.entity.Account" id="accountMap">
+		<id column="id" property="id"/>
+		<result column="login_name" property="loginName"/>
+		<result column="password" property="password"/>
+		<result column="account_type" property="accountType"/>
+		<result column="account_from" property="accountFrom"/>
+		<result column="referee" property="referee"/>
+		<result column="invite_code" property="inviteCode"/>
+		<result column="status" property="status"/>
+		<result column="email_verified" property="emailVerified"/>
+		<result column="last_login" property="lastLogin"/>
+		<result column="failure_times" property="failureTimes"/>
+		<result column="creator" property="creator"/>
+		<result column="modifier" property="modifier"/>
+		<result column="create_date" property="createDate"/>
+		<result column="modify_date" property="modifyDate"/>
+	</resultMap>
+	<!-- tbaleColumns  所有列 -->
+  	<sql id="tbaleColumns">
+		<trim suffix="" suffixOverrides=",">
+			id,user_id,doctor_id,last_visit_date,allergy,create_date,modify_date		
+		</trim>
+	</sql>
+	
+	<!-- insertColumns 入库列 -->
+	<sql id="insertColumns">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				id,
+			</if>
+			<if test="user.id != null and user.id != '' " >
+				user_id,
+			</if>
+			<if test="doctorId != null and doctorId != ''" >
+				doctor_id,
+			</if>
+			<if test="lastVisitDate != null " >
+				last_visit_date,
+			</if>
+			<if test="allergy != null and allergy != '' " >
+				allergy,
+			</if>
+			<if test="createDate != null" >
+				create_date,
+			</if>
+			<if test="modifyDate != null" >
+				modify_date,
+			</if>
+	    </trim>
+	</sql>
+	<!-- insertParams 入库值 -->
+	<sql id="insertParams">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				#{id},
+			</if>
+			<if test="user.id != null and user.id != '' " >
+				#{user.id},
+			</if>
+			<if test="doctorId != null and doctorId != ''" >
+				#{doctorId},
+			</if>
+			<if test="lastVisitDate != null " >
+				#{lastVisitDate},
+			</if>
+			<if test="allergy != null and allergy != '' " >
+				#{allergy},
+			</if>
+			<if test="createDate != null" >
+				#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- updateParams  更新列 -->
+	<sql id="updateParams">
+		<trim suffix="" suffixOverrides=",">
+			<if test="user.id != null and user.id != '' " >
+				user_id=#{user.id},
+			</if>
+			<if test="doctorId != null and doctorId != ''" >
+				doctor_id=#{doctorId},
+			</if>
+			<if test="lastVisitDate != null " >
+				last_visit_date=#{lastVisitDate},
+			</if>
+			<if test="allergy != null and allergy != '' " >
+				allergy=#{allergy},
+			</if>
+			<if test="createDate != null" >
+				create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- 条件 查询  , 去掉主键列-->
+	<sql id="andOther">
+		<trim suffix="" suffixOverrides=",">
+			<if test="user.id != null and user.id != '' " >
+				and user_id=#{user.id},
+			</if>
+			<if test="doctorId != null and doctorId != ''" >
+				and doctor_id=#{doctorId},
+			</if>
+			<if test="lastVisitDate != null " >
+				and last_visit_date=#{lastVisitDate},
+			</if>
+			<if test="allergy != null and allergy != '' " >
+				and allergy=#{allergy},
+			</if>
+			<if test="createDate != null" >
+				and create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				and modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- 条件 查询  , 包含所有 -->
+	<sql id="andOtherAll">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				and id=#{id},
+			</if>
+			<if test="user.id != null and user.id != '' " >
+				and user_id=#{user.id},
+			</if>
+			<if test="doctorId != null and doctorId != ''" >
+				and doctor_id=#{doctorId},
+			</if>
+			<if test="lastVisitDate != null " >
+				and last_visit_date=#{lastVisitDate},
+			</if>
+			<if test="allergy != null and allergy != '' " >
+				and allergy=#{allergy},
+			</if>
+			<if test="createDate != null" >
+				and create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				and modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	
+	<!-- where 条件  -->
+	<sql id="where">
+	     where 1=1
+	</sql>
+	<!-- columnKey  主键 列名称 ,视图获取不到主键 需要设置 -->
+	<sql id="columnKey">
+	     and id=#{id}
+	</sql>
+	<!-- 自定义查询 -->
+	<sql id="sql">
+	   <if test="sql != null and sql !=''">
+	       ${sql}
+	   </if>
+	   <if test="sql == null || sql==''">
+	      select <include refid="tbaleColumns"/> from medical_record_book <include refid="where"/>
+	   </if>
+	</sql>
+	<!-- 添加,插入记录   -->
+	<insert id="insert"  parameterType="com.kungfu.dental.entity.MedicalRecordBook">
+	    insert into medical_record_book(<include refid="insertColumns"/>) values(<include refid="insertParams"/>);
+	</insert>
+	<!-- 添加,SQL添加   -->
+	<insert id="insertBySql" parameterType="java.lang.String">
+	    <include refid="sql"/>
+	</insert>
+	<!-- 删除,主键删除   -->
+	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.MedicalRecordBook">
+	    delete from medical_record_book<include refid="where"/><include refid="columnKey"/>
+	</delete>
+	<!-- 删除,实体删除   -->
+	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.MedicalRecordBook">
+	    delete from medical_record_book<include refid="where"/><include refid="andOtherAll"/>
+	</delete>
+	<!-- 删除,SQL删除   -->
+	<delete id="deleteBySql" parameterType="java.lang.String">
+	      <include refid="sql"/>
+	</delete>
+	<!-- 修改,主键更新  -->
+	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.MedicalRecordBook" >
+		update medical_record_book <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
+	</update>
+	<!-- 修改,SQL更新 -->
+	<update id="updateBySql" parameterType="java.lang.String">
+		  <include refid="sql"/>
+	</update>
+	<!-- 查询,主键查询   -->
+	<select id="selectByPrimaryKey"  resultMap="medicalRecordBookMap" parameterType="java.lang.Object">
+		select <include refid="tbaleColumns"/> from medical_record_book <include refid="where"/> <include refid="columnKey"/>
+	</select>
+	<!-- 查询,所有   -->
+	<select id="selectAll"  resultMap="medicalRecordBookMap">
+		select <include refid="tbaleColumns"/> from medical_record_book
+	</select>
+	<!-- 查询,总数量   -->
+	<select id="count" resultType="java.lang.Integer">
+		select count(1) from medical_record_book
+	</select>
+	<!-- 查询,实体查询   -->
+	<select id="selectByEntiry"  resultMap="medicalRecordBookMap" parameterType="com.kungfu.dental.entity.MedicalRecordBook">
+		select <include refid="tbaleColumns"/> from medical_record_book <include refid="where"/> <include refid="andOtherAll"/>
+	</select>
+	<!-- 查询,SQL -->
+	<select id="selectBySql"  resultMap="medicalRecordBookMap" parameterType="java.lang.String">
+	     <include refid="sql"/>
+	</select>
+	<!-- 查询,总行数,Map -->
+	<select id="selectByMapCount" resultType="java.lang.Integer"  parameterType="java.util.Map">
+		select count(1) from medical_record_book <include refid="where"/>
+	    ${queryCondition}
+		<if test="andCondition !=null and andCondition !=''">
+		   and ${andCondition}
+		</if>
+		<if test="orderCondition != null and queryCondition != ''" >
+	    	order by ${orderCondition}
+	    </if>
+	</select>
+	<!-- 查询,参数查询,Map -->
+	<select id="selectByMap" resultMap="medicalRecordBookMap"  parameterType="java.util.Map">
+		select <include refid="tbaleColumns"/>from medical_record_book <include refid="where"/>
+	    ${queryCondition}
+		<if test="andCondition !=null and andCondition !=''">
+		   and ${andCondition}
+		</if>
+		<if test="orderCondition != null and orderCondition != ''" >
+	    	order by ${orderCondition}
+	    </if>
+	</select>
+	<select id="getBookListByUser" resultType="java.util.Map" parameterType="java.lang.String">
+	SELECT
+	b.id AS bookId,
+	t.realName AS doctorName,
+	b.allergy AS allergy
+	FROM
+	medical_record_book b
+	LEFT JOIN (
+	SELECT
+	t1.accountId,
+	t1.realName,
+	d.id AS doctorId
+	FROM
+	doctor d
+	LEFT JOIN (
+	SELECT
+	a.id AS accountId,
+	u.real_name AS realName
+	FROM
+	account a
+	LEFT JOIN USER u ON a.id = u.account_id
+	) t1 ON d.account_id = t1.accountId
+	) t ON b.doctor_id = t.doctorId
+	where b.user_id = #{userId}
+	</select>
+		<select id="getBookList" resultType="java.util.Map" parameterType="java.lang.String">
+		select 
+		b.id as bookId,
+		t.realName as patientName ,
+		b.allergy AS allergy
+		from medical_record_book b 
+		LEFT JOIN 
+		(select 
+		u.id as userId,u.real_name as realName 
+		from account a 
+		LEFT JOIN user u on a.id = u.account_id)
+		t on  b.user_id = t.userId 
+		where b.doctor_id = #{doctorAccountId}
+	</select>
+</mapper>   

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+         符号转义说明
+    &lt;          < 
+    &gt;          >  
+    &lt;&gt;     <>
+    &amp;        & 
+    &apos;       '
+    &quot;       "
+  <![CDATA[ 这里写你的SQL或者符号 ]]> 
+ -->
+<mapper namespace="com.kungfu.dental.dao.RequestLogDao" > 
+	<resultMap type="com.kungfu.dental.entity.RequestLog" id="requestLogDaoMap">
+		<id column="id" property="id"/>
+		<result column="consume_time" property="consumeTime"/>
+		<result column="opertat_system" property="opertatSystem"/>
+		<result column="ip" property="ip"/>
+		<result column="opt" property="opt"/>
+		<result column="token" property="token"/>
+		<result column="create_date" property="createDate"/>
+		<result column="modify_date" property="modifyDate"/>
+	</resultMap>
+	<!-- tbaleColumns  所有列 -->
+  	<sql id="tbaleColumns">
+		<trim suffix="" suffixOverrides=",">
+			id,consume_time,name,opertat_system,ip,opt,token,create_date,modify_date		
+		</trim>
+	</sql>
+	
+	<!-- insertColumns 入库列 -->
+	<sql id="insertColumns">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				id,
+			</if>
+			<if test="opertatSystem != null and opertatSystem != '' " >
+				opertat_system,
+			</if>
+			<if test="consumeTime != null  " >
+				consume_time,
+			</if>
+			<if test="ip != null and ip != '' " >
+				ip,
+			</if>
+			<if test="opt != null and opt != '' " >
+				opt,
+			</if>
+			<if test="token != null and token != ''" >
+				token,
+			</if>
+			<if test="createDate != null" >
+				create_date,
+			</if>
+			<if test="modifyDate != null" >
+				modify_date,
+			</if>
+	    </trim>
+	</sql>
+	<!-- insertParams 入库值 -->
+	<sql id="insertParams">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != ''" >
+				#{id},
+			</if>
+			<if test="opertatSystem != null and opertatSystem != '' " >
+				#{opertatSystem},
+			</if>
+			<if test="consumeTime != null  " >
+				#{consumeTime},
+			</if>
+			<if test="ip != null and ip != '' " >
+				#{ip},
+			</if>
+			<if test="opt != null and opt != '' " >
+				#{opt},
+			</if>
+			<if test="token != null and token != ''" >
+				#{token},
+			</if>
+			<if test="createDate != null" >
+				#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- updateParams  更新列 -->
+	<sql id="updateParams">
+		<trim suffix="" suffixOverrides=",">
+			<if test="opertatSystem != null and opertatSystem != '' " >
+				opertat_system=#{opertatSystem},
+			</if>
+			<if test="consumeTime != null  " >
+				consume_time=#{consumeTime},
+			</if>
+			<if test="ip != null and ip != '' " >
+				ip=#{ip},
+			</if>
+			<if test="opt != null and opt != '' " >
+				opt=#{opt},
+			</if>
+			<if test="token != null and token != ''" >
+				token=#{token},
+			</if>
+			<if test="createDate != null" >
+				create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- 条件 查询  , 去掉主键列-->
+	<sql id="andOther">
+		<trim suffix="" suffixOverrides=",">
+			<if test="opertatSystem != null and opertatSystem != '' " >
+				and opertat_system=#{opertatSystem},
+			</if>
+			<if test="consumeTime != null  " >
+				and consume_time=#{consumeTime},
+			</if>
+			<if test="ip != null and ip != '' " >
+				and ip=#{ip},
+			</if>
+			<if test="opt != null and opt != '' " >
+				and opt=#{opt},
+			</if>
+			<if test="token != null and token != ''" >
+				and token=#{token},
+			</if>
+			<if test="createDate != null" >
+				and create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				and modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- 条件 查询  , 包含所有 -->
+	<sql id="andOtherAll">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				and id=#{id},
+			</if>
+			<if test="opertatSystem != null and opertatSystem != '' " >
+				and opertat_system=#{opertatSystem},
+			</if>
+			<if test="consumeTime != null  " >
+				and consume_time=#{consumeTime},
+			</if>
+			<if test="ip != null and ip != '' " >
+				and ip=#{ip},
+			</if>
+			<if test="opt != null and opt != '' " >
+				and opt=#{opt},
+			</if>
+			<if test="token != null and token != ''" >
+				and token=#{token},
+			</if>
+			<if test="createDate != null" >
+				and create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				and modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	
+	<!-- where 条件  -->
+	<sql id="where">
+	     where 1=1
+	</sql>
+	<!-- columnKey  主键 列名称 ,视图获取不到主键 需要设置 -->
+	<sql id="columnKey">
+	     and id=#{id}
+	</sql>
+	<!-- 自定义查询 -->
+	<sql id="sql">
+	   <if test="sql != null and sql !=''">
+	       ${sql}
+	   </if>
+	   <if test="sql == null || sql==''">
+	      select <include refid="tbaleColumns"/> from request_log <include refid="where"/>
+	   </if>
+	</sql>
+	<!-- 添加,插入记录   -->
+	<insert id="insert"  parameterType="com.kungfu.dental.entity.RequestLog" useGeneratedKeys="true">
+		<!-- <selectKey keyProperty="id" resultType="String" order="BEFORE">
+        	replace(uuid(),'-','')
+    	</selectKey> -->
+	    insert into request_log(<include refid="insertColumns"/>) values(<include refid="insertParams"/>);
+	</insert>
+	<!-- 添加,SQL添加   -->
+	<insert id="insertBySql" parameterType="java.lang.String">
+	    <include refid="sql"/>
+	</insert>
+	<!-- 删除,主键删除   -->
+	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.RequestLog">
+	    delete from request_log<include refid="where"/><include refid="columnKey"/>
+	</delete>
+	<!-- 删除,实体删除   -->
+	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.RequestLog">
+	    delete from request_log<include refid="where"/><include refid="andOtherAll"/>
+	</delete>
+	<!-- 删除,SQL删除   -->
+	<delete id="deleteBySql" parameterType="java.lang.String">
+	      <include refid="sql"/>
+	</delete>
+	<!-- 修改,主键更新  -->
+	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.RequestLog" >
+		update request_log <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
+	</update>
+	<!-- 修改,SQL更新 -->
+	<update id="updateBySql" parameterType="java.lang.String">
+		  <include refid="sql"/>
+	</update>
+	<!-- 查询,主键查询   -->
+	<select id="selectByPrimaryKey"  resultMap="requestLogDaoMap" parameterType="java.lang.Object">
+		select <include refid="tbaleColumns"/> from request_log <include refid="where"/> <include refid="columnKey"/>
+	</select>
+	<!-- 查询,所有   -->
+	<select id="selectAll"  resultMap="requestLogDaoMap">
+		select <include refid="tbaleColumns"/> from request_log
+	</select>
+	<!-- 查询,总数量   -->
+	<select id="count" resultType="java.lang.Integer">
+		select count(1) from request_log
+	</select>
+	<!-- 查询,实体查询   -->
+	<select id="selectByEntiry"  resultMap="requestLogDaoMap" parameterType="com.kungfu.dental.entity.RequestLog">
+		select <include refid="tbaleColumns"/> from request_log <include refid="where"/> <include refid="andOtherAll"/>
+	</select>
+	<!-- 查询,SQL -->
+	<select id="selectBySql"  resultMap="requestLogDaoMap" parameterType="java.lang.String">
+	     <include refid="sql"/>
+	</select>
+	<!-- 查询,总行数,Map -->
+	<select id="selectByMapCount" resultType="java.lang.Integer"  parameterType="java.util.Map">
+		select count(1) from request_log <include refid="where"/>
+	    ${queryCondition}
+		<if test="andCondition !=null and andCondition !=''">
+		   and ${andCondition}
+		</if>
+		<if test="orderCondition != null and queryCondition != ''" >
+	    	order by ${orderCondition}
+	    </if>
+	</select>
+	<!-- 查询,参数查询,Map -->
+	<select id="selectByMap" resultMap="requestLogDaoMap"  parameterType="java.util.Map">
+		select <include refid="tbaleColumns"/>from request_log <include refid="where"/>
+	    ${queryCondition}
+		<if test="andCondition !=null and andCondition !=''">
+		   and ${andCondition}
+		</if>
+		<if test="orderCondition != null and orderCondition != ''" >
+	    	order by ${orderCondition}
+	    </if>
+	</select>
+</mapper>   

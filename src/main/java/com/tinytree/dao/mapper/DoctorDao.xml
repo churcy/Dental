@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+         符号转义说明
+    &lt;          < 
+    &gt;          >  
+    &lt;&gt;     <>
+    &amp;        & 
+    &apos;       '
+    &quot;       "
+  <![CDATA[ 这里写你的SQL或者符号 ]]> 
+ -->
+<mapper namespace="com.kungfu.dental.dao.DoctorDao"> 
+	
+	<select id="getByUserId" resultType="java.util.HashMap" parameterType ="java.lang.String">
+		SELECT d.id AS doctorId,
+		       t1.realName AS doctorName
+		FROM DOCTOR d
+		LEFT JOIN 
+		(SELECT u.id AS userId ,
+		        u.real_name AS realName,
+		        u.account_id AS accountId
+		FROM user u
+		LEFT JOIN account a
+		ON u.account_id = a.id) t1 
+		ON d.account_id = t1.accountId
+		WHERE t1.userId = #{0}
+	</select>
+	<select id="getByAccountId" resultMap="doctorMap">
+		SELECT do.*
+		FROM doctor do 
+		LEFT OUTER JOIN account a
+		ON do.account_id = a.id
+		LEFT OUTER JOIN hospital h
+		ON do.hospital_id = h.id
+		LEFT OUTER JOIN department d
+		ON do.dept_id = d.id
+		LEFT OUTER JOIN position p
+		ON do.position_id = p.id
+		WHERE do.account_id = #{accountId}
+	</select>
+	
+	<select id="findByConditions" resultType="java.util.HashMap" parameterType="java.util.Map">
+		SELECT
+			doc.id AS doctorId,
+			t.accountId AS doctorAccountId,
+			t.realName AS doctorName,
+			h.name AS hospitalName,
+			d.name AS departmentName,
+			p.name AS positionName,
+			doc.duties AS duties,
+			doc.brief AS brief,
+			doc.specialty AS specialty,
+			doc.verified_status AS verifiedStatus
+		FROM
+			doctor doc
+		LEFT JOIN (
+			SELECT
+				a.id AS accountId,
+				u.real_name AS realName
+			FROM
+				account a
+			LEFT JOIN USER u ON a.id = u.account_id
+		) t ON t.accountId = doc.account_id
+		LEFT JOIN hospital h ON doc.hospital_id = h.id
+		LEFT JOIN department d ON doc.dept_id = d.id
+		LEFT JOIN position p ON doc.position_id = p.id
+		WHERE 1=1
+		<if test="hospitalId != null and hospitalId != '' ">
+			and h.id = #{hospitalId}
+		</if>
+		<if test="type != null and type != '' ">
+			and doc.type = #{type}
+		</if>
+		AND doc.verified_status = 1
+		ORDER BY doc.create_date DESC
+	</select>
+
+	<resultMap type="com.kungfu.dental.entity.Doctor" id="doctorMap">
+		<id column="id" property="id"/>
+		<result column="brief" property="brief"/>
+		<result column="type" property="type"/>
+		<result column="duties" property="duties"/>
+		<result column="specialty" property="specialty"/>
+		<result column="assist_verified_account_id" property="assistVerifiedAccountId"/>
+		<result column="doc_certificate_src" property="docCertificateSrc"/>
+		<result column="work_permit_src" property="workPermitSrc"/>
+		<result column="verified_type" property="verifiedType"/>
+		<result column="verified_status" property="verifiedStatus"/>
+		<result column="order_id" property="orderId"/>
+		<result column="auditor" property="auditor"/>
+		<result column="remark" property="remark"/>
+		<result column="create_date" property="createDate"/>
+		<result column="modify_date" property="modifyDate"/>
+		<association property="account" column="account_id"
+			javaType="com.kungfu.dental.entity.Account" 
+			select="com.kungfu.dental.dao.AccountDao.selectByPrimaryKey">
+		</association>
+		<association property="hospital" column="hospital_id" 
+			javaType="com.kungfu.dental.entity.Hospital"
+			select="com.kungfu.dental.dao.HospitalDao.selectByPrimaryKey">
+		</association>
+		<association property="department" column="dept_id" 
+			javaType="com.kungfu.dental.entity.Department"
+			select="com.kungfu.dental.dao.DepartmentDao.selectByPrimaryKey">
+		</association>
+		<association property="position" column="position_id" 
+			javaType="com.kungfu.dental.entity.Position"
+			select="com.kungfu.dental.dao.PositionDao.selectByPrimaryKey">
+		</association>
+	</resultMap>
+	<resultMap type="com.kungfu.dental.entity.Account" id="accountMap">
+		<id column="id" property="id"/>
+		<result column="login_name" property="departmentName"/>
+		<result column="password" property="departmentName"/>
+		<result column="mobile" property="departmentName"/>
+		<result column="email" property="departmentName"/>
+		<result column="account_type" property="accountType"/>
+		<result column="account_from" property="accountFrom"/>
+		<result column="referee" property="referee"/>
+		<result column="invite_code" property="inviteCode"/>
+		<result column="status" property="status"/>
+		<result column="email_verified" property="emailVerified"/>
+		<result column="last_login" property="lastLogin"/>
+		<result column="failure_times" property="failureTimes"/>
+		<result column="creator" property="creator"/>
+		<result column="modifier" property="modifier"/>
+		<result column="create_date" property="createDate"/>
+		<result column="modify_date" property="modifyDate"/>
+	</resultMap>
+	<resultMap type="com.kungfu.dental.entity.Hospital" id="hospitalMap">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="address" property="address"/>
+		<result column="telephone" property="telephone"/>
+		<result column="mobile" property="mobile"/>
+		<result column="business_license_src" property="businessLicenseSrc"/>
+		<result column="health_permits_src" property="healthPermitsSrc"/>
+		<result column="status" property="status"/>
+		<result column="descript" property="descript"/>
+		<result column="grade" property="grade"/>
+		<result column="photos" property="photos"/>
+		<result column="order_id" property="orderId"/>
+		<result column="verified_status" property="verifiedStatus"/>
+		<result column="auditor" property="auditor"/>
+		<result column="remark" property="remark"/>
+		<result column="creator" property="creator"/>
+		<result column="modifier" property="modifier"/>
+		<result column="create_date" property="createDate"/>
+		<result column="modify_date" property="modifyDate"/>
+	</resultMap>
+	<resultMap type="com.kungfu.dental.entity.Department" id="departmentMap">
+		<id column="id" property="id"/>
+		<result column="department_no" property="departmentNo"/>
+		<result column="order_id" property="orderId"/>
+		<result column="descript" property="descript"/>
+		<result column="creator" property="creator"/>
+		<result column="modifier" property="modifier"/>
+		<result column="create_date" property="createDate"/>
+		<result column="modify_date" property="modifyDate"/>
+	</resultMap>
+	<resultMap type="com.kungfu.dental.entity.Position" id="positionMap">
+		<id column="id" property="id"/>
+		<result column="position_no" property="positionNo"/>
+		<result column="name" property="name"/>
+		<result column="descript" property="descript"/>
+		<result column="order_id" property="orderId"/>
+		<result column="creator" property="creator"/>
+		<result column="modifier" property="modifier"/>
+		<result column="create_date" property="createDate"/>
+		<result column="modify_date" property="modifyDate"/>
+	</resultMap>
+	<!-- tbaleColumns  所有列 -->
+  	<sql id="tbaleColumns">
+		<trim suffix="" suffixOverrides=",">
+			id,brief,type,duties,specialty,assist_verified_account_id,doc_certificate_src,work_permit_src,verified_type,verified_status,order_id,account_id,dept_id,hospital_id,position_id,auditor,remark,create_date,modify_date		
+		</trim>
+	</sql>
+	
+	<!-- insertColumns 入库列 -->
+	<sql id="insertColumns">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				id,
+			</if>
+			<if test="brief != null and brief != '' " >
+				brief,
+			</if>
+			<if test="type != null " >
+				type,
+			</if>
+			<if test="duties != null and duties != '' " >
+				duties,
+			</if>
+			<if test="specialty != null and specialty != '' " >
+				specialty,
+			</if>
+			<if test="assistVerifiedAccountId != null and assistVerifiedAccountId != '' " >
+				assist_verified_account_id,
+			</if>
+			<if test="docCertificateSrc != null and docCertificateSrc != ''" >
+				doc_certificate_src,
+			</if>
+			<if test="workPermitSrc != null and workPermitSrc != ''" >
+				work_permit_src,
+			</if>
+			<if test="verifiedStatus != null " >
+				verified_status,
+			</if>
+			<if test="verifiedType != null " >
+				verified_type,
+			</if>
+			<if test="orderId != null " >
+				order_id,
+			</if>
+			<if test="account.id != null and account.id != ''" >
+				account_id,
+			</if>
+			<if test="department.id != null and department.id != ''" >
+				dept_id,
+			</if>
+			<if test="hospital.id != null and hospital.id != ''" >
+				hospital_id,
+			</if>
+			<if test="position.id != null and position.id != ''" >
+				position_id,
+			</if>
+			<if test="auditor != null and auditor != ''" >
+				auditor,
+			</if>
+			<if test="remark != null and remark != ''" >
+				modifier,
+			</if>
+			<if test="createDate != null" >
+				create_date,
+			</if>
+			<if test="modifyDate != null" >
+				modify_date,
+			</if>
+	    </trim>
+	</sql>
+	<!-- insertParams 入库值 -->
+	<sql id="insertParams">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				#{id},
+			</if>
+			<if test="brief != null and brief != '' " >
+				#{brief},
+			</if>
+			<if test="type != null " >
+				#{type},
+			</if>
+			<if test="duties != null and duties != '' " >
+				#{duties},
+			</if>
+			<if test="specialty != null and specialty != '' " >
+				#{specialty},
+			</if>
+			<if test="assistVerifiedAccountId != null and assistVerifiedAccountId != '' " >
+				#{assistVerifiedAccountId},
+			</if>
+			<if test="docCertificateSrc != null and docCertificateSrc != ''" >
+				#{docCertificateSrc},
+			</if>
+			<if test="workPermitSrc != null and workPermitSrc != ''" >
+				#{workPermitSrc},
+			</if>
+			<if test="verifiedStatus != null " >
+				#{verifiedStatus},
+			</if>
+			<if test="verifiedType != null " >
+				#{verifiedType},
+			</if>
+			<if test="orderId != null " >
+				#{orderId},
+			</if>
+			<if test="account.id != null and account.id != ''" >
+				#{account.id},
+			</if>
+			<if test="department.id != null and department.id != ''" >
+				#{department.id},
+			</if>
+			<if test="hospital.id != null and hospital.id != ''" >
+				#{hospital.id},
+			</if>
+			<if test="position.id != null and position.id != ''" >
+				#{position.id},
+			</if>
+			<if test="auditor != null and auditor != ''" >
+				#{auditor},
+			</if>
+			<if test="remark != null and remark != ''" >
+				#{modifier},
+			</if>
+			<if test="createDate != null" >
+				#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- updateParams  更新列 -->
+	<sql id="updateParams">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				id=#{id},
+			</if>
+			<if test="brief != null and brief != '' " >
+				brief=#{brief},
+			</if>
+			<if test="type != null " >
+				type=#{type},
+			</if>
+			<if test="duties != null and duties != '' " >
+				duties=#{duties},
+			</if>
+			<if test="specialty != null and specialty != '' " >
+				specialty=#{specialty},
+			</if>
+			<if test="assistVerifiedAccountId != null and assistVerifiedAccountId != '' " >
+				assist_verified_account_id=#{assistVerifiedAccountId},
+			</if>
+			<if test="docCertificateSrc != null and docCertificateSrc != ''" >
+				doc_certificate_src=#{docCertificateSrc},
+			</if>
+			<if test="workPermitSrc != null and workPermitSrc != ''" >
+				work_permit_src=#{workPermitSrc},
+			</if>
+			<if test="verifiedStatus != null " >
+				verified_status=#{verifiedStatus},
+			</if>
+			<if test="verifiedType != null " >
+				verified_type=#{verifiedType},
+			</if>
+			<if test="orderId != null " >
+				order_id=#{orderId},
+			</if>
+			<if test="account.id != null and account.id != ''" >
+				account_id=#{account.id},
+			</if>
+			<if test="department.id != null and department.id != ''" >
+				dept_id=#{department.id},
+			</if>
+			<if test="hospital.id != null and hospital.id != ''" >
+				hospital_id=#{hospital.id},
+			</if>
+			<if test="position.id != null and position.id != ''" >
+				position_id=#{position.id},
+			</if>
+			<if test="auditor != null and auditor != ''" >
+				auditor=#{auditor},
+			</if>
+			<if test="remark != null and remark != ''" >
+				remark=#{remark},
+			</if>
+			<if test="createDate != null" >
+				create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- 条件 查询  , 去掉主键列-->
+	<sql id="andOther">
+		<trim suffix="" suffixOverrides=",">
+			<if test="brief != null and brief != '' " >
+				and brief=#{brief},
+			</if>
+			<if test="type != null " >
+				and type=#{type},
+			</if>
+			<if test="duties != null and duties != '' " >
+				and duties=#{duties},
+			</if>
+			<if test="specialty != null and specialty != '' " >
+				and specialty=#{specialty},
+			</if>
+			<if test="assistVerifiedAccountId != null and assistVerifiedAccountId != '' " >
+				and assist_verified_account_id=#{assistVerifiedAccountId},
+			</if>
+			<if test="docCertificateSrc != null and docCertificateSrc != ''" >
+				and doc_certificate_src=#{docCertificateSrc},
+			</if>
+			<if test="workPermitSrc != null and workPermitSrc != ''" >
+				and work_permit_src=#{workPermitSrc},
+			</if>
+			<if test="verifiedStatus != null " >
+				and verified_status=#{verifiedStatus},
+			</if>
+			<if test="verifiedType != null " >
+				and verified_type=#{verifiedType},
+			</if>
+			<if test="orderId != null " >
+				and order_id=#{orderId},
+			</if>
+			<if test="account.id != null and account.id != ''" >
+				and account_id=#{account.id},
+			</if>
+			<if test="department.id != null and department.id != ''" >
+				and dept_id=#{department.id},
+			</if>
+			<if test="hospital.id != null and hospital.id != ''" >
+				and hospital_id=#{hospital.id},
+			</if>
+			<if test="position != null " >
+				and position=#{position},
+			</if>
+			<if test="auditor != null and auditor != ''" >
+				and auditor=#{auditor},
+			</if>
+			<if test="remark != null and remark != ''" >
+				and remark=#{remark},
+			</if>
+			<if test="createDate != null" >
+				and create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				and modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	<!-- 条件 查询  , 包含所有 -->
+	<sql id="andOtherAll">
+		<trim suffix="" suffixOverrides=",">
+			<if test="id != null and id != '' " >
+				and id=#{id},
+			</if>
+			<if test="brief != null and brief != '' " >
+				and brief=#{brief},
+			</if>
+			<if test="type != null " >
+				and type=#{type},
+			</if>
+			<if test="duties != null and duties != '' " >
+				and duties=#{duties},
+			</if>
+			<if test="specialty != null and specialty != '' " >
+				and specialty=#{specialty},
+			</if>
+			<if test="assistVerifiedAccountId != null and assistVerifiedAccountId != '' " >
+				and assist_verified_account_id=#{assistVerifiedAccountId},
+			</if>
+			<if test="docCertificateSrc != null and docCertificateSrc != ''" >
+				and doc_certificate_src=#{docCertificateSrc},
+			</if>
+			<if test="workPermitSrc != null and workPermitSrc != ''" >
+				and work_permit_src=#{workPermitSrc},
+			</if>
+			<if test="verifiedStatus != null " >
+				and verified_status=#{verifiedStatus},
+			</if>
+			<if test="verifiedType != null " >
+				and verified_type=#{verifiedType},
+			</if>
+			<if test="orderId != null " >
+				and order_id=#{orderId},
+			</if>
+			<if test="account.id != null and account.id != ''" >
+				and account_id=#{account.id},
+			</if>
+			<if test="department.id != null and department.id != ''" >
+				and dept_id=#{department.id},
+			</if>
+			<if test="hospital.id != null and hospital.id != ''" >
+				and hospital_id=#{hospital.id},
+			</if>
+			<if test="position != null " >
+				and position=#{position},
+			</if>
+			<if test="auditor != null and auditor != ''" >
+				and auditor=#{auditor},
+			</if>
+			<if test="remark != null and remark != ''" >
+				and remark=#{remark},
+			</if>
+			<if test="createDate != null" >
+				and create_date=#{createDate},
+			</if>
+			<if test="modifyDate != null" >
+				and modify_date=#{modifyDate},
+			</if>
+	    </trim>
+	</sql>
+	
+	<!-- where 条件  -->
+	<sql id="where">
+	     where 1=1
+	</sql>
+	<!-- columnKey  主键 列名称 ,视图获取不到主键 需要设置 -->
+	<sql id="columnKey">
+	     and id=#{id}
+	</sql>
+	<!-- 自定义查询 -->
+	<sql id="sql">
+	   <if test="sql != null and sql !=''">
+	       ${sql}
+	   </if>
+	   <if test="sql == null || sql==''">
+	      select <include refid="tbaleColumns"/> from doctor <include refid="where"/>
+	   </if>
+	</sql>
+	<!-- 添加,插入记录   -->
+	<insert id="insert"  parameterType="com.kungfu.dental.entity.Doctor" useGeneratedKeys="true">
+		<!-- <selectKey keyProperty="id" resultType="String" order="BEFORE">
+        	replace(uuid(),'-','')
+    	</selectKey> -->
+	    insert into doctor(<include refid="insertColumns"/>) values(<include refid="insertParams"/>);
+	</insert>
+	<!-- 添加,SQL添加   -->
+	<insert id="insertBySql" parameterType="java.lang.String">
+	    <include refid="sql"/>
+	</insert>
+	<!-- 删除,主键删除   -->
+	<delete id="deleteByPrimaryKey" parameterType="com.kungfu.dental.entity.Doctor">
+	    delete from doctor<include refid="where"/><include refid="columnKey"/>
+	</delete>
+	<!-- 删除,实体删除   -->
+	<delete id="deleteByEntity" parameterType="com.kungfu.dental.entity.Doctor">
+	    delete from doctor<include refid="where"/><include refid="andOtherAll"/>
+	</delete>
+	<!-- 删除,SQL删除   -->
+	<delete id="deleteBySql" parameterType="java.lang.String">
+	      <include refid="sql"/>
+	</delete>
+	<!-- 修改,主键更新  -->
+	<update id="updateByPrimaryKey" parameterType="com.kungfu.dental.entity.Doctor" >
+		update doctor <set><include refid="updateParams"/></set><include refid="where"/><include refid="columnKey"/>
+	</update>
+	<!-- 修改,SQL更新 -->
+	<update id="updateBySql" parameterType="java.lang.String">
+		  <include refid="sql"/>
+	</update>
+	<!-- 查询,主键查询   -->
+	<select id="selectByPrimaryKey"  resultMap="doctorMap" parameterType="java.lang.Object">
+		select <include refid="tbaleColumns"/> from doctor <include refid="where"/> <include refid="columnKey"/>
+	</select>
+	<!-- 查询,所有   -->
+	<select id="selectAll"  resultMap="doctorMap">
+		select <include refid="tbaleColumns"/> from doctor
+	</select>
+	<!-- 查询,总数量   -->
+	<select id="count" resultType="java.lang.Integer">
+		select count(1) from doctor
+	</select>
+	<!-- 查询,实体查询   -->
+	<select id="selectByEntiry"  resultMap="doctorMap" parameterType="com.kungfu.dental.entity.Doctor">
+		select <include refid="tbaleColumns"/> from doctor <include refid="where"/> <include refid="andOtherAll"/>
+	</select>
+	<!-- 查询,SQL -->
+	<select id="selectBySql"  resultMap="doctorMap" parameterType="java.lang.String">
+	     <include refid="sql"/>
+	</select>
+	<!-- 查询,总行数,Map -->
+	<select id="selectByMapCount" resultType="java.lang.Integer"  parameterType="java.util.Map">
+		select count(1) from doctor <include refid="where"/>
+	    ${queryCondition}
+		<if test="andCondition !=null and andCondition !=''">
+		   and ${andCondition}
+		</if>
+		<if test="orderCondition != null and queryCondition != ''" >
+	    	order by ${orderCondition}
+	    </if>
+	</select>
+	<!-- 查询,参数查询,Map -->
+	<select id="selectByMap" resultMap="doctorMap"  parameterType="java.util.Map">
+		select <include refid="tbaleColumns"/>from doctor <include refid="where"/>
+	    ${queryCondition}
+		<if test="andCondition !=null and andCondition !=''">
+		   and ${andCondition}
+		</if>
+		<if test="orderCondition != null and orderCondition != ''" >
+	    	order by ${orderCondition}
+	    </if>
+	</select>
+</mapper>   

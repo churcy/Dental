@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+         符号转义说明
+    &lt;          < 
+    &gt;          >  
+    &lt;&gt;     <>
+    &amp;        & 
+    &apos;       '
+    &quot;       "
+  <![CDATA[ 这里写你的SQL或者符号 ]]> 
+ -->
+<mapper namespace="com.kungfu.dental.dao.DepartmentInfoDao"> 
+
+	<resultMap type="com.kungfu.dental.entity.DepartmentInfo" id="departmentInfoMap">
+		<id column="id" property="id"/>
+		<result column="address" property="address"/>
+		<result column="telephone" property="telephone"/>
+		<result column="mobile" property="mobile"/>
+		<result column="business_license_src" property="businessLicenseSrc"/>
+		<result column="health_permits_src" property="healthPermitsSrc"/>
+		<result column="status" property="status"/>
+		<result column="desc" property="desc"/>
+		<result column="grade" property="grade"/>
+		<result column="photos" property="photos"/>
+		<result column="order_id" property="orderId"/>
+		<result column="verified_status" property="verifiedStatus"/>
+		<result column="auditor" property="auditor"/>
+		<result column="remark" property="remark"/>
+		<result column="creator" property="creator"/>
+		<result column="modifier" property="modifier"/>
+		<result column="create_date" property="createDate"/>
+		<result column="modify_date" property="modifyDate"/>
+		<result column="department_id" property="departmentId"/>
+	<!-- 	<association property="department" columnPrefix="d_"
+			column="department_id" resultMap="accountMap"
+			javaType="com.kungfu.dental.entity.Department">
+		</association> -->
+	</resultMap>
+
+	<resultMap type="com.kungfu.dental.entity.Department" id="departmentMap">
+		<id column="id" property="id"/>
+		<result column="department_no" property="departmentNo"/>
+		<result column="order_id" property="orderId"/>
+		<result column="desc" property="desc"/>
+		<result column="creator" property="creator"/>
+		<result column="modifier" property="modifier"/>
+		<result column="create_date" property="createDate"/>
+		<result column="modify_date" property="modifyDate"/>
+	</resultMap>
+</mapper>   
