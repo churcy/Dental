@@ -1,20 +1,16 @@
 package com.tinytree.util;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
 import com.tinytree.bean.RongCloudBean;
 import com.tinytree.bean.UriBean;
 import com.tinytree.bean.WeatherBean;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
+
 public class LoadProperty2Bean {
-	private static final String [] BEAN_NAME = new String[]{"Weather","SMS","Uri","RongCloud"};
+	private static final String [] BEAN_NAME = new String[]{"Weather","SMS","Uri","RongCloud","JPush"};
 	
 	private static final String BEAN_SUFFIX = "Bean";
 	
@@ -31,6 +27,8 @@ public class LoadProperty2Bean {
 	public static final String RONGCLOUD = "RongCloud";
 	
 	public static final String URI = "Uri";
+	
+	public static final String JPUSH = "JPush";
 	
 	private LoadProperty2Bean(){
 		init();

@@ -23,9 +23,6 @@
 			  	<ref bean="stringHttpMessageConverter" /> 
 			</list>
 		</property>
-		<!--  property name="webBindingInitializer">
-    		<bean class="com.kungfu.platform.web.MyBindingInitializer" />
-    	</property-->
 	</bean>
 
 	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
